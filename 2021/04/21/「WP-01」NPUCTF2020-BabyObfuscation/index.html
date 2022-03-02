@@ -9,7 +9,7 @@
     <meta name="description" content="Step 1: 查壳 发现是64位程序，无壳 运行程序提示为”WHERE IS MY KEY!?”  Step 2: IDA加载初步判断功能main函数直接F5看的话，是这样一坨浆糊 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「WP-01」NPUCTF2020-BabyObfuscation">
-<meta property="og:url" content="http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/index.html">
+<meta property="og:url" content="https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/index.html">
 <meta property="og:site_name" content="Track">
 <meta property="og:description" content="Step 1: 查壳 发现是64位程序，无壳 运行程序提示为”WHERE IS MY KEY!?”  Step 2: IDA加载初步判断功能main函数直接F5看的话，是这样一坨浆糊 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585">
 <meta property="og:locale" content="en_US">
@@ -71,9 +71,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </span>
@@ -95,17 +95,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&text=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&is_video=false&description=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-01」NPUCTF2020-BabyObfuscation&body=Check out this article: http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&name=「WP-01」NPUCTF2020-BabyObfuscation&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&t=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&text=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&is_video=false&description=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-01」NPUCTF2020-BabyObfuscation&body=Check out this article: https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&name=「WP-01」NPUCTF2020-BabyObfuscation&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&t=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -234,9 +234,9 @@
          
           <li><a href="/about/">About</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Archives</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/search/">Search</a></li>
         
       </ul>
     </div>
@@ -247,17 +247,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&text=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&is_video=false&description=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-01」NPUCTF2020-BabyObfuscation&body=Check out this article: http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&name=「WP-01」NPUCTF2020-BabyObfuscation&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&t=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&text=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&is_video=false&description=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-01」NPUCTF2020-BabyObfuscation&body=Check out this article: https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&title=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&name=「WP-01」NPUCTF2020-BabyObfuscation&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/04/21/%E3%80%8CWP-01%E3%80%8DNPUCTF2020-BabyObfuscation/&t=「WP-01」NPUCTF2020-BabyObfuscation"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -289,9 +289,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </nav>

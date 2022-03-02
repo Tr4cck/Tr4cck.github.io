@@ -9,7 +9,7 @@
     <meta name="description" content="写在前面感谢 Rx Hs Av 三位师傅验题 逆向出题先说一下我出的两道题的考点：  基于栈的虚拟机 信号处理  前者主要就是写个脚本撸字节码，核心就是异或。 后者有毒，主要是那时候看 APUE 在学这玩意儿，于是糊了一道当时觉得还行的题，但是从做题的角度看就觉得奇奇怪怪的。后来整道题改了一个思路，核心考点不变，还是觉得奇怪（恼。 这两道题都没上。因为赛前反复考虑觉得难度不太对劲，再加上上午的时候">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「Journalctl-01」MssCTF2021出题经验">
-<meta property="og:url" content="http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/index.html">
+<meta property="og:url" content="https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/index.html">
 <meta property="og:site_name" content="Track">
 <meta property="og:description" content="写在前面感谢 Rx Hs Av 三位师傅验题 逆向出题先说一下我出的两道题的考点：  基于栈的虚拟机 信号处理  前者主要就是写个脚本撸字节码，核心就是异或。 后者有毒，主要是那时候看 APUE 在学这玩意儿，于是糊了一道当时觉得还行的题，但是从做题的角度看就觉得奇奇怪怪的。后来整道题改了一个思路，核心考点不变，还是觉得奇怪（恼。 这两道题都没上。因为赛前反复考虑觉得难度不太对劲，再加上上午的时候">
 <meta property="og:locale" content="en_US">
@@ -67,9 +67,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </span>
@@ -93,17 +93,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&text=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&is_video=false&description=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「Journalctl-01」MssCTF2021出题经验&body=Check out this article: http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&name=「Journalctl-01」MssCTF2021出题经验&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&t=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&text=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&is_video=false&description=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「Journalctl-01」MssCTF2021出题经验&body=Check out this article: https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&name=「Journalctl-01」MssCTF2021出题经验&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&t=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -184,9 +184,9 @@
          
           <li><a href="/about/">About</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Archives</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/search/">Search</a></li>
         
       </ul>
     </div>
@@ -197,17 +197,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&text=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&is_video=false&description=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「Journalctl-01」MssCTF2021出题经验&body=Check out this article: http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&name=「Journalctl-01」MssCTF2021出题经验&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&t=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&text=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&is_video=false&description=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「Journalctl-01」MssCTF2021出题经验&body=Check out this article: https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&title=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&name=「Journalctl-01」MssCTF2021出题经验&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/&t=「Journalctl-01」MssCTF2021出题经验"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -239,9 +239,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </nav>

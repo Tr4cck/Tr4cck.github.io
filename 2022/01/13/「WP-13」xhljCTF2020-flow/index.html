@@ -9,7 +9,7 @@
     <meta name="description" content="SROP首先来点 pwn 的基础知识。  SROP 是一种高级的 ROP 技术，核心原理是 signal 被触发时，sigreturn 系统调用会间接的被触发。  signal 主要用于在类 unix 系统中实现进程间通信。来张图展示一下基本流程：   首先是内核向某个进程发送 signal，该进程会被暂时挂起，进入内核态 内核会将被挂起进程的上下文存在栈上，主要是所有的寄存器、signal信息以">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「WP-13」xhljCTF2020 flow">
-<meta property="og:url" content="http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/index.html">
+<meta property="og:url" content="https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/index.html">
 <meta property="og:site_name" content="Track">
 <meta property="og:description" content="SROP首先来点 pwn 的基础知识。  SROP 是一种高级的 ROP 技术，核心原理是 signal 被触发时，sigreturn 系统调用会间接的被触发。  signal 主要用于在类 unix 系统中实现进程间通信。来张图展示一下基本流程：   首先是内核向某个进程发送 signal，该进程会被暂时挂起，进入内核态 内核会将被挂起进程的上下文存在栈上，主要是所有的寄存器、signal信息以">
 <meta property="og:locale" content="en_US">
@@ -69,9 +69,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </span>
@@ -95,17 +95,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&text=「WP-13」xhljCTF2020 flow"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&is_video=false&description=「WP-13」xhljCTF2020 flow"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-13」xhljCTF2020 flow&body=Check out this article: http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&name=「WP-13」xhljCTF2020 flow&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&t=「WP-13」xhljCTF2020 flow"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&text=「WP-13」xhljCTF2020 flow"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&is_video=false&description=「WP-13」xhljCTF2020 flow"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-13」xhljCTF2020 flow&body=Check out this article: https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&name=「WP-13」xhljCTF2020 flow&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&t=「WP-13」xhljCTF2020 flow"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -194,9 +194,9 @@
          
           <li><a href="/about/">About</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Archives</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/search/">Search</a></li>
         
       </ul>
     </div>
@@ -207,17 +207,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&text=「WP-13」xhljCTF2020 flow"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&is_video=false&description=「WP-13」xhljCTF2020 flow"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-13」xhljCTF2020 flow&body=Check out this article: http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&name=「WP-13」xhljCTF2020 flow&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&t=「WP-13」xhljCTF2020 flow"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&text=「WP-13」xhljCTF2020 flow"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&is_video=false&description=「WP-13」xhljCTF2020 flow"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-13」xhljCTF2020 flow&body=Check out this article: https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&title=「WP-13」xhljCTF2020 flow"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&name=「WP-13」xhljCTF2020 flow&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/01/13/%E3%80%8CWP-13%E3%80%8DxhljCTF2020-flow/&t=「WP-13」xhljCTF2020 flow"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -249,9 +249,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </nav>

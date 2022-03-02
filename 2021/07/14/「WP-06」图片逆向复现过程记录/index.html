@@ -9,7 +9,7 @@
     <meta name="description" content="前言在看雪论坛上偶然看到一个关于图片的逆向过程，遂前往复现，学到不少东西，尤其是关于PE文件结构、手动脱壳、手写汇编脱壳以及OD的使用等等，解决了很多以前的困惑，就记录下来 Step One首先把图片拖进010Editor，发现正常的 png 图片结尾后，还附带有大段的数据  发现 DOS 头的 magic 字段，即 MZ 之后，猜测是在图片结尾附加一段 PE 文件，于是将整个后半部分 dump">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「WP-06」图片逆向复现过程记录">
-<meta property="og:url" content="http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:url" content="https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="Track">
 <meta property="og:description" content="前言在看雪论坛上偶然看到一个关于图片的逆向过程，遂前往复现，学到不少东西，尤其是关于PE文件结构、手动脱壳、手写汇编脱壳以及OD的使用等等，解决了很多以前的困惑，就记录下来 Step One首先把图片拖进010Editor，发现正常的 png 图片结尾后，还附带有大段的数据  发现 DOS 头的 magic 字段，即 MZ 之后，猜测是在图片结尾附加一段 PE 文件，于是将整个后半部分 dump">
 <meta property="og:locale" content="en_US">
@@ -76,9 +76,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </span>
@@ -102,17 +102,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&text=「WP-06」图片逆向复现过程记录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&is_video=false&description=「WP-06」图片逆向复现过程记录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-06」图片逆向复现过程记录&body=Check out this article: http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&name=「WP-06」图片逆向复现过程记录&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&t=「WP-06」图片逆向复现过程记录"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&text=「WP-06」图片逆向复现过程记录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&is_video=false&description=「WP-06」图片逆向复现过程记录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-06」图片逆向复现过程记录&body=Check out this article: https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&name=「WP-06」图片逆向复现过程记录&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&t=「WP-06」图片逆向复现过程记录"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -216,9 +216,9 @@
          
           <li><a href="/about/">About</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Archives</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/search/">Search</a></li>
         
       </ul>
     </div>
@@ -229,17 +229,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&text=「WP-06」图片逆向复现过程记录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&is_video=false&description=「WP-06」图片逆向复现过程记录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-06」图片逆向复现过程记录&body=Check out this article: http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&name=「WP-06」图片逆向复现过程记录&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&t=「WP-06」图片逆向复现过程记录"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&text=「WP-06」图片逆向复现过程记录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&is_video=false&description=「WP-06」图片逆向复现过程记录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-06」图片逆向复现过程记录&body=Check out this article: https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&title=「WP-06」图片逆向复现过程记录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&name=「WP-06」图片逆向复现过程记录&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/07/14/%E3%80%8CWP-06%E3%80%8D%E5%9B%BE%E7%89%87%E9%80%86%E5%90%91%E5%A4%8D%E7%8E%B0%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/&t=「WP-06」图片逆向复现过程记录"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -271,9 +271,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </nav>

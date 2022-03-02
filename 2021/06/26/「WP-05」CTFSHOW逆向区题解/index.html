@@ -9,7 +9,7 @@
     <meta name="description" content="卷王杯BabyOC题目使用 Objective-C 编写。在 ArchLinux 下想要运行附件需要 sudo pacman -S gnustep-base 。由于没有相关开发经验，只能简单查看offical website 中给出的 oc 中 oop 的核心概念。结合题目，我个人理解的是使用一种类似 通信 的方式来实现函数调用等等。同时函数调用时除了函数名，貌似会生成一种 对象签名（也是我自己理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「WP-05」CTFSHOW逆向区题解">
-<meta property="og:url" content="http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:url" content="https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="Track">
 <meta property="og:description" content="卷王杯BabyOC题目使用 Objective-C 编写。在 ArchLinux 下想要运行附件需要 sudo pacman -S gnustep-base 。由于没有相关开发经验，只能简单查看offical website 中给出的 oc 中 oop 的核心概念。结合题目，我个人理解的是使用一种类似 通信 的方式来实现函数调用等等。同时函数调用时除了函数名，貌似会生成一种 对象签名（也是我自己理">
 <meta property="og:locale" content="en_US">
@@ -72,9 +72,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </span>
@@ -98,17 +98,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&text=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&is_video=false&description=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-05」CTFSHOW逆向区题解&body=Check out this article: http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&name=「WP-05」CTFSHOW逆向区题解&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&t=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&text=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&is_video=false&description=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-05」CTFSHOW逆向区题解&body=Check out this article: https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&name=「WP-05」CTFSHOW逆向区题解&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&t=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -185,9 +185,9 @@
          
           <li><a href="/about/">About</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Archives</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/search/">Search</a></li>
         
       </ul>
     </div>
@@ -198,17 +198,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&text=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&is_video=false&description=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-05」CTFSHOW逆向区题解&body=Check out this article: http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&name=「WP-05」CTFSHOW逆向区题解&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&t=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&text=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&is_video=false&description=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-05」CTFSHOW逆向区题解&body=Check out this article: https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&title=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&name=「WP-05」CTFSHOW逆向区题解&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/&t=「WP-05」CTFSHOW逆向区题解"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -240,9 +240,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </nav>

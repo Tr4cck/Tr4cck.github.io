@@ -9,7 +9,7 @@
     <meta name="description" content="Tales-of-Arrowget_lit 返回 i + 1 &#x2F; - i - 1 然后根据后面的去还原那个 01 序列，给了输入长度是 17 个 ascii 字符。数据里面有干扰 8bits 一组的话，第一个肯定是 0，这样可以得到一组负的索引。然后把 output 里的数每 3 个分成一组，肯定有一个是对的。这样之后可以排除一部分数据，然后这时候有一些组内只有一个数据，那就肯定是对的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「WP-17」TQLCTF2022">
-<meta property="og:url" content="http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/index.html">
+<meta property="og:url" content="https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/index.html">
 <meta property="og:site_name" content="Track">
 <meta property="og:description" content="Tales-of-Arrowget_lit 返回 i + 1 &#x2F; - i - 1 然后根据后面的去还原那个 01 序列，给了输入长度是 17 个 ascii 字符。数据里面有干扰 8bits 一组的话，第一个肯定是 0，这样可以得到一组负的索引。然后把 output 里的数每 3 个分成一组，肯定有一个是对的。这样之后可以排除一部分数据，然后这时候有一些组内只有一个数据，那就肯定是对的。">
 <meta property="og:locale" content="en_US">
@@ -67,9 +67,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </span>
@@ -91,17 +91,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&text=「WP-17」TQLCTF2022"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&is_video=false&description=「WP-17」TQLCTF2022"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-17」TQLCTF2022&body=Check out this article: http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&name=「WP-17」TQLCTF2022&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&t=「WP-17」TQLCTF2022"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&text=「WP-17」TQLCTF2022"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&is_video=false&description=「WP-17」TQLCTF2022"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-17」TQLCTF2022&body=Check out this article: https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&name=「WP-17」TQLCTF2022&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&t=「WP-17」TQLCTF2022"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -174,9 +174,9 @@
          
           <li><a href="/about/">About</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Archives</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/search/">Search</a></li>
         
       </ul>
     </div>
@@ -187,17 +187,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&text=「WP-17」TQLCTF2022"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&is_video=false&description=「WP-17」TQLCTF2022"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-17」TQLCTF2022&body=Check out this article: http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&name=「WP-17」TQLCTF2022&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&t=「WP-17」TQLCTF2022"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&text=「WP-17」TQLCTF2022"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&is_video=false&description=「WP-17」TQLCTF2022"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-17」TQLCTF2022&body=Check out this article: https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&title=「WP-17」TQLCTF2022"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&name=「WP-17」TQLCTF2022&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/03/02/%E3%80%8CWP-17%E3%80%8DTQLCTF2022/&t=「WP-17」TQLCTF2022"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -229,9 +229,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </nav>

@@ -9,7 +9,7 @@
     <meta name="description" content="SECCONCTF 2021pyast64++.rev题目实现了一个简单的 py 汇编器。将可执行文件拖进 IDA 可以看到非常多成对的 push-pop 操作，并且简单调试一下发现函数调用栈是一种奇怪的结构，即： 123456789--------|length|--------|canary|--------|param1|--------|param2|........  猜测出题人没有对编">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「WP-09」最近的一些比赛WP整理">
-<meta property="og:url" content="http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/index.html">
+<meta property="og:url" content="https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/index.html">
 <meta property="og:site_name" content="Track">
 <meta property="og:description" content="SECCONCTF 2021pyast64++.rev题目实现了一个简单的 py 汇编器。将可执行文件拖进 IDA 可以看到非常多成对的 push-pop 操作，并且简单调试一下发现函数调用栈是一种奇怪的结构，即： 123456789--------|length|--------|canary|--------|param1|--------|param2|........  猜测出题人没有对编">
 <meta property="og:locale" content="en_US">
@@ -67,9 +67,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </span>
@@ -93,17 +93,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&text=「WP-09」最近的一些比赛WP整理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&is_video=false&description=「WP-09」最近的一些比赛WP整理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-09」最近的一些比赛WP整理&body=Check out this article: http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&name=「WP-09」最近的一些比赛WP整理&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&t=「WP-09」最近的一些比赛WP整理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&text=「WP-09」最近的一些比赛WP整理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&is_video=false&description=「WP-09」最近的一些比赛WP整理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-09」最近的一些比赛WP整理&body=Check out this article: https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&name=「WP-09」最近的一些比赛WP整理&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&t=「WP-09」最近的一些比赛WP整理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -202,9 +202,9 @@
          
           <li><a href="/about/">About</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Archives</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/search/">Search</a></li>
         
       </ul>
     </div>
@@ -215,17 +215,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&text=「WP-09」最近的一些比赛WP整理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&is_video=false&description=「WP-09」最近的一些比赛WP整理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-09」最近的一些比赛WP整理&body=Check out this article: http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&name=「WP-09」最近的一些比赛WP整理&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&t=「WP-09」最近的一些比赛WP整理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&text=「WP-09」最近的一些比赛WP整理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&is_video=false&description=「WP-09」最近的一些比赛WP整理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-09」最近的一些比赛WP整理&body=Check out this article: https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&name=「WP-09」最近的一些比赛WP整理&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&t=「WP-09」最近的一些比赛WP整理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -257,9 +257,9 @@
      --><!--
        --><li><a href="/about/">About</a></li><!--
      --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
+       --><li><a href="/archives/">Archives</a></li><!--
      --><!--
-       --><li><a href="/projects_url">Projects</a></li><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </nav>
