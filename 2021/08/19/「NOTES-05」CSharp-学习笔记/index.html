@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Summary-About-101 params int[] array  public delegate double MyDelegate (double p1, double p2);   MyDelegate d &#x3D; …  To stop the process: System.Console.ReadKey(); &lt;&#x3D;&gt; getchar();  int?">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「NOTES-05」C#学习笔记">
+<meta property="og:url" content="http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Track">
+<meta property="og:description" content="Summary-About-101 params int[] array  public delegate double MyDelegate (double p1, double p2);   MyDelegate d &#x3D; …  To stop the process: System.Console.ReadKey(); &lt;&#x3D;&gt; getchar();  int?">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-19T15:06:35.000Z">
+<meta property="article:modified_time" content="2022-03-02T08:40:08.620Z">
+<meta property="article:author" content="Tr4cck">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Programs">
+<meta property="article:tag" content="Code">
+<meta property="article:tag" content="C#">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="Development">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>「NOTES-05」C#学习笔记</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2021/07/18/%E3%80%8CWP-07%E3%80%8DReversingKR%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0%E8%AE%B0%E5%BD%95/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&text=「NOTES-05」C#学习笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=「NOTES-05」C#学习笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&is_video=false&description=「NOTES-05」C#学习笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「NOTES-05」C#学习笔记&body=Check out this article: http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=「NOTES-05」C#学习笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=「NOTES-05」C#学习笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=「NOTES-05」C#学习笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=「NOTES-05」C#学习笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&name=「NOTES-05」C#学习笔记&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&t=「NOTES-05」C#学习笔记"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary-About-101"><span class="toc-number">1.</span> <span class="toc-text">Summary-About-101</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OOP"><span class="toc-number">3.</span> <span class="toc-text">OOP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%A3%B0%E6%98%8E"><span class="toc-number">3.1.</span> <span class="toc-text">类的定义与声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B4%BE%E7%94%9F%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">3.2.1.</span> <span class="toc-text">派生类的构造函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7"><span class="toc-number">3.3.</span> <span class="toc-text">属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%B3%95"><span class="toc-number">3.3.1.</span> <span class="toc-text">用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%80%A7"><span class="toc-number">3.3.2.</span> <span class="toc-text">特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="toc-number">3.4.</span> <span class="toc-text">虚函数与抽象类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">3.4.1.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E9%9A%90%E8%97%8F%E6%96%B9%E6%B3%95"><span class="toc-number">3.4.2.</span> <span class="toc-text">关于隐藏方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%86%E5%B0%81%E7%B1%BB"><span class="toc-number">3.5.</span> <span class="toc-text">密封类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">3.5.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F-1"><span class="toc-number">3.5.2.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-number">3.6.</span> <span class="toc-text">修饰符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.7.</span> <span class="toc-text">接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">3.7.1.</span> <span class="toc-text">接口与类的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F-2"><span class="toc-number">3.7.2.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">3.7.3.</span> <span class="toc-text">接口之间的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-number">3.8.</span> <span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%B1%BBList-lt-T-gt"><span class="toc-number">3.8.1.</span> <span class="toc-text">集合类List&lt;T&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%AE%9A%E4%B9%89"><span class="toc-number">3.8.2.</span> <span class="toc-text">泛型类定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E6%96%B9%E6%B3%95%E5%AE%9A%E4%B9%89"><span class="toc-number">3.8.3.</span> <span class="toc-text">泛型方法定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MyList2Practice"><span class="toc-number">3.9.</span> <span class="toc-text">MyList2Practice</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%98%E6%96%B9%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.9.1.</span> <span class="toc-text">官方实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.10.</span> <span class="toc-text">反射类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LINQ"><span class="toc-number">4.</span> <span class="toc-text">LINQ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sequences-operation"><span class="toc-number">4.1.</span> <span class="toc-text">Sequences-operation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TakeWhile"><span class="toc-number">4.2.</span> <span class="toc-text">TakeWhile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Skip-Take"><span class="toc-number">4.3.</span> <span class="toc-text">Skip()-Take()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Zip"><span class="toc-number">4.4.</span> <span class="toc-text">Zip()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sum"><span class="toc-number">4.5.</span> <span class="toc-text">Sum()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Select-from-multiple-input-sequences"><span class="toc-number">4.6.</span> <span class="toc-text">Select-from-multiple-input-sequences</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Blazor"><span class="toc-number">5.</span> <span class="toc-text">Blazor</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#App-razor"><span class="toc-number">5.1.</span> <span class="toc-text">App.razor</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#System-Security-Cryptography"><span class="toc-number">6.</span> <span class="toc-text">System.Security.Cryptography</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        「NOTES-05」C#学习笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tr4cck</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-08-19T15:06:35.000Z" itemprop="datePublished">2021-08-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Programs/">Programs</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/C/" rel="tag">C#</a>, <a class="tag-link-link" href="/tags/Code/" rel="tag">Code</a>, <a class="tag-link-link" href="/tags/Development/" rel="tag">Development</a>, <a class="tag-link-link" href="/tags/Notes/" rel="tag">Notes</a>, <a class="tag-link-link" href="/tags/Programs/" rel="tag">Programs</a>, <a class="tag-link-link" href="/tags/Unity/" rel="tag">Unity</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Summary-About-101"><a href="#Summary-About-101" class="headerlink" title="Summary-About-101"></a>Summary-About-101</h1><ul>
+<li><p>params int[] array</p>
+</li>
+<li><p>public delegate double MyDelegate (double p1, double p2);</p>
+<p>  MyDelegate d &#x3D; …</p>
+</li>
+<li><p>To stop the process: System.Console.ReadKey(); &lt;&#x3D;&gt; getchar();</p>
+</li>
+<li><p>int? a;</p>
+</li>
+</ul>
+<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>异常处理结构如下：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (&lt;ExceptionType&gt; e) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong>catch块和finally块必须包含其中之一，且两者可以同时存在。catch块可以有多个，finally块0或1个。</p>
+<p>其中执行顺序与python一致。</p>
+<p>catch块不写的话，表示捕捉任意异常。</p>
+<p>例子如下：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="built_in">int</span>[] array = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    <span class="built_in">int</span> element = array[<span class="number">4</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (IndexOutOfRangeException e) &#123;</span><br><span class="line">    Console.WriteLine(<span class="string">&quot;catch&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">finally</span> &#123;</span><br><span class="line">    Console.WriteLine(<span class="string">&quot;finally&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="OOP"><a href="#OOP" class="headerlink" title="OOP"></a>OOP</h1><h2 id="类的定义与声明"><a href="#类的定义与声明" class="headerlink" title="类的定义与声明"></a>类的定义与声明</h2><p>在C#中，同样存在未来要创建的实例指针<code>this</code>，我们可以通过它在类的内部给参数赋值</p>
+<h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><p><strong>构造函数可以有多个，它们的不同只能在参数列表上体现</strong></p>
+<h3 id="派生类的构造函数"><a href="#派生类的构造函数" class="headerlink" title="派生类的构造函数"></a>派生类的构造函数</h3><p>如何在子类中调用父类的构造函数？有两种情况</p>
+<ol>
+<li><p>无参</p>
+ <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Father</span> &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Father</span>()</span> &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Father&#x27;s constructor with no parameters.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Son</span> : <span class="title">Father</span> &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Son</span>() : <span class="title">base</span>()</span> &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Son&#x27;s constructor with no parameters.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>有参</p>
+ <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Father</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="built_in">int</span> x;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Father</span>(<span class="params"><span class="built_in">int</span> x</span>)</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.x = x;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Father&#x27;s constructor with one parameters.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Son</span> : <span class="title">Father</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="built_in">int</span> x, y;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Son</span>(<span class="params"><span class="built_in">int</span> x, <span class="built_in">int</span> y</span>) : <span class="title">base</span>(<span class="params">x</span>)</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.y = y;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Son&#x27;s constructor with two parameters.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>这两种情况都会先调用父类的构造函数，再调用子类的构造函数</strong></p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><p>见源码与<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/properties">官方文档</a></p>
+<p>主要关注特殊的用法，例如<code>new&#123;X = ..., Y = ...&#125;</code>等等</p>
+<p>还有就是由属性可以自动生成相应的字段</p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>使用特性可以有效将元数据或声明性信息与代码（程序集、类型、方法、属性等）相关联。将特性与程序实体相关联后，可以在运行时使用<strong>反射</strong>技术查询特性。</p>
+<p>特性具有以下属性：</p>
+<ul>
+<li>特性向程序添加元数据。 <strong>元数据</strong> 是程序中定义的类型的相关信息。 所有<code>.NET</code>程序集都包含一组指定的元数据，用于描述程序集中定义的类型和类型成员。 可以添加自定义特性来指定所需的其他任何信息。 有关详细信息。</li>
+<li>可以将一个或多个特性应用于整个程序集、模块或较小的程序元素（如类和属性）。</li>
+<li>特性可以像方法和属性一样接受自变量。</li>
+<li>程序可使用反射来检查自己的元数据或其他程序中的元数据。</li>
+</ul>
+<h2 id="虚函数与抽象类"><a href="#虚函数与抽象类" class="headerlink" title="虚函数与抽象类"></a>虚函数与抽象类</h2><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>虚函数：</p>
+<ul>
+<li>类型声明为父类的实例可以调用子类的构造方法，这样就可以实现<strong>父类实例调用子类中的重载方法</strong></li>
+<li>不能用父类的构造函数声明子类实例</li>
+<li>如果不override，那么使用父类的virtual方法</li>
+</ul>
+<p>抽象类：</p>
+<ul>
+<li>不能实例化</li>
+<li>类和方法都要加上<code>abstract</code>关键字</li>
+<li>在子类中override后，可以用子类的构造函数创建抽象父类的实例，调用时等价于调用子类的相应方法</li>
+</ul>
+<h3 id="关于隐藏方法"><a href="#关于隐藏方法" class="headerlink" title="关于隐藏方法"></a>关于隐藏方法</h3><p>使用<code>new</code>修饰符配合，只需要知道<strong>与虚函数的交错声明相反</strong>即可，因为这个东西个人感觉比较混乱，应该不太会在项目中用到</p>
+<h2 id="密封类"><a href="#密封类" class="headerlink" title="密封类"></a>密封类</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>C#允许把类和方法加上<code>sealed</code>关键字。对于类，表示其他类不能继承自该类，对于方法，表示不能重载该方法</p>
+<h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><p>只有重载的方法才可以被声明为sealed</p>
+<h2 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h2><table>
+<thead>
+<tr>
+<th align="center">修饰符</th>
+<th align="center">应用于</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public</td>
+<td align="center">所有类或成员</td>
+<td align="center">任何代码均可以访问该项</td>
+</tr>
+<tr>
+<td align="center">protected</td>
+<td align="center">该类和内嵌于类的所有成员</td>
+<td align="center">与private不同之处在于：它修饰的东西可以在派生类能访问</td>
+</tr>
+<tr>
+<td align="center">internal</td>
+<td align="center">所有类或成员</td>
+<td align="center">只能在包含它的程序集中访问</td>
+</tr>
+<tr>
+<td align="center">private</td>
+<td align="center">该类和内嵌于类的所有成员</td>
+<td align="center">只能在它所属的类内访问</td>
+</tr>
+<tr>
+<td align="center">protected internal</td>
+<td align="center">该类和内嵌于类的所有成员</td>
+<td align="center">只有派生类和在包含它的程序集中访问</td>
+</tr>
+<tr>
+<td align="center">static</td>
+<td align="center">所有成员</td>
+<td align="center">成员不作用于类的具体实例</td>
+</tr>
+<tr>
+<td align="center">new</td>
+<td align="center">函数成员</td>
+<td align="center">见隐藏方法</td>
+</tr>
+<tr>
+<td align="center">override</td>
+<td align="center">仅函数成员</td>
+<td align="center">成员重写了继承的虚拟或抽象成员</td>
+</tr>
+<tr>
+<td align="center">virtual</td>
+<td align="center">仅函数成员</td>
+<td align="center">见虚方法</td>
+</tr>
+<tr>
+<td align="center">extern</td>
+<td align="center">仅静态方法</td>
+<td align="center">成员在外部以另一种语言实现</td>
+</tr>
+<tr>
+<td align="center">sealed</td>
+<td align="center">类、方法、属性</td>
+<td align="center">见密封类</td>
+</tr>
+<tr>
+<td align="center">abstract</td>
+<td align="center">函数和类</td>
+<td align="center">见抽象类</td>
+</tr>
+<tr>
+<td align="center">readonly</td>
+<td align="center">字段</td>
+<td align="center">构造函数退出后，不能分配 <code>readonly</code> 字段。 此规则对于值类型和引用类型具有不同的含义</td>
+</tr>
+</tbody></table>
+<p>（修饰符比较多，遇到一个学习一个即可）。</p>
+<p>注意一下几点：</p>
+<ul>
+<li>static声明的类里面必须全是public</li>
+</ul>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>使用<code>public interface xxx &#123; public void xxxx( ... ); &#125;</code>来定义一个接口，这与抽象类有极大的相似度。</p>
+<h3 id="接口与类的关系"><a href="#接口与类的关系" class="headerlink" title="接口与类的关系"></a>接口与类的关系</h3><p>接口的实现要具体到类，即<strong>实现</strong>是接口与类之间的关系。结构如下：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">What</span> : <span class="title">AInterface</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意-2"><a href="#注意-2" class="headerlink" title="注意"></a>注意</h3><ul>
+<li><p>只能包含方法、属性、索引器和事件的声明。</p>
+</li>
+<li><p>一个接口中不能有字段、构造函数。</p>
+</li>
+<li><p>接口内不允许运算符重载。</p>
+</li>
+<li><p>接口中的成员都是public的。</p>
+</li>
+</ul>
+<h3 id="接口之间的关系"><a href="#接口之间的关系" class="headerlink" title="接口之间的关系"></a>接口之间的关系</h3><p>也可以继承</p>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><h3 id="集合类List-lt-T-gt"><a href="#集合类List-lt-T-gt" class="headerlink" title="集合类List&lt;T&gt;"></a>集合类List&lt;T&gt;</h3><p>首先是如何实例化，有如下两种方法：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1 空列表 后续用Add方法添加值</span></span><br><span class="line">List&lt;<span class="built_in">int</span>&gt; scorelist = <span class="keyword">new</span> List&lt;<span class="built_in">int</span>&gt;();</span><br><span class="line"><span class="comment">// 2 有初始值</span></span><br><span class="line">List&lt;<span class="built_in">int</span>&gt; scorelist = <span class="keyword">new</span> List&lt;<span class="built_in">int</span>&gt;() &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>一般声明的类型用<code>var</code></p>
+<p>列表的Add方法类似python中的append</p>
+<p>注意区分capacity和count，前者表示list被分配的大小，也等价于底层数组的<code>Length</code>属性，后者表示其元素个数。并且它分配的逻辑也比较有趣，空列表加元素时，会先将capacity扩大到4，直到count为5，capacity置为8，以此类推</p>
+<p>然后还有一些方法，不写了，能记住一些常用的，其它要用再查就好了。</p>
+<h3 id="泛型类定义"><a href="#泛型类定义" class="headerlink" title="泛型类定义"></a>泛型类定义</h3><p>意思是类中某些字段的类型是不确定的，并且要在类构造的时候确定下来，例如：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">GenericThings</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> a = <span class="keyword">new</span> ClassA&lt;<span class="built_in">string</span>&gt;&#123;A=<span class="string">&quot;www.&quot;</span>, B=<span class="string">&quot;trackonyou.com&quot;</span>&#125;;</span><br><span class="line">            Console.WriteLine(a.GetSum());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ClassA</span>&lt;<span class="title">T</span>&gt; &#123;</span><br><span class="line">        <span class="keyword">public</span> T A &#123;<span class="keyword">get</span>; <span class="keyword">set</span>;&#125;</span><br><span class="line">        <span class="keyword">public</span> T B &#123;<span class="keyword">get</span>; <span class="keyword">set</span>;&#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="built_in">string</span> <span class="title">GetSum</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> A + <span class="string">&quot;&quot;</span> + B;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="泛型方法定义"><a href="#泛型方法定义" class="headerlink" title="泛型方法定义"></a>泛型方法定义</h3><p>与上面类似，就是指的方法的参数不定（<strong>注意不是返回值不定</strong>），直到调用时才被确定下来</p>
+<p><strong>PS：</strong>可以在<code>&lt;T, U&gt;</code>里面这样，包含多种类型</p>
+<h2 id="MyList2Practice"><a href="#MyList2Practice" class="headerlink" title="MyList2Practice"></a>MyList2Practice</h2><p>描一个轮子</p>
+<h3 id="官方实现"><a href="#官方实现" class="headerlink" title="官方实现"></a>官方实现</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先是几个变量，一个默认容量为4</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="built_in">int</span> DefaultCapacity = <span class="number">4</span>;</span><br><span class="line"><span class="comment">// _items是一个底层数组，是这个类的核心</span></span><br><span class="line"><span class="keyword">internal</span> T[] _items;</span><br><span class="line"><span class="comment">// _size私有变量，是元素个数</span></span><br><span class="line"><span class="keyword">internal</span> <span class="built_in">int</span> _size;</span><br><span class="line"><span class="comment">// TODO</span></span><br><span class="line"><span class="keyword">private</span> <span class="built_in">int</span> _version;</span><br><span class="line"><span class="comment">// 提前定义一个私有的空数组</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">readonly</span> T[] s_emptyArray = <span class="keyword">new</span> T[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接着是构造函数，有三个，主要分析前两个，第三个暂时看不太懂😂</span></span><br><span class="line"><span class="comment">// 无参的默认new空数组</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">List</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    _items = s_emptyArray;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 传递参数为分配空间</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">List</span>(<span class="params"><span class="built_in">int</span> capacity</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (capacity &lt; <span class="number">0</span>)</span><br><span class="line">        ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.capacity, ExceptionResource.ArgumentOutOfRange_NeedNonNegNum);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (capacity == <span class="number">0</span>)</span><br><span class="line">        _items = s_emptyArray;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">        _items = <span class="keyword">new</span> T[capacity];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 分配空间属性</span></span><br><span class="line"><span class="keyword">public</span> <span class="built_in">int</span> Capacity</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// get方法用表达式主体的方式，然后动态获取数组的Length，这样比较智能</span></span><br><span class="line">    <span class="keyword">get</span> =&gt; _items.Length;</span><br><span class="line">    <span class="comment">// set方法，首先判断预期值与当前元素个数的大小关系，如果前者小于后者则触发异常；然后处理预期值不等于当前容量的情况，大于就重新分配一个临时数组，并把原来的东西复制过去，同时改变一下_items的指向，如果小于等于0就分配空数组</span></span><br><span class="line">    <span class="keyword">set</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">value</span> &lt; _size)</span><br><span class="line">        &#123;</span><br><span class="line">            ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.<span class="keyword">value</span>, ExceptionResource.ArgumentOutOfRange_SmallCapacity);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">value</span> != _items.Length)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">value</span> &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                T[] newItems = <span class="keyword">new</span> T[<span class="keyword">value</span>];</span><br><span class="line">                <span class="keyword">if</span> (_size &gt; <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    Array.Copy(_items, newItems, _size);</span><br><span class="line">                &#125;</span><br><span class="line">                _items = newItems;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                _items = s_emptyArray;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 设置Count为get访问器，返回个数</span></span><br><span class="line"><span class="keyword">public</span> <span class="built_in">int</span> Count =&gt; _size;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Add</span>(<span class="params">T item</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    _version++;</span><br><span class="line">    <span class="comment">// 保存当前数组的状态</span></span><br><span class="line">    T[] array = _items;</span><br><span class="line">    <span class="built_in">int</span> size = _size;</span><br><span class="line">    <span class="comment">// 如果有多余空间</span></span><br><span class="line">    <span class="keyword">if</span> ((<span class="built_in">uint</span>)size &lt; (<span class="built_in">uint</span>)array.Length)</span><br><span class="line">    &#123;</span><br><span class="line">        _size = size + <span class="number">1</span>;</span><br><span class="line">        array[size] = item;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 没有的话就resize</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        AddWithResize(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">AddWithResize</span>(<span class="params">T item</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 一样，保存一下size，底层数组以参数形式传递进来</span></span><br><span class="line">    <span class="built_in">int</span> size = _size;</span><br><span class="line">    <span class="comment">// 调用函数改容量，然后下文就是一样操作</span></span><br><span class="line">    EnsureCapacity(size + <span class="number">1</span>);</span><br><span class="line">    _size = size + <span class="number">1</span>;</span><br><span class="line">    _items[size] = item;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 下界是size+1，因为我们要add一个元素</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">EnsureCapacity</span>(<span class="params"><span class="built_in">int</span> min</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 处理容量小于下界的情况</span></span><br><span class="line">    <span class="keyword">if</span> (_items.Length &lt; min)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">int</span> newCapacity = _items.Length == <span class="number">0</span> ? DefaultCapacity : _items.Length * <span class="number">2</span>;</span><br><span class="line">        <span class="comment">// Tr4ck: internal const int MaxArrayLength = 0X7FEFFFFF;</span></span><br><span class="line">        <span class="keyword">if</span> ((<span class="built_in">uint</span>)newCapacity &gt; Array.MaxArrayLength) newCapacity = Array.MaxArrayLength;</span><br><span class="line">        <span class="keyword">if</span> (newCapacity &lt; min) newCapacity = min;</span><br><span class="line">        Capacity = newCapacity;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="反射类型"><a href="#反射类型" class="headerlink" title="反射类型"></a>反射类型</h2><p>可以通过反射的方法用类的实例获取类型对象的实例，也就是获取到了实例的类型信息</p>
+<h1 id="LINQ"><a href="#LINQ" class="headerlink" title="LINQ"></a>LINQ</h1><h2 id="Sequences-operation"><a href="#Sequences-operation" class="headerlink" title="Sequences-operation"></a>Sequences-operation</h2><p>直接来个例子</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wordA = <span class="keyword">new</span> <span class="built_in">string</span>[] &#123;<span class="string">&quot;blackbird&quot;</span>, <span class="string">&quot;deebato&quot;</span>, <span class="string">&quot;cyxq&quot;</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> wordB = <span class="keyword">new</span> <span class="built_in">string</span>[] &#123;<span class="string">&quot;blackbird&quot;</span>, <span class="string">&quot;d3ebato&quot;</span>, <span class="string">&quot;cyxq&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">bool</span> IsMatch = wordA.SequenceEqual(wordB);</span><br><span class="line"></span><br><span class="line">Console.WriteLine(<span class="string">$&quot;Is equal or not? &gt;&gt;&gt; <span class="subst">&#123;IsMatch&#125;</span>&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="TakeWhile"><a href="#TakeWhile" class="headerlink" title="TakeWhile"></a>TakeWhile</h2><p>传入的参数为<code>lambda</code>表达式例如<code>n =&gt; n &lt; 6</code>，返回一个布尔判断式</p>
+<h2 id="Skip-Take"><a href="#Skip-Take" class="headerlink" title="Skip()-Take()"></a><code>Skip()-Take()</code></h2><p>它们都是<code>IEnumerable&lt;T&gt;</code>接口的扩展方法，其中前者表示从指定下标开始截取（包含），后者表示截取到指定下标为止（不包含）。</p>
+<p>用这两个函数配合使用可以轻易实现获取列表的子列。</p>
+<p><strong>值得注意的是：</strong>它们都不会对越界操作甚至负操作有任何的报错，而且结果也很符合预期。这与另一个实现该功能的函数不尽相同，<code>SubString()</code>，它对于越界的索引都会抛出异常。</p>
+<h2 id="Zip"><a href="#Zip" class="headerlink" title="Zip()"></a><code>Zip()</code></h2><p>类似python中的zip函数，即将两个序列进行元组级的组合。C#使用时对其中任一序列调用该方法，传入的第一个参数是另一个序列，第二个参数是<code>lambda表达式</code>，返回组合后希望进行的运算。调用Zip方法将得到一个序列，可以直接在后面调用Sum方法之类的。</p>
+<h2 id="Sum"><a href="#Sum" class="headerlink" title="Sum()"></a><code>Sum()</code></h2><p>字面意思，对一个序列进行<code>Sum</code>操作。</p>
+<h2 id="Select-from-multiple-input-sequences"><a href="#Select-from-multiple-input-sequences" class="headerlink" title="Select-from-multiple-input-sequences"></a>Select-from-multiple-input-sequences</h2><p>类似sql语句的东西。注意如果两个from前后出现，则类似双重循环。这个语句类似函数，定义的时候并不会直接执行，必须在循环里遍历对应的变量，才能实现相应的功能。注意下select，它是返回满足选择条件的值，即where。但如果不写where语句，则它会无条件返回对应的值。这实际是一种懒加载，如果直接在后面加<code>ToList</code>方法，就可以完全变为字符串 </p>
+<h1 id="Blazor"><a href="#Blazor" class="headerlink" title="Blazor"></a>Blazor</h1><h2 id="App-razor"><a href="#App-razor" class="headerlink" title="App.razor"></a>App.razor</h2><p>管理路由，并控制访问页面的内容</p>
+<h1 id="System-Security-Cryptography"><a href="#System-Security-Cryptography" class="headerlink" title="System.Security.Cryptography"></a>System.Security.Cryptography</h1>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary-About-101"><span class="toc-number">1.</span> <span class="toc-text">Summary-About-101</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OOP"><span class="toc-number">3.</span> <span class="toc-text">OOP</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%A3%B0%E6%98%8E"><span class="toc-number">3.1.</span> <span class="toc-text">类的定义与声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B4%BE%E7%94%9F%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-number">3.2.1.</span> <span class="toc-text">派生类的构造函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7"><span class="toc-number">3.3.</span> <span class="toc-text">属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%B3%95"><span class="toc-number">3.3.1.</span> <span class="toc-text">用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E6%80%A7"><span class="toc-number">3.3.2.</span> <span class="toc-text">特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="toc-number">3.4.</span> <span class="toc-text">虚函数与抽象类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">3.4.1.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E9%9A%90%E8%97%8F%E6%96%B9%E6%B3%95"><span class="toc-number">3.4.2.</span> <span class="toc-text">关于隐藏方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%86%E5%B0%81%E7%B1%BB"><span class="toc-number">3.5.</span> <span class="toc-text">密封类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">3.5.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F-1"><span class="toc-number">3.5.2.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="toc-number">3.6.</span> <span class="toc-text">修饰符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3"><span class="toc-number">3.7.</span> <span class="toc-text">接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E4%B8%8E%E7%B1%BB%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">3.7.1.</span> <span class="toc-text">接口与类的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F-2"><span class="toc-number">3.7.2.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">3.7.3.</span> <span class="toc-text">接口之间的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B"><span class="toc-number">3.8.</span> <span class="toc-text">泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%B1%BBList-lt-T-gt"><span class="toc-number">3.8.1.</span> <span class="toc-text">集合类List&lt;T&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E7%B1%BB%E5%AE%9A%E4%B9%89"><span class="toc-number">3.8.2.</span> <span class="toc-text">泛型类定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%9E%8B%E6%96%B9%E6%B3%95%E5%AE%9A%E4%B9%89"><span class="toc-number">3.8.3.</span> <span class="toc-text">泛型方法定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MyList2Practice"><span class="toc-number">3.9.</span> <span class="toc-text">MyList2Practice</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%98%E6%96%B9%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.9.1.</span> <span class="toc-text">官方实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.10.</span> <span class="toc-text">反射类型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LINQ"><span class="toc-number">4.</span> <span class="toc-text">LINQ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sequences-operation"><span class="toc-number">4.1.</span> <span class="toc-text">Sequences-operation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TakeWhile"><span class="toc-number">4.2.</span> <span class="toc-text">TakeWhile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Skip-Take"><span class="toc-number">4.3.</span> <span class="toc-text">Skip()-Take()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Zip"><span class="toc-number">4.4.</span> <span class="toc-text">Zip()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sum"><span class="toc-number">4.5.</span> <span class="toc-text">Sum()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Select-from-multiple-input-sequences"><span class="toc-number">4.6.</span> <span class="toc-text">Select-from-multiple-input-sequences</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Blazor"><span class="toc-number">5.</span> <span class="toc-text">Blazor</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#App-razor"><span class="toc-number">5.1.</span> <span class="toc-text">App.razor</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#System-Security-Cryptography"><span class="toc-number">6.</span> <span class="toc-text">System.Security.Cryptography</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&text=「NOTES-05」C#学习笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=「NOTES-05」C#学习笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&is_video=false&description=「NOTES-05」C#学习笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「NOTES-05」C#学习笔记&body=Check out this article: http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=「NOTES-05」C#学习笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=「NOTES-05」C#学习笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=「NOTES-05」C#学习笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=「NOTES-05」C#学习笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&name=「NOTES-05」C#学习笔记&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&t=「NOTES-05」C#学习笔记"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Tr4cck
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

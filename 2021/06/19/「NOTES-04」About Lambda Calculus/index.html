@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="About Lambda CalculusSyntax标识符引用举个例子 1lambda x.x+2  这个x实际上就被称为标识符 柯里化一个lambda表达式只接受一个参数，为了实现具有两个参数的函数，我们必须使用柯里化：   即写一个函数，它返回一个函数  自由标识符 vs. 绑定标识符要看你在哪个视角，或者说你站在lambda表达式中的哪一层来看这个问题。从全局来看，前者对应所谓全局变量，后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「NOTES-04」About Lambda Calculus">
+<meta property="og:url" content="http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/index.html">
+<meta property="og:site_name" content="Track">
+<meta property="og:description" content="About Lambda CalculusSyntax标识符引用举个例子 1lambda x.x+2  这个x实际上就被称为标识符 柯里化一个lambda表达式只接受一个参数，为了实现具有两个参数的函数，我们必须使用柯里化：   即写一个函数，它返回一个函数  自由标识符 vs. 绑定标识符要看你在哪个视角，或者说你站在lambda表达式中的哪一层来看这个问题。从全局来看，前者对应所谓全局变量，后">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-19T15:06:35.000Z">
+<meta property="article:modified_time" content="2022-03-02T08:40:02.941Z">
+<meta property="article:author" content="Tr4cck">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Church Calculus">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>「NOTES-04」About Lambda Calculus</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2021/06/26/%E3%80%8CWP-05%E3%80%8DCTFSHOW%E9%80%86%E5%90%91%E5%8C%BA%E9%A2%98%E8%A7%A3/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2021/06/13/%E3%80%8CWP-04%E3%80%8DstarCTF2021-wherekey/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&text=「NOTES-04」About Lambda Calculus"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&title=「NOTES-04」About Lambda Calculus"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&is_video=false&description=「NOTES-04」About Lambda Calculus"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「NOTES-04」About Lambda Calculus&body=Check out this article: http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&title=「NOTES-04」About Lambda Calculus"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&title=「NOTES-04」About Lambda Calculus"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&title=「NOTES-04」About Lambda Calculus"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&title=「NOTES-04」About Lambda Calculus"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&name=「NOTES-04」About Lambda Calculus&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&t=「NOTES-04」About Lambda Calculus"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#About-Lambda-Calculus"><span class="toc-number">1.</span> <span class="toc-text">About Lambda Calculus</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Syntax"><span class="toc-number">1.1.</span> <span class="toc-text">Syntax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E5%BC%95%E7%94%A8"><span class="toc-number">1.1.1.</span> <span class="toc-text">标识符引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%AF%E9%87%8C%E5%8C%96"><span class="toc-number">1.1.2.</span> <span class="toc-text">柯里化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%94%B1%E6%A0%87%E8%AF%86%E7%AC%A6-vs-%E7%BB%91%E5%AE%9A%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="toc-number">1.1.3.</span> <span class="toc-text">自由标识符 vs. 绑定标识符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grammar"><span class="toc-number">1.2.</span> <span class="toc-text">Grammar</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Alpha-translate"><span class="toc-number">1.2.1.</span> <span class="toc-text">Alpha translate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Beta-rule"><span class="toc-number">1.2.2.</span> <span class="toc-text">Beta rule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-number">1.2.3.</span> <span class="toc-text">一个例子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Number-and-Calculation"><span class="toc-number">1.3.</span> <span class="toc-text">Number and Calculation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Church"><span class="toc-number">1.3.1.</span> <span class="toc-text">Church</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Branch-and-loop"><span class="toc-number">1.3.2.</span> <span class="toc-text">Branch and loop</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        「NOTES-04」About Lambda Calculus
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tr4cck</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-06-19T15:06:35.000Z" itemprop="datePublished">2021-06-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CS/">CS</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Church-Calculus/" rel="tag">Church Calculus</a>, <a class="tag-link-link" href="/tags/Notes/" rel="tag">Notes</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="About-Lambda-Calculus"><a href="#About-Lambda-Calculus" class="headerlink" title="About Lambda Calculus"></a>About Lambda Calculus</h1><h2 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h2><h3 id="标识符引用"><a href="#标识符引用" class="headerlink" title="标识符引用"></a>标识符引用</h3><p>举个例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lambda x.x+2</span><br></pre></td></tr></table></figure>
+
+<p>这个x实际上就被称为标识符</p>
+<h3 id="柯里化"><a href="#柯里化" class="headerlink" title="柯里化"></a>柯里化</h3><p>一个lambda表达式只接受一个参数，为了实现具有两个参数的函数，我们必须使用<strong>柯里化</strong>：</p>
+<blockquote>
+<p> 即写一个函数，它返回一个函数</p>
+</blockquote>
+<h3 id="自由标识符-vs-绑定标识符"><a href="#自由标识符-vs-绑定标识符" class="headerlink" title="自由标识符 vs. 绑定标识符"></a>自由标识符 vs. 绑定标识符</h3><p>要看你在哪个视角，或者说你站在lambda表达式中的哪一层来看这个问题。从全局来看，前者对应所谓全局变量，后者对应局部变量</p>
+<h2 id="Grammar"><a href="#Grammar" class="headerlink" title="Grammar"></a>Grammar</h2><h3 id="Alpha-translate"><a href="#Alpha-translate" class="headerlink" title="Alpha translate"></a>Alpha translate</h3><p>它是一个重命名操作，即：</p>
+<blockquote>
+<p>变量的名称是不重要的（莫名想到离散数学</p>
+</blockquote>
+<h3 id="Beta-rule"><a href="#Beta-rule" class="headerlink" title="Beta rule"></a>Beta rule</h3><p>其实就是可以将值代入的意思，值得注意的是：</p>
+<blockquote>
+<p>我们只有在不引起绑定标识符和自由标识符之间的任何冲突的情况下，才可以做Beta规约：如果标识符“<code>z</code>”在“<code>e</code>”中是自由的，那么我们就需要确保，Beta规约不会导致“<code>z</code>”变成绑定的。如果在“<code>B</code>”中绑定的变量和“<code>e</code>”中的自由变量产生命名冲突，我们就需要用Alpha转换来更改标识符名称，使之不同。</p>
+</blockquote>
+<p><strong>特别地：参数大部分都是自由的</strong></p>
+<h3 id="一个例子"><a href="#一个例子" class="headerlink" title="一个例子"></a>一个例子</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lambda x y.x y</span><br></pre></td></tr></table></figure>
+
+<p>这个实际上是一个简写，它等价于下面：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lambda x.(lambda y.x)</span><br></pre></td></tr></table></figure>
+
+<p>其中x是一个lambda表达式，就是说接受两个参数x、y，返回将y带入x后的结果</p>
+<h2 id="Number-and-Calculation"><a href="#Number-and-Calculation" class="headerlink" title="Number and Calculation"></a>Number and Calculation</h2><p>目前我们有的只有函数，而没有定义数字和算术运算的概念，因此我们需要用函数来定义数字，是的你没有看错。我们下面就要介绍<strong>丘奇数</strong>。</p>
+<h3 id="Church"><a href="#Church" class="headerlink" title="Church"></a>Church</h3><p>所有丘奇数都是带有两个参数的函数</p>
+<ul>
+<li>0是<code>lambda s z.z</code></li>
+<li>1是<code>lambda s z.s z</code></li>
+<li>2是<code>lambda s z.s (s z)</code></li>
+<li>对于任何数“<code>n</code>”，它的丘奇数是将其第一个参数应用到第二个参数上“<code>n</code>”次的函数。</li>
+</ul>
+<blockquote>
+<p>一个很好的理解办法是将“<code>z</code>”作为是对于零值的命名，而“<code>s</code>”作为后继函数的名称。因此，0是一个仅返回“0”值的函数；1是将后继函数运用到0上一次的函数；2则是将后继函数应用到零的后继上的函数，以此类推。</p>
+</blockquote>
+<p>利用丘奇数，我们可以完全利用lambda表达式定义<code>x+y</code>，下面先给出结果，然后进行详细解释：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let add = lambda s z x y.x s (y s z)</span><br></pre></td></tr></table></figure>
+
+<p>按上面说的，我们先进行柯里化：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">let add = lambda x y.(lambda s z.(x s (y s z)))</span><br></pre></td></tr></table></figure>
+
+<p>从内到外分析，即为了将x、y相加，先<code>(y s z)</code>。这个的意思是，y是一个函数，将s，z应用到y上，意义上得到y的值；x也是一个函数，把s和内层应用到x上，得到类似x+y的值。</p>
+<blockquote>
+<p>为了将<code>x</code>和<code>y</code>相加，先用参数“<code>s</code>”和“<code>z</code>”创建（正则化的）丘奇数“<code>y</code>”。然后应用<code>x</code>到丘奇数<code>y</code>上，这时候使用由“<code>s</code>”和“<code>z</code>”定义的丘奇数<code>y</code>。也就是说，我们得到的结果是一个函数，这个函数把自己加到另一个数字上。（要计算<code>x + y</code>，先计算 <code>y</code> 是 <code>z</code> 的几号后继，然后计算<code>x</code> 是 <code>y</code>的几号后继。）</p>
+</blockquote>
+<p><strong>然后我们可以举一个例子：</strong></p>
+<p>2 + 3：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">step1：translate</span><br><span class="line">	add (lambda s z.s (s z)) (lambda s z.s (s (s z)))</span><br><span class="line">step2: alpha</span><br><span class="line">	add (lambda s2 z2 . s2 (s2 z2)) (lambda s3 z3 . s3 (s3 (s3 z3)))</span><br><span class="line">step3: replace</span><br><span class="line">	lambda x y.(lambda s z.(x s y s z))) (lambda s2 z2 . s2 (s2 z2)) (lambda s3 z3 . s3 (s3 (s3 z3)))</span><br><span class="line">step4: beta to add</span><br><span class="line">	lambda s z.(lambda s2 z2.s2 (s2 z2)) s (lambda s3 z3 . s3 (s3 (s3 z3)) s z)</span><br><span class="line">step5: beta to 3</span><br><span class="line">	lambda s z.(lambda s2 z2.s2 (s2 z2)) s (s (s (s z)))</span><br><span class="line">step6: beta to 2</span><br><span class="line">	lambda s z.s (s (s (s (s z))))</span><br></pre></td></tr></table></figure>
+
+<p><strong>DONE！</strong></p>
+<h3 id="Branch-and-loop"><a href="#Branch-and-loop" class="headerlink" title="Branch and loop"></a>Branch and loop</h3><blockquote>
+<p>众所周知，其实我们只需要数据、分支跳转这两类，就能够表达任意计算了，其实编程语言基本都是从这三类指令开始向外扩展的</p>
+</blockquote>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#About-Lambda-Calculus"><span class="toc-number">1.</span> <span class="toc-text">About Lambda Calculus</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Syntax"><span class="toc-number">1.1.</span> <span class="toc-text">Syntax</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E8%AF%86%E7%AC%A6%E5%BC%95%E7%94%A8"><span class="toc-number">1.1.1.</span> <span class="toc-text">标识符引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%AF%E9%87%8C%E5%8C%96"><span class="toc-number">1.1.2.</span> <span class="toc-text">柯里化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%94%B1%E6%A0%87%E8%AF%86%E7%AC%A6-vs-%E7%BB%91%E5%AE%9A%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="toc-number">1.1.3.</span> <span class="toc-text">自由标识符 vs. 绑定标识符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grammar"><span class="toc-number">1.2.</span> <span class="toc-text">Grammar</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Alpha-translate"><span class="toc-number">1.2.1.</span> <span class="toc-text">Alpha translate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Beta-rule"><span class="toc-number">1.2.2.</span> <span class="toc-text">Beta rule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90"><span class="toc-number">1.2.3.</span> <span class="toc-text">一个例子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Number-and-Calculation"><span class="toc-number">1.3.</span> <span class="toc-text">Number and Calculation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Church"><span class="toc-number">1.3.1.</span> <span class="toc-text">Church</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Branch-and-loop"><span class="toc-number">1.3.2.</span> <span class="toc-text">Branch and loop</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&text=「NOTES-04」About Lambda Calculus"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&title=「NOTES-04」About Lambda Calculus"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&is_video=false&description=「NOTES-04」About Lambda Calculus"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「NOTES-04」About Lambda Calculus&body=Check out this article: http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&title=「NOTES-04」About Lambda Calculus"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&title=「NOTES-04」About Lambda Calculus"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&title=「NOTES-04」About Lambda Calculus"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&title=「NOTES-04」About Lambda Calculus"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&name=「NOTES-04」About Lambda Calculus&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/06/19/%E3%80%8CNOTES-04%E3%80%8DAbout%20Lambda%20Calculus/&t=「NOTES-04」About Lambda Calculus"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Tr4cck
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

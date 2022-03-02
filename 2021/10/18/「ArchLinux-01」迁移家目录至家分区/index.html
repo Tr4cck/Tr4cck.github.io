@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="工作环境123456789101112131415161718192021222324                  -&#96;                    track@Track-Arch                 .o+&#96;                   ----------------                &#96;ooo&#x2F;                   OS: A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「ArchLinux-01」迁移家目录至家分区">
+<meta property="og:url" content="http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/index.html">
+<meta property="og:site_name" content="Track">
+<meta property="og:description" content="工作环境123456789101112131415161718192021222324                  -&#96;                    track@Track-Arch                 .o+&#96;                   ----------------                &#96;ooo&#x2F;                   OS: A">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/10/18/oXnyCasSFpEmqvi.png">
+<meta property="article:published_time" content="2021-10-18T11:57:11.000Z">
+<meta property="article:modified_time" content="2022-03-02T08:06:07.279Z">
+<meta property="article:author" content="Tr4cck">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="ArchLinux">
+<meta property="article:tag" content="Migration">
+<meta property="article:tag" content="Home Directory">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/10/18/oXnyCasSFpEmqvi.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>「ArchLinux-01」迁移家目录至家分区</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2021/10/19/%E3%80%8CJournalctl-01%E3%80%8DMssCTF2021%E5%87%BA%E9%A2%98%E7%BB%8F%E9%AA%8C/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2021/08/19/%E3%80%8CNOTES-05%E3%80%8DCSharp-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&text=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&title=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&is_video=false&description=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「ArchLinux-01」迁移家目录至家分区&body=Check out this article: http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&title=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&title=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&title=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&title=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&name=「ArchLinux-01」迁移家目录至家分区&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&t=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">工作环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E5%AE%B6%E5%88%86%E5%8C%BA%E4%BB%A3%E6%9B%BF%E5%AE%B6%E7%9B%AE%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">为什么要使用家分区代替家目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%BF%81%E7%A7%BB"><span class="toc-number">3.</span> <span class="toc-text">如何迁移</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E4%B9%8B%E5%89%8D"><span class="toc-number">3.1.</span> <span class="toc-text">迁移之前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E8%BF%81%E7%A7%BB"><span class="toc-number">3.2.</span> <span class="toc-text">开始迁移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E6%9C%BA%E6%8C%82%E8%BD%BD"><span class="toc-number">3.3.</span> <span class="toc-text">开机挂载</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E5%AE%8C%E6%88%90"><span class="toc-number">4.</span> <span class="toc-text">迁移完成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E5%A4%96%E8%AF%9D"><span class="toc-number">5.</span> <span class="toc-text">题外话</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        「ArchLinux-01」迁移家目录至家分区
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tr4cck</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-10-18T11:57:11.000Z" itemprop="datePublished">2021-10-18</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ArchLinux/" rel="tag">ArchLinux</a>, <a class="tag-link-link" href="/tags/Home-Directory/" rel="tag">Home Directory</a>, <a class="tag-link-link" href="/tags/Linux/" rel="tag">Linux</a>, <a class="tag-link-link" href="/tags/Migration/" rel="tag">Migration</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="工作环境"><a href="#工作环境" class="headerlink" title="工作环境"></a>工作环境</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">                  -`                    track@Track-Arch</span><br><span class="line">                 .o+`                   ----------------</span><br><span class="line">                `ooo/                   OS: Arch Linux x86_64</span><br><span class="line">               `+oooo:                  Host: 82AX Lenovo Legion Y7000P2020H</span><br><span class="line">              `+oooooo:                 Kernel: 5.14.12-arch1-1</span><br><span class="line">              -+oooooo+:                Uptime: 31 mins</span><br><span class="line">            `/:-:++oooo+:               Packages: 1681 (pacman)</span><br><span class="line">           `/++++/+++++++:              Shell: fish 3.3.1</span><br><span class="line">          `/++++++++++++++:             Resolution: 1920x1080</span><br><span class="line">         `/+++ooooooooooooo/`           DE: Plasma 5.23.0</span><br><span class="line">        ./ooosssso++osssssso+`          WM: KWin</span><br><span class="line">       .oossssso-````/ossssss+`         WM Theme: Breeze 微风</span><br><span class="line">      -osssssso.      :ssssssso.        Theme: Layan [Plasma], Breeze [GTK2/3]</span><br><span class="line">     :osssssss/        osssso+++.       Icons: Fluent [Plasma], Fluent [GTK2/3]</span><br><span class="line">    /ossssssss/        +ssssooo/-       Terminal: st</span><br><span class="line">  `/ossssso+/:-        -:/+osssso+-     Terminal Font: JetBrainsMono Nerd Font</span><br><span class="line"> `+sso+:-`                 `.-/+oso:    CPU: Intel i7-10875H (16) @ 5.100GHz</span><br><span class="line">`++:.                           `-/+/   GPU: NVIDIA GeForce RTX 2060 Mobile</span><br><span class="line">.`                                 `/   GPU: Intel CometLake-H GT2 [UHD Graphics]</span><br><span class="line">                                        Memory: 4282MiB / 15868MiB</span><br><span class="line">                                        GPU Driver: i915</span><br><span class="line">                                        CPU Usage: 6%</span><br><span class="line">                                        Disk (/): 44G / 457G (11%)</span><br><span class="line">                                        Battery0: 100% [Full]</span><br></pre></td></tr></table></figure>
+
+<h1 id="为什么要使用家分区代替家目录"><a href="#为什么要使用家分区代替家目录" class="headerlink" title="为什么要使用家分区代替家目录"></a>为什么要使用家分区代替家目录</h1><p>众所周知 <code>ArchLinux</code> 是一个不太稳定的系统，如果你没有很好的备份你的操作系统的话，可能在某次 <code>pacman -Syyu</code> 之后你的系统就挂掉了。那么家分区的创建可以很好的避免重装系统带来的痛苦，因为你的所有软件的配置文件等等主要文件基本都放在了家目录下，如果有一个家分区，那么我们就不需要完全重建分区标并格式化，只需把家分区挂载到家目录，就可以有一个几乎无差别的体验。</p>
+<h1 id="如何迁移"><a href="#如何迁移" class="headerlink" title="如何迁移"></a>如何迁移</h1><h2 id="迁移之前"><a href="#迁移之前" class="headerlink" title="迁移之前"></a>迁移之前</h2><ul>
+<li><input disabled="" type="checkbox"> 当然你最好有一块儿新的硬盘，这会给你带来很大的便利</li>
+<li><input disabled="" type="checkbox"> 确保你知道关于 <code>Linux</code> 的一些基本知识，包括但不限于挂载、分区表、格式化之类的</li>
+</ul>
+<h2 id="开始迁移"><a href="#开始迁移" class="headerlink" title="开始迁移"></a>开始迁移</h2><p>首先使用 <code>sudo fdisk -l</code> 查看你要用来充当家分区的那个设备：</p>
+<p><img src="https://i.loli.net/2021/10/18/oXnyCasSFpEmqvi.png"></p>
+<p>比如说我的是 <code>/dev/nvme1n1</code> 这个设备。接着使用 <code>sudo fdisk /dev/nvme1n1</code> 进入 <code>fdisk</code>，然后先 <code>g</code>，接着 <code>n</code> ，一路回车表示使用默认值，最后 <code>w</code> 即可写入。</p>
+<p>不要忘记使用 <code>sudo fdisk -l</code> 确保正确，接着你可能需要重启一下你的电脑，否则无法进行格式化，如果你的系统还在使用这个设备的话。</p>
+<p>格式化使用 <code>sudo mkfs.ext4 /dev/nvme1n1p1</code>。</p>
+<p><strong>注意：</strong>格式化的是分区而不是设备！</p>
+<p>之后就是挂载了，我们使用 <code>sudo mount /dev/nvme1n1p1 /mnt</code> 将设备挂载到 <code>/mnt</code> 目录，可以选择删除 <code>/mnt/lost+found</code>。</p>
+<p>然后将家目录整个复制过来，<code>sudo cp -rp /home/* /mnt</code>，并 <code>sudo mv /home /home.orig</code> 同时创建新的家目录 <code>/home</code> 。</p>
+<p>接着 <code>cd /</code> 避免挂载失败，然后更改挂载点 ：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo umount /dev/nvme1n1p1</span><br><span class="line">sudo mount /dev/nvme1n1p1 /home</span><br></pre></td></tr></table></figure>
+
+<p>随后测试一下 <code>df /dev/nvme1n1p1</code> 这个命令帮助我们查看设备的使用情况和挂载情况。</p>
+<h2 id="开机挂载"><a href="#开机挂载" class="headerlink" title="开机挂载"></a>开机挂载</h2><p>上面基本已经算完成了，但是还有最关键的一步：就是更改 <code>/etc/fstab</code> ，实际上这个文件记录了开机时有哪些分区以及挂载信息，<code>sudo vim /etc/fstab</code> 写入下面这一行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/dev/nvme1n1p1    /home    ext4    defaults    0    0</span><br></pre></td></tr></table></figure>
+
+<h1 id="迁移完成"><a href="#迁移完成" class="headerlink" title="迁移完成"></a>迁移完成</h1><p>然后重启你的系统就好了！如果确定无误，可以删除 <code>/home.orig</code>。</p>
+<h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><p>在我重启之后卡在了sddm，一度让我怀疑是迁移哪里出了问题。但是我经过查看 <code>sudo journalctl -b -1</code>，一番折腾，发现在卡住的页面居然可以打开终端！原来是 <code>KDE</code> 炸了，不得不去 <code>/var/cache</code> 里找历史版本回滚上，然后重启才恢复正常。这让我考虑更换一个窗口管理器，例如 <code>i3</code> 或者 <code>dwm</code> ，因为一个桌面环境确实增加了一些不稳定因素（虽然可能窗口管理器也可能有这种问题），不管怎么样还是想试试，之后应该也会相应的更一篇关于 <code>st</code> 以及 <code>dwm</code> 等等的配置之类的。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">工作环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E5%AE%B6%E5%88%86%E5%8C%BA%E4%BB%A3%E6%9B%BF%E5%AE%B6%E7%9B%AE%E5%BD%95"><span class="toc-number">2.</span> <span class="toc-text">为什么要使用家分区代替家目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%BF%81%E7%A7%BB"><span class="toc-number">3.</span> <span class="toc-text">如何迁移</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E4%B9%8B%E5%89%8D"><span class="toc-number">3.1.</span> <span class="toc-text">迁移之前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E8%BF%81%E7%A7%BB"><span class="toc-number">3.2.</span> <span class="toc-text">开始迁移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E6%9C%BA%E6%8C%82%E8%BD%BD"><span class="toc-number">3.3.</span> <span class="toc-text">开机挂载</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E5%AE%8C%E6%88%90"><span class="toc-number">4.</span> <span class="toc-text">迁移完成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E5%A4%96%E8%AF%9D"><span class="toc-number">5.</span> <span class="toc-text">题外话</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&text=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&title=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&is_video=false&description=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「ArchLinux-01」迁移家目录至家分区&body=Check out this article: http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&title=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&title=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&title=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&title=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&name=「ArchLinux-01」迁移家目录至家分区&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/10/18/%E3%80%8CArchLinux-01%E3%80%8D%E8%BF%81%E7%A7%BB%E5%AE%B6%E7%9B%AE%E5%BD%95%E8%87%B3%E5%AE%B6%E5%88%86%E5%8C%BA/&t=「ArchLinux-01」迁移家目录至家分区"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Tr4cck
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

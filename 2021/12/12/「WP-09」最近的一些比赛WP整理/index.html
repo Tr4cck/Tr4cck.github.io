@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="SECCONCTF 2021pyast64++.rev题目实现了一个简单的 py 汇编器。将可执行文件拖进 IDA 可以看到非常多成对的 push-pop 操作，并且简单调试一下发现函数调用栈是一种奇怪的结构，即： 123456789--------|length|--------|canary|--------|param1|--------|param2|........  猜测出题人没有对编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「WP-09」最近的一些比赛WP整理">
+<meta property="og:url" content="http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/index.html">
+<meta property="og:site_name" content="Track">
+<meta property="og:description" content="SECCONCTF 2021pyast64++.rev题目实现了一个简单的 py 汇编器。将可执行文件拖进 IDA 可以看到非常多成对的 push-pop 操作，并且简单调试一下发现函数调用栈是一种奇怪的结构，即： 123456789--------|length|--------|canary|--------|param1|--------|param2|........  猜测出题人没有对编">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://md.innerspace.top/uploads/upload_f7f67072f4097a64753d2a28e7e2aedf.png">
+<meta property="article:published_time" content="2021-12-12T08:06:41.000Z">
+<meta property="article:modified_time" content="2022-03-02T08:10:35.639Z">
+<meta property="article:author" content="Tr4cck">
+<meta property="article:tag" content="[object Object]">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://md.innerspace.top/uploads/upload_f7f67072f4097a64753d2a28e7e2aedf.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>「WP-09」最近的一些比赛WP整理</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/01/04/%E3%80%8CArchLinux-02%E3%80%8D%E6%8B%AF%E6%95%91%E6%88%91%E7%9A%84Wine/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2021/11/29/%E3%80%8CWP-08%E3%80%8DNCTF2021-Reverse-0xbl4cb12d/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&text=「WP-09」最近的一些比赛WP整理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&is_video=false&description=「WP-09」最近的一些比赛WP整理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-09」最近的一些比赛WP整理&body=Check out this article: http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&name=「WP-09」最近的一些比赛WP整理&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&t=「WP-09」最近的一些比赛WP整理"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SECCONCTF-2021"><span class="toc-number">1.</span> <span class="toc-text">SECCONCTF 2021</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#pyast64-rev"><span class="toc-number">1.1.</span> <span class="toc-text">pyast64++.rev</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HITCTF-2021"><span class="toc-number">2.</span> <span class="toc-text">HITCTF 2021</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BabyRNG"><span class="toc-number">2.1.</span> <span class="toc-text">BabyRNG</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NUAACTF-2021"><span class="toc-number">3.</span> <span class="toc-text">NUAACTF 2021</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IDA-Start"><span class="toc-number">3.1.</span> <span class="toc-text">IDA Start</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Warm-up"><span class="toc-number">3.2.</span> <span class="toc-text">Warm up</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#elf"><span class="toc-number">3.3.</span> <span class="toc-text">elf</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MTCTF-2021"><span class="toc-number">4.</span> <span class="toc-text">MTCTF 2021</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Random"><span class="toc-number">4.1.</span> <span class="toc-text">Random</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        「WP-09」最近的一些比赛WP整理
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tr4cck</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-12-12T08:06:41.000Z" itemprop="datePublished">2021-12-12</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF-Reverse/">CTF-Reverse</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/object-Object/" rel="tag">[object Object]</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="SECCONCTF-2021"><a href="#SECCONCTF-2021" class="headerlink" title="SECCONCTF 2021"></a>SECCONCTF 2021</h1><h2 id="pyast64-rev"><a href="#pyast64-rev" class="headerlink" title="pyast64++.rev"></a>pyast64++.rev</h2><p>题目实现了一个简单的 py 汇编器。将可执行文件拖进 IDA 可以看到非常多成对的 push-pop 操作，并且简单调试一下发现函数调用栈是一种奇怪的结构，即：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">--------</span><br><span class="line">|length|</span><br><span class="line">--------</span><br><span class="line">|canary|</span><br><span class="line">--------</span><br><span class="line">|param1|</span><br><span class="line">--------</span><br><span class="line">|param2|</span><br><span class="line">........</span><br></pre></td></tr></table></figure>
+
+<p>猜测出题人没有对编译出来的汇编代码做优化，函数实现、传参以及用于栈保护的 canary 也是一种比较原始的实现。大概有两种思路：</p>
+<ul>
+<li>分析附件给出的 py，写汇编器的恢复</li>
+<li>直接逆二进制文件，比较耗时但应该可做</li>
+</ul>
+<p>比赛时选择了后者，因为觉得是一种比较好上手的思路，后面可以研究这个汇编器的实现，看看能否恢复出抽象语法树。</p>
+<p>程序流程大致如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">read flag -&gt; check -&gt; compare</span><br></pre></td></tr></table></figure>
+
+<p>比较套路化的过程，主要是调试的时候由于赋值是通过 push-pop 对，比较耗时耗力。然后由于栈结构的变化，使得 IDA 的 F5 基本是不能细看，推荐主要看汇编，不太明白的地方 F5 参考一下。代码恢复结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">S = []</span><br><span class="line">T = []</span><br><span class="line">NEW = [<span class="number">0</span>] * <span class="number">64</span></span><br><span class="line">key = <span class="string">&#x27;SECCON2021&#x27;</span></span><br><span class="line">sec_to_plain = [<span class="number">0x61</span>] * <span class="number">40</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">    S.append(<span class="number">255</span> - i)</span><br><span class="line">    T.append(<span class="built_in">ord</span>(key[i % <span class="built_in">len</span>(key)]))</span><br><span class="line"></span><br><span class="line">j = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">    j = (j + S[i] + T[i]) % <span class="number">256</span></span><br><span class="line">    (S[i], S[j]) = (S[j], S[i])</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> cnt <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="comment"># S</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">64</span>):</span><br><span class="line">        sec_to_plain[i] = S[sec_to_plain[i]]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># P</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">            tmp = sec_to_plain[<span class="number">8</span>*i + j]</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>): <span class="comment"># 二进制编码</span></span><br><span class="line">                NEW[k + <span class="number">8</span> * j] = tmp % <span class="number">2</span></span><br><span class="line">                tmp //= <span class="number">2</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">64</span>):</span><br><span class="line">            res = (j * j * j )% <span class="number">0x43</span> % <span class="number">0x40</span> <span class="comment"># 比特交换</span></span><br><span class="line">            (NEW[res], NEW[j]) = (NEW[j], NEW[res])</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>): <span class="comment"># 二进制译码</span></span><br><span class="line">            v78 = <span class="number">0</span></span><br><span class="line">            v74 = <span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">               v78 |= NEW[k + <span class="number">8</span> * j] * v74</span><br><span class="line">               v74 *= <span class="number">2</span></span><br><span class="line">            v70 = j + <span class="number">8</span> * i</span><br><span class="line">            sec_to_plain[v70] = v78</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">64</span>):</span><br><span class="line">        sec_to_plain[i] ^= <span class="built_in">ord</span>(key[cnt])</span><br><span class="line"></span><br><span class="line">enc = [<span class="number">0x4B</span>, <span class="number">0xCB</span>, <span class="number">0xBE</span>, <span class="number">0x7E</span>, <span class="number">0xB8</span>, <span class="number">0xA9</span>, <span class="number">0x1B</span>, <span class="number">0x4A</span>, <span class="number">0x23</span>, <span class="number">0x53</span>, <span class="number">0x71</span>, <span class="number">0x41</span>, <span class="number">0xCF</span>, <span class="number">0xC1</span>, <span class="number">0x1B</span>, <span class="number">0x89</span>, <span class="number">0x25</span>, <span class="number">0x62</span>, <span class="number">0x00</span>, <span class="number">0x44</span>, <span class="number">0xDB</span>, <span class="number">0x71</span>, <span class="number">0x15</span>, <span class="number">0xB4</span>, <span class="number">0xDF</span>, <span class="number">0x87</span>, <span class="number">0x05</span>, <span class="number">0x81</span>, <span class="number">0xBD</span>, <span class="number">0xC8</span>, <span class="number">0xF5</span>, <span class="number">0x64</span>, <span class="number">0x75</span>, <span class="number">0x3E</span>, <span class="number">0xC0</span>, <span class="number">0x65</span>, <span class="number">0xEF</span>, <span class="number">0x5C</span>, <span class="number">0xB6</span>, <span class="number">0x88</span>, <span class="number">0x9F</span>, <span class="number">0xEB</span>, <span class="number">0xA6</span>, <span class="number">0x5A</span>, <span class="number">0x4A</span>, <span class="number">0x85</span>, <span class="number">0x53</span>, <span class="number">0x4E</span>, <span class="number">0x06</span>, <span class="number">0xE1</span>, <span class="number">0x65</span>, <span class="number">0x67</span>, <span class="number">0x52</span>, <span class="number">0x4E</span>, <span class="number">0x90</span>, <span class="number">0xCD</span>, <span class="number">0x82</span>, <span class="number">0xEE</span>, <span class="number">0xAF</span>, <span class="number">0xF5</span>, <span class="number">0xAC</span>, <span class="number">0x3E</span>, <span class="number">0x9D</span>, <span class="number">0xB0</span>]</span><br></pre></td></tr></table></figure>
+
+<p>exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">ans = []</span><br><span class="line">S = [<span class="number">243</span>, <span class="number">106</span>, <span class="number">132</span>, <span class="number">232</span>, <span class="number">161</span>, <span class="number">31</span>, <span class="number">46</span>, <span class="number">140</span>, <span class="number">221</span>, <span class="number">19</span>, <span class="number">203</span>, <span class="number">158</span>, <span class="number">173</span>, <span class="number">183</span>, <span class="number">157</span>, <span class="number">76</span>, <span class="number">43</span>, <span class="number">237</span>, <span class="number">13</span>, <span class="number">209</span>, <span class="number">130</span>, <span class="number">81</span>, <span class="number">39</span>, <span class="number">235</span>, <span class="number">198</span>, <span class="number">122</span>, <span class="number">123</span>, <span class="number">77</span>, <span class="number">62</span>, <span class="number">63</span>, <span class="number">79</span>, <span class="number">146</span>, <span class="number">196</span>, <span class="number">215</span>, <span class="number">93</span>, <span class="number">145</span>, <span class="number">38</span>, <span class="number">187</span>, <span class="number">2</span>, <span class="number">14</span>, <span class="number">163</span>, <span class="number">195</span>, <span class="number">171</span>, <span class="number">242</span>, <span class="number">178</span>, <span class="number">167</span>, <span class="number">164</span>, <span class="number">236</span>, <span class="number">220</span>, <span class="number">212</span>, <span class="number">102</span>, <span class="number">3</span>, <span class="number">162</span>, <span class="number">192</span>, <span class="number">168</span>, <span class="number">230</span>, <span class="number">153</span>, <span class="number">252</span>, <span class="number">124</span>, <span class="number">229</span>, <span class="number">210</span>, <span class="number">159</span>, <span class="number">71</span>, <span class="number">45</span>, <span class="number">34</span>, <span class="number">6</span>, <span class="number">127</span>, <span class="number">84</span>, <span class="number">143</span>, <span class="number">113</span>, <span class="number">57</span>, <span class="number">96</span>, <span class="number">66</span>, <span class="number">100</span>, <span class="number">44</span>, <span class="number">204</span>, <span class="number">30</span>, <span class="number">87</span>, <span class="number">250</span>, <span class="number">185</span>, <span class="number">118</span>, <span class="number">131</span>, <span class="number">65</span>, <span class="number">47</span>, <span class="number">174</span>, <span class="number">54</span>, <span class="number">24</span>, <span class="number">98</span>, <span class="number">137</span>, <span class="number">213</span>, <span class="number">69</span>, <span class="number">52</span>, <span class="number">223</span>, <span class="number">110</span>, <span class="number">129</span>, <span class="number">255</span>, <span class="number">75</span>, <span class="number">53</span>, <span class="number">99</span>, <span class="number">36</span>, <span class="number">58</span>, <span class="number">197</span>, <span class="number">251</span>, <span class="number">175</span>, <span class="number">244</span>, <span class="number">51</span>, <span class="number">21</span>, <span class="number">217</span>, <span class="number">211</span>, <span class="number">169</span>, <span class="number">201</span>, <span class="number">141</span>, <span class="number">234</span>, <span class="number">83</span>, <span class="number">16</span>, <span class="number">49</span>, <span class="number">12</span>, <span class="number">92</span>, <span class="number">1</span>, <span class="number">166</span>, <span class="number">8</span>, <span class="number">206</span>, <span class="number">186</span>, <span class="number">126</span>, <span class="number">239</span>, <span class="number">240</span>, <span class="number">108</span>, <span class="number">29</span>, <span class="number">144</span>, <span class="number">194</span>, <span class="number">238</span>, <span class="number">105</span>, <span class="number">120</span>, <span class="number">224</span>, <span class="number">179</span>, <span class="number">32</span>, <span class="number">119</span>, <span class="number">228</span>, <span class="number">138</span>, <span class="number">231</span>, <span class="number">125</span>, <span class="number">26</span>, <span class="number">165</span>, <span class="number">133</span>, <span class="number">73</span>, <span class="number">40</span>, <span class="number">107</span>, <span class="number">249</span>, <span class="number">227</span>, <span class="number">248</span>, <span class="number">74</span>, <span class="number">176</span>, <span class="number">184</span>, <span class="number">20</span>, <span class="number">10</span>, <span class="number">116</span>, <span class="number">78</span>, <span class="number">80</span>, <span class="number">111</span>, <span class="number">60</span>, <span class="number">155</span>, <span class="number">104</span>, <span class="number">41</span>, <span class="number">68</span>, <span class="number">33</span>, <span class="number">142</span>, <span class="number">112</span>, <span class="number">59</span>, <span class="number">136</span>, <span class="number">149</span>, <span class="number">85</span>, <span class="number">128</span>, <span class="number">48</span>, <span class="number">177</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">241</span>, <span class="number">94</span>, <span class="number">72</span>, <span class="number">160</span>, <span class="number">253</span>, <span class="number">139</span>, <span class="number">135</span>, <span class="number">154</span>, <span class="number">56</span>, <span class="number">233</span>, <span class="number">7</span>, <span class="number">11</span>, <span class="number">28</span>, <span class="number">202</span>, <span class="number">172</span>, <span class="number">27</span>, <span class="number">50</span>, <span class="number">82</span>, <span class="number">246</span>, <span class="number">193</span>, <span class="number">205</span>, <span class="number">22</span>, <span class="number">200</span>, <span class="number">247</span>, <span class="number">9</span>, <span class="number">208</span>, <span class="number">216</span>, <span class="number">115</span>, <span class="number">121</span>, <span class="number">189</span>, <span class="number">190</span>, <span class="number">134</span>, <span class="number">218</span>, <span class="number">152</span>, <span class="number">219</span>, <span class="number">5</span>, <span class="number">15</span>, <span class="number">86</span>, <span class="number">61</span>, <span class="number">23</span>, <span class="number">188</span>, <span class="number">35</span>, <span class="number">117</span>, <span class="number">88</span>, <span class="number">151</span>, <span class="number">4</span>, <span class="number">70</span>, <span class="number">207</span>, <span class="number">89</span>, <span class="number">180</span>, <span class="number">222</span>, <span class="number">214</span>, <span class="number">55</span>, <span class="number">245</span>, <span class="number">156</span>, <span class="number">91</span>, <span class="number">226</span>, <span class="number">254</span>, <span class="number">191</span>, <span class="number">181</span>, <span class="number">182</span>, <span class="number">148</span>, <span class="number">170</span>, <span class="number">225</span>, <span class="number">199</span>, <span class="number">97</span>, <span class="number">67</span>, <span class="number">101</span>, <span class="number">64</span>, <span class="number">103</span>, <span class="number">114</span>, <span class="number">25</span>, <span class="number">147</span>, <span class="number">18</span>, <span class="number">95</span>, <span class="number">42</span>, <span class="number">37</span>, <span class="number">17</span>, <span class="number">109</span>, <span class="number">90</span>]</span><br><span class="line">enc = [<span class="number">0x4B</span>, <span class="number">0xCB</span>, <span class="number">0xBE</span>, <span class="number">0x7E</span>, <span class="number">0xB8</span>, <span class="number">0xA9</span>, <span class="number">0x1B</span>, <span class="number">0x4A</span>, <span class="number">0x23</span>, <span class="number">0x53</span>, <span class="number">0x71</span>, <span class="number">0x41</span>, <span class="number">0xCF</span>, <span class="number">0xC1</span>, <span class="number">0x1B</span>, <span class="number">0x89</span>, <span class="number">0x25</span>, <span class="number">0x62</span>, <span class="number">0x00</span>, <span class="number">0x44</span>, <span class="number">0xDB</span>, <span class="number">0x71</span>, <span class="number">0x15</span>, <span class="number">0xB4</span>, <span class="number">0xDF</span>, <span class="number">0x87</span>, <span class="number">0x05</span>, <span class="number">0x81</span>, <span class="number">0xBD</span>, <span class="number">0xC8</span>, <span class="number">0xF5</span>, <span class="number">0x64</span>, <span class="number">0x75</span>, <span class="number">0x3E</span>, <span class="number">0xC0</span>, <span class="number">0x65</span>, <span class="number">0xEF</span>, <span class="number">0x5C</span>, <span class="number">0xB6</span>, <span class="number">0x88</span>, <span class="number">0x9F</span>, <span class="number">0xEB</span>, <span class="number">0xA6</span>, <span class="number">0x5A</span>, <span class="number">0x4A</span>, <span class="number">0x85</span>, <span class="number">0x53</span>, <span class="number">0x4E</span>, <span class="number">0x06</span>, <span class="number">0xE1</span>, <span class="number">0x65</span>, <span class="number">0x67</span>, <span class="number">0x52</span>, <span class="number">0x4E</span>, <span class="number">0x90</span>, <span class="number">0xCD</span>, <span class="number">0x82</span>, <span class="number">0xEE</span>, <span class="number">0xAF</span>, <span class="number">0xF5</span>, <span class="number">0xAC</span>, <span class="number">0x3E</span>, <span class="number">0x9D</span>, <span class="number">0xB0</span>]</span><br><span class="line">key = <span class="string">&#x27;SECCON2021&#x27;</span></span><br><span class="line">NEW_SUB = [<span class="number">0</span>] * <span class="number">64</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> cnt <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">64</span>):</span><br><span class="line">        enc[i] ^= <span class="built_in">ord</span>(key[<span class="number">10</span> - cnt - <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">            tmp = enc[j + i*<span class="number">8</span>]</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">                NEW_SUB[k + <span class="number">8</span>*j] = tmp % <span class="number">2</span></span><br><span class="line">                tmp //= <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">63</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            res = (j**<span class="number">3</span>) % <span class="number">0x43</span> % <span class="number">0x40</span></span><br><span class="line">            NEW_SUB[res], NEW_SUB[j] = NEW_SUB[j], NEW_SUB[res]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">            v78 = <span class="number">0</span></span><br><span class="line">            v74 = <span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">                v78 |= NEW_SUB[k + <span class="number">8</span>*j] * v74</span><br><span class="line">                v74 *= <span class="number">2</span></span><br><span class="line">            enc[j + <span class="number">8</span>*i] = v78</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">64</span>):</span><br><span class="line">        enc[i] = S.index(enc[i])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">bytes</span>(enc))</span><br></pre></td></tr></table></figure>
+
+<h1 id="HITCTF-2021"><a href="#HITCTF-2021" class="headerlink" title="HITCTF 2021"></a>HITCTF 2021</h1><h2 id="BabyRNG"><a href="#BabyRNG" class="headerlink" title="BabyRNG"></a>BabyRNG</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">matrix = [ <span class="number">0x737A074B2A5FFC4F</span>, <span class="number">0x321F3772B75371F0</span>, <span class="number">0xE4EE355BFC5A53DB</span>, <span class="number">0xA77F3B3A1705B5EB</span>,</span><br><span class="line">           <span class="number">0x862767F503168BF7</span>, <span class="number">0xA6BE8C5F94612BE0</span>, <span class="number">0x5CF08CFB54522960</span>, <span class="number">0x26E77E8A70492CF6</span>,</span><br><span class="line">           <span class="number">0x72D75624BC03E433</span>, <span class="number">0x8CA020BCAD669BF7</span>, <span class="number">0xCD2CC3F1998A67BB</span>, <span class="number">0x885FC05F86ABFB0</span>,</span><br><span class="line">           <span class="number">0x9599CC320D3FE57C</span>, <span class="number">0xCC9458420B27A204</span>, <span class="number">0x64CD34844C4880DB</span>, <span class="number">0x8C40FEB2DB68D66C</span>]</span><br><span class="line"></span><br><span class="line">result = [<span class="number">0x473D522ACD6D711D</span>, <span class="number">0x2749BD99CAA1E332</span>, <span class="number">0xDBD902B6C82D673D</span>,</span><br><span class="line">          <span class="number">0x203C7FADB24D4391</span>, <span class="number">0x92A2DAF7C5C4B7F0</span>, <span class="number">0x86A68A7AD1F1F475</span>]</span><br><span class="line"></span><br><span class="line">local = <span class="keyword">lambda</span> a, b : matrix[b] ^ b ^ a ^ <span class="number">0xdeadbeef</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">genSecret</span>(<span class="params">front, tail</span>):</span><br><span class="line">    subKey = []</span><br><span class="line">    subKey.append(front)</span><br><span class="line">    subKey.append(tail)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">16</span>):</span><br><span class="line">        subKey.append(local(subKey[i + <span class="number">1</span>], i) ^ subKey[i])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> subKey[-<span class="number">2</span>], subKey[-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">deSecret</span>(<span class="params">front, tail</span>):</span><br><span class="line">    subKey = []</span><br><span class="line">    subKey.append(tail)</span><br><span class="line">    subKey.append(front)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">15</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">        subKey.append(local(subKey[<span class="number">15</span> - i + <span class="number">1</span>], i) ^ subKey[<span class="number">15</span> - i])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> subKey[-<span class="number">2</span>:][::-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encrypt</span>(<span class="params"><span class="built_in">input</span></span>):</span><br><span class="line">    enc = []</span><br><span class="line">    key = [<span class="number">0xDEADBEEFDEADBEEF</span>, <span class="number">0xBAADF00DBAADF00D</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">6</span>, <span class="number">2</span>):</span><br><span class="line">        temp1, temp2 = genSecret(<span class="built_in">input</span>[i] ^ key[i], <span class="built_in">input</span>[i + <span class="number">1</span>] ^ key[i + <span class="number">1</span>])</span><br><span class="line">        enc.append(temp1)</span><br><span class="line">        enc.append(temp2)</span><br><span class="line">    key.append(temp1, temp2)</span><br><span class="line">    <span class="keyword">return</span> enc</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt</span>():</span><br><span class="line">    msg = []</span><br><span class="line">    key = [<span class="number">0xDEADBEEFDEADBEEF</span>, <span class="number">0xBAADF00DBAADF00D</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">6</span>, <span class="number">2</span>):</span><br><span class="line">        temp1, temp2 = deSecret(result[i], result[i + <span class="number">1</span>])</span><br><span class="line">        msg.append(temp1 ^ key[<span class="number">0</span>])</span><br><span class="line">        msg.append(temp2 ^ key[<span class="number">1</span>])</span><br><span class="line">        key = result[i], result[i + <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> msg</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    plain = decrypt()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(plain)):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="built_in">print</span>(long_to_bytes(plain[i])[::-<span class="number">1</span>].decode(), end=<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br></pre></td></tr></table></figure>
+
+<p>丢个 exp 应该不会被骂吧（逃</p>
+<h1 id="NUAACTF-2021"><a href="#NUAACTF-2021" class="headerlink" title="NUAACTF 2021"></a>NUAACTF 2021</h1><h2 id="IDA-Start"><a href="#IDA-Start" class="headerlink" title="IDA Start"></a>IDA Start</h2><p>拖进 IDA 有明文 flag</p>
+<h2 id="Warm-up"><a href="#Warm-up" class="headerlink" title="Warm up"></a>Warm up</h2><p>init 函数指针中存着初始化 s1 的过程，照着跑一遍得到 s1 , 然后异或密文就没了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s1 = [<span class="built_in">ord</span>(ch) <span class="keyword">for</span> ch <span class="keyword">in</span> <span class="built_in">list</span>(<span class="string">&#x27;qasxcytgsasxcvrefghnrfghnjedfgbhn&#x27;</span>)]</span><br><span class="line">s1.append(<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(s1)</span><br><span class="line">s1_proced = [s1[i] ^ (<span class="number">2</span>*i + <span class="number">65</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">34</span>)]</span><br><span class="line">s2 = [<span class="number">0x56</span>, <span class="number">0x4E</span>, <span class="number">0x57</span>, <span class="number">0x58</span>, <span class="number">0x51</span>, <span class="number">0x51</span>, <span class="number">0x09</span>, <span class="number">0x46</span>, <span class="number">0x17</span>, <span class="number">0x46</span>, <span class="number">0x54</span>, <span class="number">0x5A</span>, <span class="number">0x59</span>, <span class="number">0x59</span>, <span class="number">0x1F</span>, <span class="number">0x48</span>, <span class="number">0x32</span>, <span class="number">0x5B</span>, <span class="number">0x6B</span>, <span class="number">0x7C</span>, <span class="number">0x75</span>, <span class="number">0x6E</span>, <span class="number">0x7E</span>, <span class="number">0x6E</span>, <span class="number">0x2F</span>, <span class="number">0x77</span>, <span class="number">0x4F</span>, <span class="number">0x7A</span>, <span class="number">0x71</span>, <span class="number">0x43</span>, <span class="number">0x2B</span>, <span class="number">0x26</span>, <span class="number">0x89</span>, <span class="number">0xFE</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">bytes</span>([x ^ y <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(s1_proced, s2)]))</span><br></pre></td></tr></table></figure>
+
+<h2 id="elf"><a href="#elf" class="headerlink" title="elf"></a>elf</h2><p>修 4 个字节。其中 3 个为 elf 文件的 <code>magic number</code>，还有一个是第 17 个字节——因为该文件有 PHT 表，所以肯定不是可重定位文件，改成可执行文件。然后拖进 IDA，发现算了一下 0 的 MD5，取成一个 8*16 的 byte 数组，然后异或就没了。</p>
+<h1 id="MTCTF-2021"><a href="#MTCTF-2021" class="headerlink" title="MTCTF 2021"></a>MTCTF 2021</h1><h2 id="Random"><a href="#Random" class="headerlink" title="Random"></a>Random</h2><p>random-key 生成过程中使用触发除 0 异常使控制流改变，可以静态分析出大概的触发链是啥。好在出题人没在里面加反调试，于是可以在 IDA 调试过程中手动改变 EIP 的值（未曾设想的道路），使程序往预期的方向走，然后就把 key 调出来了，然后就没了。</p>
+<p><img src="https://md.innerspace.top/uploads/upload_f7f67072f4097a64753d2a28e7e2aedf.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/projects_url">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SECCONCTF-2021"><span class="toc-number">1.</span> <span class="toc-text">SECCONCTF 2021</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#pyast64-rev"><span class="toc-number">1.1.</span> <span class="toc-text">pyast64++.rev</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HITCTF-2021"><span class="toc-number">2.</span> <span class="toc-text">HITCTF 2021</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BabyRNG"><span class="toc-number">2.1.</span> <span class="toc-text">BabyRNG</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NUAACTF-2021"><span class="toc-number">3.</span> <span class="toc-text">NUAACTF 2021</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IDA-Start"><span class="toc-number">3.1.</span> <span class="toc-text">IDA Start</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Warm-up"><span class="toc-number">3.2.</span> <span class="toc-text">Warm up</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#elf"><span class="toc-number">3.3.</span> <span class="toc-text">elf</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MTCTF-2021"><span class="toc-number">4.</span> <span class="toc-text">MTCTF 2021</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Random"><span class="toc-number">4.1.</span> <span class="toc-text">Random</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&text=「WP-09」最近的一些比赛WP整理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&is_video=false&description=「WP-09」最近的一些比赛WP整理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-09」最近的一些比赛WP整理&body=Check out this article: http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&title=「WP-09」最近的一些比赛WP整理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&name=「WP-09」最近的一些比赛WP整理&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2021/12/12/%E3%80%8CWP-09%E3%80%8D%E6%9C%80%E8%BF%91%E7%9A%84%E4%B8%80%E4%BA%9B%E6%AF%94%E8%B5%9BWP%E6%95%B4%E7%90%86/&t=「WP-09」最近的一些比赛WP整理"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2022
+    Tr4cck
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/projects_url">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
