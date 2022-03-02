@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Mini-L2021URL: https:&#x2F;&#x2F;ctf.xidian.edu.cn&#x2F;#&#x2F;index Team: cuttl3fish——kyriota | track | TBMK Start Time: 5.06 20:00 End Time: 5.12 20:00 WEBweb1 easy-java | kyr不会java，枯嘞 1New java.io.BufferedReader(New j">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「WP-02」MiniL-CTF-2021">
+<meta property="og:url" content="https://tr4cck.github.io/2021/05/16/a217d1073a20/index.html">
+<meta property="og:site_name" content="Track">
+<meta property="og:description" content="Mini-L2021URL: https:&#x2F;&#x2F;ctf.xidian.edu.cn&#x2F;#&#x2F;index Team: cuttl3fish——kyriota | track | TBMK Start Time: 5.06 20:00 End Time: 5.12 20:00 WEBweb1 easy-java | kyr不会java，枯嘞 1New java.io.BufferedReader(New j">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-16T07:21:03.000Z">
+<meta property="article:modified_time" content="2022-03-02T08:07:40.479Z">
+<meta property="article:author" content="Tr4cck">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="WP">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>「WP-02」MiniL-CTF-2021</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="Track" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Archives</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/links/">Links</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2021/05/16/7f395e0159df/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2021/04/21/fec4652abe20/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/05/16/a217d1073a20/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&text=「WP-02」MiniL-CTF-2021"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&title=「WP-02」MiniL-CTF-2021"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&is_video=false&description=「WP-02」MiniL-CTF-2021"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-02」MiniL-CTF-2021&body=Check out this article: https://tr4cck.github.io/2021/05/16/a217d1073a20/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&title=「WP-02」MiniL-CTF-2021"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&title=「WP-02」MiniL-CTF-2021"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&title=「WP-02」MiniL-CTF-2021"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&title=「WP-02」MiniL-CTF-2021"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&name=「WP-02」MiniL-CTF-2021&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/05/16/a217d1073a20/&t=「WP-02」MiniL-CTF-2021"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mini-L2021"><span class="toc-number">1.</span> <span class="toc-text">Mini-L2021</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#WEB"><span class="toc-number">1.1.</span> <span class="toc-text">WEB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web1-easy-java-kyr"><span class="toc-number">1.1.1.</span> <span class="toc-text">web1 easy-java | kyr</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MISC"><span class="toc-number">1.2.</span> <span class="toc-text">MISC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%93%E7%8C%AB%E7%8C%AB-kyr"><span class="toc-number">1.2.1.</span> <span class="toc-text">抓猫猫 | kyr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%BD%E7%99%BD%E7%BB%99%E7%9A%84%E7%AD%BE%E5%88%B0%E9%A2%98-kyr"><span class="toc-number">1.2.2.</span> <span class="toc-text">好白给的签到题 | kyr</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CRYPTO"><span class="toc-number">1.3.</span> <span class="toc-text">CRYPTO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%9F-%E5%9D%97-kyr"><span class="toc-number">1.3.1.</span> <span class="toc-text">土 块 | kyr</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reverse"><span class="toc-number">1.4.</span> <span class="toc-text">Reverse</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0oooops-track"><span class="toc-number">1.4.1.</span> <span class="toc-text">0oooops | track</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SEH"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">SEH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#VEH-amp-amp-TLS"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">VEH &amp;&amp; TLS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EXP"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">EXP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sub-track"><span class="toc-number">1.4.2.</span> <span class="toc-text">sub | track</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Pre-check"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">Pre_check</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Dump"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">Dump</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EXP-1"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">EXP</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FIN"><span class="toc-number">2.</span> <span class="toc-text">FIN</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        「WP-02」MiniL-CTF-2021
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tr4cck</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-05-16T07:21:03.000Z" itemprop="datePublished">2021-05-16</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF-Competition/">CTF-Competition</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/CTF/" rel="tag">CTF</a>, <a class="tag-link-link" href="/tags/WP/" rel="tag">WP</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Mini-L2021"><a href="#Mini-L2021" class="headerlink" title="Mini-L2021"></a>Mini-L2021</h1><p><strong>URL</strong>: <a target="_blank" rel="noopener" href="https://ctf.xidian.edu.cn/#/index">https://ctf.xidian.edu.cn/#/index</a></p>
+<p><strong>Team</strong>: cuttl3fish——kyriota | track | TBMK</p>
+<p><strong>Start Time</strong>: 5.06 20:00</p>
+<p><strong>End Time</strong>: 5.12 20:00</p>
+<h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="web1-easy-java-kyr"><a href="#web1-easy-java-kyr" class="headerlink" title="web1 easy-java | kyr"></a>web1 easy-java | kyr</h3><p>不会java，枯嘞</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">New java.io.BufferedReader(New java.io.FileReader(<span class="string">&quot;/flag&quot;</span>)).readLine()</span><br></pre></td></tr></table></figure>
+
+<h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><h3 id="抓猫猫-kyr"><a href="#抓猫猫-kyr" class="headerlink" title="抓猫猫 | kyr"></a>抓猫猫 | kyr</h3><blockquote>
+<p> hint：kawaii neko chan says that : what doesn’t kill u makes u stronger</p>
+</blockquote>
+<p>so what u should do is follow what she said , 然后同时连俩 bot 让他们对线，看看谁更腻害</p>
+<h3 id="好白给的签到题-kyr"><a href="#好白给的签到题-kyr" class="headerlink" title="好白给的签到题 | kyr"></a>好白给的签到题 | kyr</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&quot;story.txt&quot;</span>, <span class="string">&quot;rb&quot;</span>).read()</span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    fll=flast</span><br><span class="line">    <span class="keyword">if</span> <span class="string">b&#x27;&#123;&#x27;</span> <span class="keyword">in</span> f <span class="keyword">and</span> <span class="string">b&#x27;&#125;&#x27;</span> <span class="keyword">in</span> f:</span><br><span class="line">        <span class="built_in">print</span>(f[::-<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        flast=f</span><br><span class="line">        f=base64.b64decode(f)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        flast=fll</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            f=base64.b64decode(f[::-<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            f=base64.b64decode(flast[::-<span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<h2 id="CRYPTO"><a href="#CRYPTO" class="headerlink" title="CRYPTO"></a>CRYPTO</h2><h3 id="土-块-kyr"><a href="#土-块-kyr" class="headerlink" title="土 块 | kyr"></a>土 块 | kyr</h3><p>把题目中的<code>game</code>函数拿出来研究，如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tukuai <span class="keyword">import</span> game</span><br><span class="line">cheat=[[<span class="number">9</span>,[<span class="number">1</span>,<span class="number">0</span>]],[<span class="number">9</span>,[<span class="number">0</span>,<span class="number">1</span>]]]</span><br><span class="line">init_state = [<span class="number">0</span>] * <span class="number">4</span></span><br><span class="line">coin1 = randint(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">coin2 = randint(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">temp = coin1 * <span class="number">2</span> + coin2</span><br><span class="line">init_state[temp] = <span class="number">1</span></span><br><span class="line">servercoin,qc = game(cheat, init_state)</span><br><span class="line"><span class="built_in">print</span>(coin1)</span><br><span class="line"><span class="built_in">print</span>(coin2)</span><br><span class="line"><span class="built_in">print</span>(init_state)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;my coin is &#x27;</span> + <span class="built_in">str</span>(servercoin) + <span class="string">&#x27; your coin is?&#x27;</span>)</span><br><span class="line"><span class="keyword">from</span> qiskit.tools.visualization <span class="keyword">import</span> plot_bloch_multivector</span><br><span class="line">display(plot_bloch_multivector(init_state))</span><br><span class="line">simulator=Aer.get_backend(<span class="string">&#x27;qasm_simulator&#x27;</span>)</span><br><span class="line">result=execute(qc,backend=simulator).result()</span><br><span class="line"><span class="keyword">from</span> qiskit.tools.visualization <span class="keyword">import</span> plot_histogram</span><br><span class="line">display(qc.draw(output=<span class="string">&#x27;mpl&#x27;</span>))</span><br><span class="line">display(plot_histogram(result.get_counts(qc)))</span><br></pre></td></tr></table></figure>
+
+<p>画出几个图出来看看，只要绘出 bot 的输出 &#x3D; my coin 的量子电路即可，如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">       ┌──────────────────────┐┌───┐        </span><br><span class="line">q12_0: ┤0                     ├┤ X ├──■─────</span><br><span class="line">       │  initialize(0,0,1,0) │└─┬─┘┌─┴─┐┌─┐</span><br><span class="line">q12_1: ┤1                     ├──■──┤ X ├┤M├</span><br><span class="line">       └──────────────────────┘     └───┘└╥┘</span><br><span class="line"> c1: 1/═══════════════════════════════════╩═</span><br><span class="line">                                          0 </span><br></pre></td></tr></table></figure>
+
+<h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><h3 id="0oooops-track"><a href="#0oooops-track" class="headerlink" title="0oooops | track"></a>0oooops | track</h3><blockquote>
+<p>这道题涉及到windows的异常处理机制SEH</p>
+</blockquote>
+<h4 id="SEH"><a href="#SEH" class="headerlink" title="SEH"></a>SEH</h4><p>这个题不涉及太多SEH的底层，大概有以下几个点需要了解的：</p>
+<ul>
+<li>SEH实际包含两个主要功能：结束处理（termination handling）和异常处理（exception handling)</li>
+<li>每当你建立一个try块，它必须跟随一个 <code>__finally</code>块或一个<code>__except</code>块。</li>
+<li>一个<code>try</code>块之后不能既有finally块又有except块。但可以在try-except块中嵌套try-finally块，反过来 也可以。</li>
+<li><code>__try</code>,<code>__finally</code>关键字用来标出结束处理程序两段代码的轮廓<br>不管保护体（try块） 是如何退出的。不论你在保护体中使用return，还是goto，或者是longjump，结束处理程序 （finally块）都将被调用。</li>
+<li>在try使用<code>__leave</code>关键字会引起跳转到try块的结尾</li>
+<li>给<code>ms_exc.registration.TryLevel</code>赋值是用于处理嵌套的try</li>
+</ul>
+<blockquote>
+<p>学习自HAPPY师傅的博客</p>
+</blockquote>
+<p>然后看看题，main函数直接看发现异常，于是看汇编，定位到伪代码异常处。IDA的分析结果如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.text:00412330 loc_412330:                             ; CODE XREF: _main_0+15C↑j</span><br><span class="line">.text:00412330 ;   __try &#123; // __except at loc_412377</span><br><span class="line">.text:00412330                 mov     [ebp+ms_exc.registration.TryLevel], 0</span><br><span class="line">.text:00412337                 lea     ebx, [ebp+Str]</span><br><span class="line">.text:0041233D                 xor     eax, eax</span><br><span class="line">.text:0041233F                 db      3Eh</span><br><span class="line">.text:0041233F                 mov     dword ptr [eax], 0</span><br><span class="line">.text:00412346                 mov     edx, 0</span><br><span class="line">.text:0041234B                 div     edx</span><br></pre></td></tr></table></figure>
+
+
+
+<p>发现非常明显的<strong>除零异常</strong>还有<strong>eax清零后却试图访问它的内存</strong>，以及SEH结构。不需要对它进行任何patch，因为必须让程序捕获到这个异常，才会去执行<code>__except_filter</code>，也就是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">text:00412356 loc_412356:                             ; DATA XREF: .rdata:stru_41A238↓o</span><br><span class="line">.text:00412356 ;   __except filter // owned by 412330</span><br><span class="line">.text:00412356                 mov     eax, [ebp+ms_exc.exc_ptr]</span><br><span class="line">.text:00412359                 mov     ecx, [eax]</span><br><span class="line">.text:0041235B                 mov     edx, [ecx]</span><br><span class="line">.text:0041235D                 mov     [ebp+var_1BC], edx</span><br><span class="line">.text:00412363                 mov     eax, [ebp+ms_exc.exc_ptr]</span><br><span class="line">.text:00412366                 push    eax</span><br><span class="line">.text:00412367                 mov     ecx, [ebp+var_1BC]</span><br><span class="line">.text:0041236D                 push    ecx</span><br><span class="line">.text:0041236E                 call    sub_411131</span><br><span class="line">.text:00412373                 add     esp, 8</span><br><span class="line">.text:00412376                 retn</span><br></pre></td></tr></table></figure>
+
+
+
+<p>稍微看一看<code>sub_411131</code>函数的内部逻辑</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __cdecl <span class="title function_">sub_411DD0</span><span class="params">(<span class="type">int</span> a1, _EXCEPTION_POINTERS *a2)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> i; <span class="comment">// [esp+D0h] [ebp-40h]</span></span><br><span class="line">  <span class="type">char</span> v4[<span class="number">40</span>]; <span class="comment">// [esp+DCh] [ebp-34h] BYREF</span></span><br><span class="line">  <span class="type">char</span> *v5; <span class="comment">// [esp+104h] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  __CheckForDebuggerJustMyCode(&amp;unk_41D015);</span><br><span class="line">  <span class="keyword">if</span> ( a2-&gt;ExceptionRecord-&gt;ExceptionCode != <span class="number">0xC0000094</span> ) <span class="comment">// 除零异常相应的异常代码</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  v5 = (<span class="type">char</span> *)(a2-&gt;ContextRecord-&gt;Ebx + <span class="number">9</span>);</span><br><span class="line">  qmemcpy(v4, <span class="string">&quot;!V -&#125;VG-bp&#125;m-nG!b|ra GyGE|Drp D&quot;</span>, <span class="number">31</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">0x1F</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( v4[i] != ((<span class="type">unsigned</span> __int8)a2-&gt;ContextRecord-&gt;Eip ^ ((v5[<span class="number">2</span> * i + <span class="number">1</span>] ^ <span class="number">0x4D</span>) - <span class="number">4</span>) ^ <span class="number">0x13</span>) )</span><br><span class="line">    &#123;</span><br><span class="line">      a2-&gt;ContextRecord-&gt;Eip += <span class="number">54</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  a2-&gt;ContextRecord-&gt;Eip += <span class="number">63</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以发现将运算结果存在v5中，但是只有奇数位，不妨试着还原一下（伪代码）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> magic_1[] = <span class="string">&quot;!V -&#125;VG-bp&#125;m-nG!b|ra GyGE|Drp D&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">0x1f</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// printf(&quot;%c&quot;, ((magic_1[i] ^ 0x13 ^ errr_addr)+4)^0x4d);</span></span><br><span class="line">        flag[<span class="number">2</span> * i + <span class="number">1</span>] = ((magic_1[i] ^ <span class="number">0x13</span> ^ errr_addr)+<span class="number">4</span>)^<span class="number">0x4d</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>并且如果满足条件，将会改变eip的值，将进程从异常中跳出来，不妨看看跳到了哪里</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="number">0x41234B</span> + <span class="number">63</span>))</span><br></pre></td></tr></table></figure>
+
+<p>那里是congratulations的提示信息，但很明显我们还没拿到完整的flag</p>
+<h4 id="VEH-amp-amp-TLS"><a href="#VEH-amp-amp-TLS" class="headerlink" title="VEH &amp;&amp; TLS"></a>VEH &amp;&amp; TLS</h4><p>查看IDA的Exports窗口可以看到TlsCallback_0_0</p>
+<blockquote>
+<p>TLS，Thread Local Storage 线程局部存储，TLS回调函数的调用运行要先于PE代码执行，该特性使它可以作为一种反调试技术使用。</p>
+<p>TLS是各线程的独立的数据存储空间，使用TLS技术可在线程内部独立使用或修改进程的全局数据或静态数据。</p>
+</blockquote>
+<p>return了一个奇怪的函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">PVOID __stdcall <span class="title function_">TlsCallback_0_0</span><span class="params">(<span class="type">int</span> a1, <span class="type">int</span> a2, <span class="type">int</span> a3)</span></span><br><span class="line">&#123;</span><br><span class="line">  __CheckForDebuggerJustMyCode(&amp;unk_41D015);</span><br><span class="line">  <span class="keyword">return</span> AddVectoredExceptionHandler(<span class="number">1u</span>, Handler);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// attributes: thunk</span></span><br><span class="line">LONG __stdcall <span class="title function_">Handler</span><span class="params">(<span class="keyword">struct</span> _EXCEPTION_POINTERS *ExceptionInfo)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> sub_411BD0(ExceptionInfo);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> __stdcall <span class="title function_">sub_411BD0</span><span class="params">(_EXCEPTION_POINTERS *a1)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> i; <span class="comment">// [esp+D0h] [ebp-40h]</span></span><br><span class="line">  <span class="type">char</span> v3[<span class="number">40</span>]; <span class="comment">// [esp+DCh] [ebp-34h]</span></span><br><span class="line">  DWORD v4; <span class="comment">// [esp+104h] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  __CheckForDebuggerJustMyCode(&amp;unk_41D015);</span><br><span class="line">  <span class="keyword">if</span> ( a1-&gt;ExceptionRecord-&gt;ExceptionCode != <span class="number">0xC0000005</span> ) <span class="comment">// 不可访问地址相应的异常代码</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  v4 = a1-&gt;ContextRecord-&gt;Ebx + <span class="number">9</span>;</span><br><span class="line">  v3[<span class="number">0</span>] = <span class="number">16</span>;</span><br><span class="line">  v3[<span class="number">1</span>] = <span class="number">4</span>;</span><br><span class="line">  v3[<span class="number">2</span>] = <span class="number">24</span>;</span><br><span class="line">  v3[<span class="number">3</span>] = <span class="number">11</span>;</span><br><span class="line">  v3[<span class="number">4</span>] = <span class="number">24</span>;</span><br><span class="line">  v3[<span class="number">5</span>] = <span class="number">16</span>;</span><br><span class="line">  v3[<span class="number">6</span>] = <span class="number">4</span>;</span><br><span class="line">  v3[<span class="number">7</span>] = <span class="number">21</span>;</span><br><span class="line">  v3[<span class="number">8</span>] = <span class="number">11</span>;</span><br><span class="line">  v3[<span class="number">9</span>] = <span class="number">5</span>;</span><br><span class="line">  v3[<span class="number">10</span>] = <span class="number">31</span>;</span><br><span class="line">  v3[<span class="number">11</span>] = <span class="number">46</span>;</span><br><span class="line">  v3[<span class="number">12</span>] = <span class="number">33</span>;</span><br><span class="line">  v3[<span class="number">13</span>] = <span class="number">46</span>;</span><br><span class="line">  v3[<span class="number">14</span>] = <span class="number">72</span>;</span><br><span class="line">  v3[<span class="number">15</span>] = <span class="number">21</span>;</span><br><span class="line">  v3[<span class="number">16</span>] = <span class="number">6</span>;</span><br><span class="line">  v3[<span class="number">17</span>] = <span class="number">46</span>;</span><br><span class="line">  v3[<span class="number">18</span>] = <span class="number">17</span>;</span><br><span class="line">  v3[<span class="number">19</span>] = <span class="number">69</span>;</span><br><span class="line">  v3[<span class="number">20</span>] = <span class="number">5</span>;</span><br><span class="line">  v3[<span class="number">21</span>] = <span class="number">62</span>;</span><br><span class="line">  v3[<span class="number">22</span>] = <span class="number">46</span>;</span><br><span class="line">  v3[<span class="number">23</span>] = <span class="number">24</span>;</span><br><span class="line">  v3[<span class="number">24</span>] = <span class="number">21</span>;</span><br><span class="line">  v3[<span class="number">25</span>] = <span class="number">72</span>;</span><br><span class="line">  v3[<span class="number">26</span>] = <span class="number">46</span>;</span><br><span class="line">  v3[<span class="number">27</span>] = <span class="number">69</span>;</span><br><span class="line">  v3[<span class="number">28</span>] = <span class="number">33</span>;</span><br><span class="line">  v3[<span class="number">29</span>] = <span class="number">31</span>;</span><br><span class="line">  v3[<span class="number">30</span>] = <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">0x1F</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( v3[i] != (((*(<span class="type">char</span> *)(v4 + <span class="number">2</span> * i) ^ <span class="number">0x37</span>) + <span class="number">4</span>) ^ <span class="number">0x42</span>) )</span><br><span class="line">    &#123;</span><br><span class="line">      a1-&gt;ContextRecord-&gt;Eip += <span class="number">66</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  a1-&gt;ContextRecord-&gt;Eip += <span class="number">7</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（Handler显然是第二段解密），因为我实在是太菜了，又查了一下这个函数的功能，发现了另一个异常处理机制VEH</p>
+<p>VEH处理流程</p>
+<blockquote>
+<ul>
+<li>CPU捕获异常信息</li>
+<li>通过KiDispatchException进行分发(EIP&#x3D;KiUserExceptionDispatcher)</li>
+<li>KiUserExceptionDispatcher调用RtIDispatchException.</li>
+<li>RtIDispatchException查找VEH处理函数链表并调用相关处理函数</li>
+<li>代码返回到KiUserExceptionDispatcher</li>
+<li>调用ZwContinue再次进入0环(ZwContinue调用NtContinue,主要作用就是恢复 TRAPFRAME然后通过_KiServiceExit返回到3环)。</li>
+<li>线程再次返回3环后,从修正后的位置开始执行</li>
+</ul>
+<p>学习自：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42052102/article/details/83540134">https://blog.csdn.net/weixin_42052102/article/details/83540134</a></p>
+</blockquote>
+<h4 id="EXP"><a href="#EXP" class="headerlink" title="EXP"></a>EXP</h4><p><strong>这样一来整个流程大致明了了</strong></p>
+<ul>
+<li>VEH抓到<code>0xC0000005</code></li>
+<li>SEH抓到<code>0xC0000094</code></li>
+<li>分别的flag在各自的handler里面</li>
+</ul>
+<p>脚本如下，写的比较乱</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> flag[<span class="number">100</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> errr_addr = <span class="number">0x30234B</span>;</span><br><span class="line">    <span class="type">char</span> magic_1[] = <span class="string">&quot;!V -&#125;VG-bp&#125;m-nG!b|ra GyGE|Drp D&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">0x1f</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// printf(&quot;%c&quot;, ((magic_1[i] ^ 0x13 ^ errr_addr)+4)^0x4d);</span></span><br><span class="line">        flag[<span class="number">2</span> * i + <span class="number">1</span>] = ((magic_1[i] ^ <span class="number">0x13</span> ^ errr_addr)+<span class="number">4</span>)^<span class="number">0x4d</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="type">char</span> magic_2[] = &#123;<span class="number">16</span>,<span class="number">4</span>,<span class="number">24</span>,<span class="number">11</span>,<span class="number">24</span>,<span class="number">16</span>,<span class="number">4</span>,<span class="number">21</span>,<span class="number">11</span>,<span class="number">5</span>,<span class="number">31</span>,<span class="number">46</span>,<span class="number">33</span>,<span class="number">46</span>,<span class="number">72</span>,<span class="number">21</span>,<span class="number">6</span>,<span class="number">46</span>,<span class="number">17</span>,<span class="number">69</span>,<span class="number">5</span>,<span class="number">62</span>,<span class="number">46</span>,<span class="number">24</span>,<span class="number">21</span>,<span class="number">72</span>,<span class="number">46</span>,<span class="number">69</span>,<span class="number">33</span>,<span class="number">31</span>,<span class="number">10</span>&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">0x1f</span>; i++) &#123;</span><br><span class="line">        <span class="comment">// printf(&quot;%c&quot;, ((magic_2[i]^0x42)-4)^0x37);</span></span><br><span class="line">        flag[<span class="number">2</span> * i] = ((magic_2[i]^<span class="number">0x42</span>)<span class="number">-4</span>)^<span class="number">0x37</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, flag);</span><br><span class="line">    <span class="comment">// miniLctf&#123;y0u_a1r4ady_und4rstand_th4_w1nd0ws_exc4pt1On_handl1e_m4chan1sm&#125;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="sub-track"><a href="#sub-track" class="headerlink" title="sub | track"></a>sub | track</h3><blockquote>
+<p>傀儡进程</p>
+</blockquote>
+<h4 id="Pre-check"><a href="#Pre-check" class="headerlink" title="Pre_check"></a>Pre_check</h4><p>这题居然让我电脑报毒了，让我康康！（康不懂，爬了</p>
+<p>main函数很混乱，但仔细看能看出一点东西，貌似是创建一个进程，尝试把另一个文件读进来，然后开始执行？还看见一个熟悉的SMC</p>
+<p>看了hint之后搜到了傀儡进程，一个最基本傀儡进程的实现如下</p>
+<ul>
+<li>CreateProcess创建进程，传入参数CREATE_SUSPENDED使进程挂起</li>
+<li>NtUnmapViewOfSection清空新进程的内存数据</li>
+<li>VirtualAllocEx申请新的内存</li>
+<li>WriteProcessMemory向内存写入payload</li>
+<li>SetThreadContext设置入口点</li>
+<li>ResumeThread唤醒进程，执行payload</li>
+</ul>
+<h4 id="Dump"><a href="#Dump" class="headerlink" title="Dump"></a>Dump</h4><p>emmm直接调的话，由于各种奇怪的反调试，好像没法成功，于是我打开了010editor，直接把傀儡进程在运行前全都异或回去，并dump出来单独分析</p>
+<p>清晰的main函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __cdecl <span class="title function_">main_0</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">size_t</span> input_len; <span class="comment">// eax</span></span><br><span class="line">  <span class="type">char</span> v5; <span class="comment">// [esp+0h] [ebp-10Ch]</span></span><br><span class="line">  <span class="type">char</span> v6; <span class="comment">// [esp+0h] [ebp-10Ch]</span></span><br><span class="line">  <span class="type">char</span> input[<span class="number">56</span>]; <span class="comment">// [esp+D0h] [ebp-3Ch] BYREF</span></span><br><span class="line"></span><br><span class="line">  __CheckForDebuggerJustMyCode(&amp;unk_40C015);</span><br><span class="line">  <span class="built_in">memset</span>(input, <span class="number">0</span>, <span class="number">0x32</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Please input your flag: &quot;</span>, v5);</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, (<span class="type">char</span>)input);</span><br><span class="line">  input_len = <span class="built_in">strlen</span>(input);</span><br><span class="line">  <span class="keyword">if</span> ( (<span class="type">unsigned</span> __int8)off_40A040(input, input_len) )</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Congratulation~~~&quot;</span>, v6);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Try again~~~&quot;</span>, v6);</span><br><span class="line">  getchar();</span><br><span class="line">  getchar();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>把<code>off_40A040</code>一路往下点，就看到加密逻辑</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> __cdecl <span class="title function_">sub_4014F0</span><span class="params">(<span class="type">int</span> a1, <span class="type">int</span> a2)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> i; <span class="comment">// [esp+DCh] [ebp-8h]</span></span><br><span class="line"></span><br><span class="line">  __CheckForDebuggerJustMyCode(&amp;unk_40C015);</span><br><span class="line">  <span class="keyword">if</span> ( a2 != <span class="number">32</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">32</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( (<span class="type">char</span>)(((*(_BYTE *)(i + a1) ^ <span class="number">0x66</span>) + <span class="number">4</span>) ^ <span class="number">0x55</span>) != byte_40A020[i] )</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>挺常规的，直接还原？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">magic_1 = [<span class="number">0x5A</span>,<span class="number">0x46</span>,<span class="number">0x59</span>,<span class="number">0x46</span>,<span class="number">0x7B</span>,<span class="number">0x5C</span>,<span class="number">0x43</span>,<span class="number">0x51</span>,<span class="number">0x74</span>,<span class="number">0x63</span>,<span class="number">0x47</span>,<span class="number">0x0E</span>,<span class="number">0x4C</span>,<span class="number">0x68</span>,<span class="number">0x0E</span>,<span class="number">0x4C</span>,<span class="number">0x68</span>,<span class="number">0x43</span>,<span class="number">0x47</span>,<span class="number">0x03</span>,<span class="number">0x68</span>,<span class="number">0x51</span>,<span class="number">0x5E</span>,<span class="number">0x44</span>,<span class="number">0x03</span>,<span class="number">0x68</span>,<span class="number">0x51</span>,<span class="number">0x0E</span>,<span class="number">0x5E</span>,<span class="number">0x50</span>,<span class="number">0x1E</span>,<span class="number">0x4A</span>]</span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(magic_1)):</span><br><span class="line">    flag += <span class="built_in">chr</span>(((magic_1[i] ^ <span class="number">0x55</span>) -<span class="number">4</span>) ^ <span class="number">0x66</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment"># miniLctf&#123;Th1s_1s_th4_fak4_f1ag!&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>我aklsjdaiwjdawijdaiwdjqw（</p>
+<h4 id="EXP-1"><a href="#EXP-1" class="headerlink" title="EXP"></a>EXP</h4><p>又是上一题一样的，在Exports里面有<code>TlsCallback_0_0</code></p>
+<p>里面有对于<code>off_40A040</code>的指向进行处理，然后就没啥问题了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">magic_1 = [<span class="number">0x5A</span>,<span class="number">0x46</span>,<span class="number">0x59</span>,<span class="number">0x46</span>,<span class="number">0x7B</span>,<span class="number">0x5C</span>,<span class="number">0x43</span>,<span class="number">0x51</span>,<span class="number">0x74</span>,<span class="number">0x63</span>,<span class="number">0x47</span>,<span class="number">0x0E</span>,<span class="number">0x4C</span>,<span class="number">0x68</span>,<span class="number">0x0E</span>,<span class="number">0x4C</span>,<span class="number">0x68</span>,<span class="number">0x43</span>,<span class="number">0x47</span>,<span class="number">0x03</span>,<span class="number">0x68</span>,<span class="number">0x51</span>,<span class="number">0x5E</span>,<span class="number">0x44</span>,<span class="number">0x03</span>,<span class="number">0x68</span>,<span class="number">0x51</span>,<span class="number">0x0E</span>,<span class="number">0x5E</span>,<span class="number">0x50</span>,<span class="number">0x1E</span>,<span class="number">0x4A</span>]</span><br><span class="line">fake_flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(magic_1)):</span><br><span class="line">    fake_flag += <span class="built_in">chr</span>(((magic_1[i] ^ <span class="number">0x55</span>) -<span class="number">4</span>) ^ <span class="number">0x66</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(fake_flag)</span><br><span class="line"></span><br><span class="line">magic_2=[<span class="number">0x5A</span>,<span class="number">0x26</span>,<span class="number">0x59</span>,<span class="number">0x26</span>,<span class="number">0x7B</span>,<span class="number">0x5C</span>,<span class="number">0x43</span>,<span class="number">0x51</span>,<span class="number">0x54</span>,<span class="number">0x6D</span>,<span class="number">0x52</span>,<span class="number">0x68</span>,<span class="number">0x0E</span>,<span class="number">0x4C</span>,<span class="number">0x68</span>,<span class="number">0x4C</span>,<span class="number">0x0F</span>,<span class="number">0x68</span>,<span class="number">0x0E</span>,<span class="number">0x59</span>,<span class="number">0x43</span>,<span class="number">0x03</span>,<span class="number">0x4D</span>,<span class="number">0x03</span>,<span class="number">0x4C</span>,<span class="number">0x43</span>,<span class="number">0x0E</span>,<span class="number">0x59</span>,<span class="number">0x50</span>,<span class="number">0x1E</span>,<span class="number">0x1E</span>,<span class="number">0x4A</span>]</span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(magic_2)):</span><br><span class="line">    flag += <span class="built_in">chr</span>(((magic_2[i] ^ <span class="number">0x66</span>) - <span class="number">4</span>) ^ <span class="number">0x55</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<h1 id="FIN"><a href="#FIN" class="headerlink" title="FIN"></a>FIN</h1><p>还是太菜了，虽然是校内rk3，但这分数太惨了，加油加油！</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/links/">Links</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mini-L2021"><span class="toc-number">1.</span> <span class="toc-text">Mini-L2021</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#WEB"><span class="toc-number">1.1.</span> <span class="toc-text">WEB</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web1-easy-java-kyr"><span class="toc-number">1.1.1.</span> <span class="toc-text">web1 easy-java | kyr</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MISC"><span class="toc-number">1.2.</span> <span class="toc-text">MISC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%93%E7%8C%AB%E7%8C%AB-kyr"><span class="toc-number">1.2.1.</span> <span class="toc-text">抓猫猫 | kyr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A5%BD%E7%99%BD%E7%BB%99%E7%9A%84%E7%AD%BE%E5%88%B0%E9%A2%98-kyr"><span class="toc-number">1.2.2.</span> <span class="toc-text">好白给的签到题 | kyr</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CRYPTO"><span class="toc-number">1.3.</span> <span class="toc-text">CRYPTO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%9F-%E5%9D%97-kyr"><span class="toc-number">1.3.1.</span> <span class="toc-text">土 块 | kyr</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reverse"><span class="toc-number">1.4.</span> <span class="toc-text">Reverse</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0oooops-track"><span class="toc-number">1.4.1.</span> <span class="toc-text">0oooops | track</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SEH"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">SEH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#VEH-amp-amp-TLS"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">VEH &amp;&amp; TLS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EXP"><span class="toc-number">1.4.1.3.</span> <span class="toc-text">EXP</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sub-track"><span class="toc-number">1.4.2.</span> <span class="toc-text">sub | track</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Pre-check"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">Pre_check</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Dump"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">Dump</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EXP-1"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">EXP</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FIN"><span class="toc-number">2.</span> <span class="toc-text">FIN</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/05/16/a217d1073a20/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&text=「WP-02」MiniL-CTF-2021"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&title=「WP-02」MiniL-CTF-2021"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&is_video=false&description=「WP-02」MiniL-CTF-2021"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-02」MiniL-CTF-2021&body=Check out this article: https://tr4cck.github.io/2021/05/16/a217d1073a20/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&title=「WP-02」MiniL-CTF-2021"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&title=「WP-02」MiniL-CTF-2021"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&title=「WP-02」MiniL-CTF-2021"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&title=「WP-02」MiniL-CTF-2021"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/05/16/a217d1073a20/&name=「WP-02」MiniL-CTF-2021&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/05/16/a217d1073a20/&t=「WP-02」MiniL-CTF-2021"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2022
+    Tr4cck
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Archives</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/links/">Links</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

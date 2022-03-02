@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="ch112345678910111213141516int __cdecl main(int argc, const char **argv, const char **envp)&amp;#123;  char *s1; &#x2F;&#x2F; [esp+1Ch] [ebp-Ch]  char *s1a; &#x2F;&#x2F; [esp+1Ch] [ebp-Ch]  puts(&quot;########################">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「WP-15」Rootme-Cracking WP">
+<meta property="og:url" content="https://tr4cck.github.io/2022/01/13/f4694a75c77b/index.html">
+<meta property="og:site_name" content="Track">
+<meta property="og:description" content="ch112345678910111213141516int __cdecl main(int argc, const char **argv, const char **envp)&amp;#123;  char *s1; &#x2F;&#x2F; [esp+1Ch] [ebp-Ch]  char *s1a; &#x2F;&#x2F; [esp+1Ch] [ebp-Ch]  puts(&quot;########################">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2022/01/14/GbFiuP8CDoSnad2.png">
+<meta property="og:image" content="https://s2.loli.net/2022/01/14/PmZNFytAeQCk2wG.png">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2022/01/1cd496388a34ce38.png">
+<meta property="article:published_time" content="2022-01-13T15:34:37.000Z">
+<meta property="article:modified_time" content="2022-03-02T08:13:01.086Z">
+<meta property="article:author" content="Tr4cck">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Reverse">
+<meta property="article:tag" content="Rootme">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/01/14/GbFiuP8CDoSnad2.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>「WP-15」Rootme-Cracking WP</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="Track" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Archives</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/links/">Links</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/02/27/23dc22daa374/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/01/13/bf93bf5d2313/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/01/13/f4694a75c77b/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&text=「WP-15」Rootme-Cracking WP"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&title=「WP-15」Rootme-Cracking WP"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&is_video=false&description=「WP-15」Rootme-Cracking WP"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-15」Rootme-Cracking WP&body=Check out this article: https://tr4cck.github.io/2022/01/13/f4694a75c77b/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&title=「WP-15」Rootme-Cracking WP"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&title=「WP-15」Rootme-Cracking WP"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&title=「WP-15」Rootme-Cracking WP"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&title=「WP-15」Rootme-Cracking WP"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&name=「WP-15」Rootme-Cracking WP&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&t=「WP-15」Rootme-Cracking WP"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ch1"><span class="toc-number">1.</span> <span class="toc-text">ch1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch2"><span class="toc-number">2.</span> <span class="toc-text">ch2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch3"><span class="toc-number">3.</span> <span class="toc-text">ch3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch4"><span class="toc-number">4.</span> <span class="toc-text">ch4</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch5"><span class="toc-number">5.</span> <span class="toc-text">ch5</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch6"><span class="toc-number">6.</span> <span class="toc-text">ch6</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch7"><span class="toc-number">7.</span> <span class="toc-text">ch7</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch8"><span class="toc-number">8.</span> <span class="toc-text">ch8</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch9"><span class="toc-number">9.</span> <span class="toc-text">ch9</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch10"><span class="toc-number">10.</span> <span class="toc-text">ch10</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch11"><span class="toc-number">11.</span> <span class="toc-text">ch11</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch12"><span class="toc-number">12.</span> <span class="toc-text">ch12</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch13"><span class="toc-number">13.</span> <span class="toc-text">ch13</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch14"><span class="toc-number">14.</span> <span class="toc-text">ch14</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch15"><span class="toc-number">15.</span> <span class="toc-text">ch15</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch16-ALMOST"><span class="toc-number">16.</span> <span class="toc-text">ch16 | ALMOST</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch17-LUA"><span class="toc-number">17.</span> <span class="toc-text">ch17 | LUA</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch18-Mac"><span class="toc-number">18.</span> <span class="toc-text">ch18 | Mac</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch19"><span class="toc-number">19.</span> <span class="toc-text">ch19</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch20"><span class="toc-number">20.</span> <span class="toc-text">ch20</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch21"><span class="toc-number">21.</span> <span class="toc-text">ch21</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch22"><span class="toc-number">22.</span> <span class="toc-text">ch22</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch23"><span class="toc-number">23.</span> <span class="toc-text">ch23</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch24"><span class="toc-number">24.</span> <span class="toc-text">ch24</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        「WP-15」Rootme-Cracking WP
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tr4cck</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-01-13T15:34:37.000Z" itemprop="datePublished">2022-01-13</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF-Reverse/">CTF-Reverse</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/CTF/" rel="tag">CTF</a>, <a class="tag-link-link" href="/tags/Reverse/" rel="tag">Reverse</a>, <a class="tag-link-link" href="/tags/Rootme/" rel="tag">Rootme</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="ch1"><a href="#ch1" class="headerlink" title="ch1"></a>ch1</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">char</span> *s1; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line">  <span class="type">char</span> *s1a; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;############################################################&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;##        Bienvennue dans ce challenge de cracking        ##&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;############################################################\n&quot;</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Veuillez entrer le mot de passe : &quot;</span>);</span><br><span class="line">  s1a = (<span class="type">char</span> *)<span class="built_in">getString</span>(s1);</span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">strcmp</span>(s1a, <span class="string">&quot;123456789&quot;</span>) )</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Bien joue, vous pouvez valider l&#x27;epreuve avec le pass : %s!\n&quot;</span>, <span class="string">&quot;123456789&quot;</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Dommage, essaye encore une fois.&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="ch2"><a href="#ch2" class="headerlink" title="ch2"></a>ch2</h1><p>printf 没有给出参数，看汇编即可发现 password</p>
+<h1 id="ch3"><a href="#ch3" class="headerlink" title="ch3"></a>ch3</h1><p>找字符串发现 main 函数，发现明文比较</p>
+<h1 id="ch4"><a href="#ch4" class="headerlink" title="ch4"></a>ch4</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">key = [<span class="number">0x18</span>, <span class="number">0xD6</span>, <span class="number">0x15</span>, <span class="number">0xCA</span>, <span class="number">0xFA</span>, <span class="number">0x77</span>]</span><br><span class="line">magic = [<span class="number">0x50</span>, <span class="number">0xB3</span>, <span class="number">0x67</span>, <span class="number">0xAF</span>, <span class="number">0xA5</span>, <span class="number">0x0E</span>, <span class="number">0x77</span>, <span class="number">0xA3</span>, <span class="number">0x4A</span>, <span class="number">0xA2</span>, <span class="number">0x9B</span>, <span class="number">0x01</span>, <span class="number">0x7D</span>, <span class="number">0x89</span>, <span class="number">0x61</span>, <span class="number">0xA5</span>, <span class="number">0xA5</span>, <span class="number">0x02</span>, <span class="number">0x76</span>, <span class="number">0xB2</span>, <span class="number">0x70</span>, <span class="number">0xB8</span>, <span class="number">0x89</span>, <span class="number">0x03</span>, <span class="number">0x79</span>, <span class="number">0xB8</span>, <span class="number">0x71</span>, <span class="number">0x95</span>, <span class="number">0x9B</span>, <span class="number">0x28</span>, <span class="number">0x74</span>, <span class="number">0xBF</span>, <span class="number">0x61</span>, <span class="number">0xBE</span>, <span class="number">0x96</span>, <span class="number">0x12</span>, <span class="number">0x47</span>, <span class="number">0x95</span>, <span class="number">0x3E</span>, <span class="number">0xE1</span>, <span class="number">0xA5</span>, <span class="number">0x04</span>, <span class="number">0x6C</span>, <span class="number">0xA3</span>, <span class="number">0x73</span>, <span class="number">0xAC</span>, <span class="number">0x89</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">bytes</span>([magic[i] ^ key[i%<span class="built_in">len</span>(key)] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(magic))]))</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h1 id="ch5"><a href="#ch5" class="headerlink" title="ch5"></a>ch5</h1><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Button1_Click</span>(<span class="params"><span class="built_in">object</span> sender, EventArgs e</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">      <span class="keyword">if</span> (Operators.CompareString(<span class="keyword">this</span>.TextBox1.Text, <span class="string">&quot;DotNetOP&quot;</span>, <span class="literal">false</span>) == <span class="number">0</span>)</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">int</span> num1 = (<span class="built_in">int</span>) Interaction.MsgBox((<span class="built_in">object</span>) <span class="string">&quot;Bravo! Vous pouvez valider avec ce mot de passe\r\nWell done! You can validate with this password&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">int</span> num2 = (<span class="built_in">int</span>) Interaction.MsgBox((<span class="built_in">object</span>) <span class="string">&quot;Mauvais mot de passe\r\nBad password&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="ch6"><a href="#ch6" class="headerlink" title="ch6"></a>ch6</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">puts</span>(<span class="string">&quot;crack-me for Root-me by s4r&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Enter password please&quot;</span>);</span><br><span class="line">  fgets(v5, <span class="number">64</span>, <span class="built_in">stdin</span>);</span><br><span class="line">  *((_BYTE *)&amp;i + <span class="built_in">strlen</span>(v5) + <span class="number">3</span>) = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">strlen</span>(v5) != <span class="number">19</span> )</span><br><span class="line">    <span class="keyword">goto</span> LABEL_21;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">8</span>; i &lt; <span class="number">17</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( *((_BYTE *)&amp;i + i + <span class="number">4</span>) != <span class="string">&#x27;i&#x27;</span> )</span><br><span class="line">      <span class="keyword">goto</span> LABEL_21;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( v11 == <span class="string">&#x27;s&#x27;</span></span><br><span class="line">    &amp;&amp; v10 == <span class="string">&#x27;p&#x27;</span></span><br><span class="line">    &amp;&amp; v9 == <span class="string">&#x27;m&#x27;</span></span><br><span class="line">    &amp;&amp; v5[<span class="number">2</span>] == <span class="string">&#x27;n&#x27;</span></span><br><span class="line">    &amp;&amp; v8 == <span class="string">&#x27;n&#x27;</span></span><br><span class="line">    &amp;&amp; v5[<span class="number">0</span>] == <span class="string">&#x27;c&#x27;</span></span><br><span class="line">    &amp;&amp; v5[<span class="number">1</span>] == <span class="string">&#x27;a&#x27;</span></span><br><span class="line">    &amp;&amp; v5[<span class="number">3</span>] == <span class="string">&#x27;t&#x27;</span></span><br><span class="line">    &amp;&amp; v6 == <span class="string">&#x27;r&#x27;</span></span><br><span class="line">    &amp;&amp; v7 == v6 + <span class="number">3</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    sub_4007C0();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>结合汇编大概是一个先填充，然后按位比较的过程</p>
+<h1 id="ch7"><a href="#ch7" class="headerlink" title="ch7"></a>ch7</h1><p>golang 基础</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">xx = <span class="built_in">bytes</span>([<span class="number">0x3b</span>, <span class="number">0x02</span>, <span class="number">0x23</span>, <span class="number">0x1b</span>, <span class="number">0x1b</span>, <span class="number">0x0c</span>, <span class="number">0x1c</span>, <span class="number">0x08</span>, <span class="number">0x28</span>, <span class="number">0x1b</span>, <span class="number">0x21</span>, <span class="number">0x04</span>, <span class="number">0x1c</span>, <span class="number">0x0b</span>])</span><br><span class="line">key = <span class="string">b&#x27;rootme&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">bytes</span>([xx[i] ^ key[i%<span class="built_in">len</span>(key)] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(xx))]))</span><br><span class="line"><span class="comment"># b&#x27;ImLovingGoLand&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="ch8"><a href="#ch8" class="headerlink" title="ch8"></a>ch8</h1><p>是一个输出 flag 的题应该可以通过 gdb 直接调出来。下面是输出逻辑：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> __noreturn <span class="title function_">blowfish</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> i; <span class="comment">// [esp+Ch] [ebp-4Ch]</span></span><br><span class="line">  <span class="type">char</span> *v1; <span class="comment">// [esp+14h] [ebp-44h]</span></span><br><span class="line">  <span class="type">char</span> v2[<span class="number">35</span>]; <span class="comment">// [esp+18h] [ebp-40h] BYREF</span></span><br><span class="line">  <span class="type">int</span> v3[<span class="number">5</span>]; <span class="comment">// [esp+3Bh] [ebp-1Dh] BYREF</span></span><br><span class="line">  <span class="type">char</span> v4[<span class="number">9</span>]; <span class="comment">// [esp+4Fh] [ebp-9h] BYREF</span></span><br><span class="line"></span><br><span class="line">  *(_DWORD *)&amp;v4[<span class="number">5</span>] = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">strcpy</span>(v2, <span class="string">&quot;liberté!&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">0x14</span>; i += <span class="number">4</span> )</span><br><span class="line">    *(_DWORD *)&amp;v2[i + <span class="number">12</span>] = <span class="number">0</span>;</span><br><span class="line">  v1 = &amp;v2[i + <span class="number">12</span>];</span><br><span class="line">  *(_WORD *)v1 = <span class="number">0</span>;</span><br><span class="line">  v1[<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">  qmemcpy(v3, <span class="string">&quot;_0cGjc5m_.5T3Ç8&quot;</span>, <span class="number">15</span>);</span><br><span class="line">  v3[<span class="number">4</span>] = <span class="string">&#x27;\xC30JC&#x27;</span>;</span><br><span class="line">  <span class="built_in">strcpy</span>(v4, <span class="string">&quot;\x809H9&quot;</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;&#x27;+) Authentification réussie...\n U&#x27;r root! \n\n sh 3.0 # password: %s\n\r&quot;</span>, v2);</span><br><span class="line">  <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="ch9"><a href="#ch9" class="headerlink" title="ch9"></a>ch9</h1><p><img src="https://s2.loli.net/2022/01/14/GbFiuP8CDoSnad2.png"></p>
+<p>file 完然后运行一下，发现就是一个口令验证器</p>
+<p><img src="https://s2.loli.net/2022/01/14/PmZNFytAeQCk2wG.png"></p>
+<p>一处简单的花指令，patch 之后是一个明文比较</p>
+<h1 id="ch10"><a href="#ch10" class="headerlink" title="ch10"></a>ch10</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jsEventHandler = <span class="keyword">function</span> <span class="title function_">jsEventHandler</span>(<span class="params">event</span>) &#123;</span><br><span class="line">      <span class="comment">// Increment nesting count for the event handler.</span></span><br><span class="line">      ++<span class="title class_">JSEvents</span>.<span class="property">inEventHandler</span>;</span><br><span class="line">      <span class="title class_">JSEvents</span>.<span class="property">currentEventHandler</span> = eventHandler;</span><br><span class="line">      <span class="comment">// Process any old deferred calls the user has placed.</span></span><br><span class="line">      <span class="title class_">JSEvents</span>.<span class="title function_">runDeferredCalls</span>();</span><br><span class="line">      <span class="comment">// Process the actual event, calls back to user C code handler.</span></span><br><span class="line">      eventHandler.<span class="title function_">handlerFunc</span>(event);</span><br><span class="line">      <span class="comment">// Process any new deferred calls that were placed right now from this event handler.</span></span><br><span class="line">      <span class="title class_">JSEvents</span>.<span class="title function_">runDeferredCalls</span>();</span><br><span class="line">      <span class="comment">// Out of event handler - restore nesting count.</span></span><br><span class="line">      --<span class="title class_">JSEvents</span>.<span class="property">inEventHandler</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>发现输入之后触发这个地方的 js 。惭愧，我不是很懂 js 相关技术，好在题目提示了 wasm 之后去分析wasm。先<code>gcc index.c -c -o index</code> 编译。通过字符串可以发现有口令检测相关函数。大概读了一下发现先在初始化了一个 md5 数据，然后在 check_password 处进行 md5 的比较，我是直接查到了。</p>
+<h1 id="ch11"><a href="#ch11" class="headerlink" title="ch11"></a>ch11</h1><p>对于 arm 还有不少要去了解的，好在现在的反编译工具已经特别方便，但这其实也是阻碍进步的一把双刃剑。</p>
+<p>题目是六个方程，刚好能解出来。</p>
+<h1 id="ch12"><a href="#ch12" class="headerlink" title="ch12"></a>ch12</h1><blockquote>
+<p>一开始没看到题目给了用户名，迷惑了好久</p>
+</blockquote>
+<p>一个比较简单的 keygen 的题目，猜测应该是出题人用汇编手写出来的，先从 <code>byte_600260</code> 出读 32 个字节，再从 <code>.m.key</code> 中连续着读 32 个字节，通过下面的 <code>check</code> 进行比对：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">__int64 __fastcall <span class="title function_">sub_400146</span><span class="params">(__int64 a1, __int64 a2)</span></span><br><span class="line">&#123;</span><br><span class="line">  __int64 v2; <span class="comment">// rax</span></span><br><span class="line">  __int64 i; <span class="comment">// rcx</span></span><br><span class="line"></span><br><span class="line">  v2 = <span class="built_in">strlen</span>(a1);</span><br><span class="line">  <span class="keyword">if</span> ( v2 == <span class="number">1</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">4919LL</span>;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0LL</span>; i != v2 - <span class="number">1</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( *(_BYTE *)(a1 + i) - (_BYTE)i + <span class="number">0x14</span> != *(_BYTE *)(a2 + i) )</span><br><span class="line">      <span class="keyword">return</span> <span class="number">4919LL</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0LL</span>;</span><br></pre></td></tr></table></figure>
+<p>来个 keygen：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line">name = <span class="string">b&#x27;root-me.org&#x27;</span></span><br><span class="line">passwd = <span class="built_in">bytes</span>([name[i] - i + <span class="number">0x14</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(name))])</span><br><span class="line"><span class="built_in">print</span>(hashlib.sha256(passwd).hexdigest())</span><br></pre></td></tr></table></figure>
+
+<h1 id="ch13"><a href="#ch13" class="headerlink" title="ch13"></a>ch13</h1><p>rider 里面看一下，下面是生成字符串：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">mqsldfksdfgljk</span>(<span class="params"><span class="built_in">string</span> data, <span class="built_in">string</span> key</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">int</span> length1 = data.Length;</span><br><span class="line">  <span class="built_in">int</span> length2 = key.Length;</span><br><span class="line">  <span class="built_in">char</span>[] chArray = <span class="keyword">new</span> <span class="built_in">char</span>[checked (length1 - <span class="number">1</span> + <span class="number">1</span>)];</span><br><span class="line">  <span class="built_in">int</span> num = checked (length1 - <span class="number">1</span>);</span><br><span class="line">  <span class="built_in">int</span> index = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (index &lt;= num)</span><br><span class="line">  &#123;</span><br><span class="line">    chArray[index] = Strings.ChrW(Strings.Asc(data[index]) ^ Strings.Asc(key[index % length2]));</span><br><span class="line">    checked &#123; ++index; &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">string</span>(chArray);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是调用，输入内容与上面生成的字符串比较：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Button1_Click</span>(<span class="params"><span class="built_in">object</span> sender, EventArgs e</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">string</span> data = Encoding.UTF8.GetString(Convert.FromBase64String(<span class="string">&quot;B29mVBJ7cDdtRAYAHh0GKw1yX1g4IV9QOA==&quot;</span>));</span><br><span class="line">  <span class="built_in">string</span> key = <span class="string">&quot;I_Gu3$$_Y0u_Ju5t_Fl4gg3d_!!!&quot;</span>;</span><br><span class="line">  <span class="comment">// ISSUE: reference to a compiler-generated method</span></span><br><span class="line">  MySettingsProperty.mqsldfksdfgljk(data, key);</span><br><span class="line">  <span class="comment">// ISSUE: reference to a compiler-generated method</span></span><br><span class="line">  <span class="keyword">if</span> (Operators.CompareString(<span class="keyword">this</span>.TextBox1.Text, MySettingsProperty.mqsldfksdfgljk(data, key), <span class="literal">false</span>) == <span class="number">0</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">int</span> num1 = (<span class="built_in">int</span>) Interaction.MsgBox((<span class="built_in">object</span>) <span class="string">&quot;GG !!! Vous pouvez valider le challenge avec ce mot de passe.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">int</span> num2 = (<span class="built_in">int</span>) Interaction.MsgBox((<span class="built_in">object</span>) <span class="string">&quot;Nop&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>太久不写 C# 了，所以就用 python 模拟一个：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">key = <span class="string">b&#x27;I_Gu3$$_Y0u_Ju5t_Fl4gg3d_!!!&#x27;</span></span><br><span class="line">data = base64.b64decode(<span class="string">&#x27;B29mVBJ7cDdtRAYAHh0GKw1yX1g4IV9QOA==&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">bytes</span>([data[i] ^ key[i % <span class="built_in">len</span>(key)] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data))]))</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="ch14"><a href="#ch14" class="headerlink" title="ch14"></a>ch14</h1><p>rider 里面看一下，只有一个 Program 类，猜测是个纯逆算法的题：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="ch15"><a href="#ch15" class="headerlink" title="ch15"></a>ch15</h1><p>file 发现为 python3.1 的 bytecode，直接 pycdc 可以看到源码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Source Generated with Decompyle++</span></span><br><span class="line"><span class="comment"># File: ch19.pyc (Python 3.1)</span></span><br><span class="line"></span><br><span class="line">Warning: Stack history <span class="keyword">is</span> <span class="keyword">not</span> empty!</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Welcome to the RootMe python crackme&#x27;</span>)</span><br><span class="line">    PASS = <span class="built_in">input</span>(<span class="string">&#x27;Enter the Flag: &#x27;</span>)</span><br><span class="line">    KEY = <span class="string">&#x27;I know, you love decrypting Byte Code !&#x27;</span></span><br><span class="line">    I = <span class="number">5</span></span><br><span class="line">    SOLUCE = [</span><br><span class="line">        <span class="number">57</span>,</span><br><span class="line">        <span class="number">73</span>,</span><br><span class="line">        <span class="number">79</span>,</span><br><span class="line">        <span class="number">16</span>,</span><br><span class="line">        <span class="number">18</span>,</span><br><span class="line">        <span class="number">26</span>,</span><br><span class="line">        <span class="number">74</span>,</span><br><span class="line">        <span class="number">50</span>,</span><br><span class="line">        <span class="number">13</span>,</span><br><span class="line">        <span class="number">38</span>,</span><br><span class="line">        <span class="number">13</span>,</span><br><span class="line">        <span class="number">79</span>,</span><br><span class="line">        <span class="number">86</span>,</span><br><span class="line">        <span class="number">86</span>,</span><br><span class="line">        <span class="number">87</span>]</span><br><span class="line">    KEYOUT = []</span><br><span class="line">    <span class="keyword">for</span> X <span class="keyword">in</span> PASS:</span><br><span class="line">        KEYOUT.append((<span class="built_in">ord</span>(X) + I ^ <span class="built_in">ord</span>(KEY[I])) % <span class="number">255</span>)</span><br><span class="line">        I = (I + <span class="number">1</span>) % <span class="built_in">len</span>(KEY)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> SOLUCE == KEYOUT:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;You Win&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Try Again !&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p>简单逆一下就行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SOLUCE = [<span class="number">57</span>, <span class="number">73</span>, <span class="number">79</span>, <span class="number">16</span>, <span class="number">18</span>, <span class="number">26</span>, <span class="number">74</span>, <span class="number">50</span>, <span class="number">13</span>, <span class="number">38</span>, <span class="number">13</span>, <span class="number">79</span>, <span class="number">86</span>, <span class="number">86</span>, <span class="number">87</span>]</span><br><span class="line">KEY = <span class="string">b&#x27;I know, you love decrypting Byte Code !&#x27;</span></span><br><span class="line">I = <span class="number">5</span></span><br><span class="line">flag = []</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> SOLUCE:</span><br><span class="line">    flag.append((x  ^ KEY[I]) - I)</span><br><span class="line">    I = (I + <span class="number">1</span>) % <span class="built_in">len</span>(KEY)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">bytes</span>(flag))</span><br></pre></td></tr></table></figure>
+
+<h1 id="ch16-ALMOST"><a href="#ch16-ALMOST" class="headerlink" title="ch16 | ALMOST"></a>ch16 | ALMOST</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> malduck <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">init_seed = <span class="number">0x563b2b37</span></span><br><span class="line">key = [ror(init, <span class="number">1</span>, <span class="number">32</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">25</span>)]</span><br><span class="line"><span class="built_in">print</span>(key)</span><br></pre></td></tr></table></figure>
+
+<h1 id="ch17-LUA"><a href="#ch17-LUA" class="headerlink" title="ch17 | LUA"></a>ch17 | LUA</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Reverse/Root-Me/ch17 </span><br><span class="line">➜ file ch45.out </span><br><span class="line">ch45.out: Lua bytecode, version 5.1</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="ch18-Mac"><a href="#ch18-Mac" class="headerlink" title="ch18 | Mac"></a>ch18 | Mac</h1><h1 id="ch19"><a href="#ch19" class="headerlink" title="ch19"></a>ch19</h1><p>实现了一个矩阵一样的数据结构，里面依次往里填充 <code>ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_ </code> 然后进行比较</p>
+<h1 id="ch20"><a href="#ch20" class="headerlink" title="ch20"></a>ch20</h1><p>开局一个 ptrace 检测反调，password 在运行时以命令行的形式传入。输入的每一个字符约束为 <code>ch &amp; 8 == 0</code>，随便模拟一下生成目标字符串：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">sub_804851C</span><span class="params">(<span class="type">unsigned</span> <span class="type">char</span> *a1, <span class="type">unsigned</span> <span class="type">char</span> *s)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> *v2; <span class="comment">// esi</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> *v4; <span class="comment">// ecx</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> v5; <span class="comment">// al</span></span><br><span class="line">  <span class="type">int</span> v6; <span class="comment">// ebx</span></span><br><span class="line">  <span class="type">int</span> v7; <span class="comment">// edx</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> v8; <span class="comment">// al</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> *v9; <span class="comment">// edx</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> v10; <span class="comment">// al</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> v11; <span class="comment">// al</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> v12; <span class="comment">// al</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> v13; <span class="comment">// al</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> v14; <span class="comment">// al</span></span><br><span class="line"></span><br><span class="line">  v2 = a1;</span><br><span class="line">  *a1 ^= <span class="number">0xAB</span>u;</span><br><span class="line">  v4 = a1 + <span class="number">1</span>;</span><br><span class="line">  v5 = a1[<span class="number">1</span>];</span><br><span class="line">  <span class="keyword">if</span> ( v5 )</span><br><span class="line">  &#123;</span><br><span class="line">    v6 = <span class="number">1</span>;</span><br><span class="line">    v7 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">      v8 = v5 - v6;</span><br><span class="line">      *v4 = v8;</span><br><span class="line">      v9 = &amp;a1[v7 - <span class="number">1</span>];</span><br><span class="line">      v10 = *v9 ^ v8;</span><br><span class="line">      *v4 = v10;</span><br><span class="line">      v11 = *v9 + v10;</span><br><span class="line">      *v4 = v11;</span><br><span class="line">      v12 = *v9 ^ v11;</span><br><span class="line">      *v4 = v12;</span><br><span class="line">      v13 = a1[<span class="number">8</span>] ^ v12;</span><br><span class="line">      *v4 = v13;</span><br><span class="line">      <span class="keyword">if</span> ( !v13 )</span><br><span class="line">        *v4 = <span class="number">1</span>;</span><br><span class="line">      v7 = ++v6;</span><br><span class="line">      v4 = &amp;a1[v6];</span><br><span class="line">      v5 = a1[v6];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ( v5 );</span><br><span class="line">  &#125;</span><br><span class="line">  v14 = *a1;</span><br><span class="line">  <span class="keyword">if</span> ( *a1 )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">sprintf</span>((<span class="type">char</span> *)s, <span class="string">&quot;%.2x&quot;</span>, v14);</span><br><span class="line">      s += <span class="number">2</span>;</span><br><span class="line">      v14 = *++v2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ( *v2 );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">char</span> go[<span class="number">10000</span>];</span><br><span class="line">  <span class="type">char</span> s[] = <span class="string">&quot;THEPASSWORDISEASYTOCRACK&quot;</span>;</span><br><span class="line">  sub_804851C(s, go);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, go);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="ch21"><a href="#ch21" class="headerlink" title="ch21"></a>ch21</h1><p>有一万种做法的样子…可以改跳转，也可以通过溢出覆盖函数指针的值让它指向 asm 函数</p>
+<h1 id="ch22"><a href="#ch22" class="headerlink" title="ch22"></a>ch22</h1><p>边调边改寄存器，即对比结果，然后在内存中把程序事先有的正确 password 拿出来，往里面一输：</p>
+<p><img src="https://s3.bmp.ovh/imgs/2022/01/1cd496388a34ce38.png"></p>
+<h1 id="ch23"><a href="#ch23" class="headerlink" title="ch23"></a>ch23</h1><h1 id="ch24"><a href="#ch24" class="headerlink" title="ch24"></a>ch24</h1>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/links/">Links</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ch1"><span class="toc-number">1.</span> <span class="toc-text">ch1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch2"><span class="toc-number">2.</span> <span class="toc-text">ch2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch3"><span class="toc-number">3.</span> <span class="toc-text">ch3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch4"><span class="toc-number">4.</span> <span class="toc-text">ch4</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch5"><span class="toc-number">5.</span> <span class="toc-text">ch5</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch6"><span class="toc-number">6.</span> <span class="toc-text">ch6</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch7"><span class="toc-number">7.</span> <span class="toc-text">ch7</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch8"><span class="toc-number">8.</span> <span class="toc-text">ch8</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch9"><span class="toc-number">9.</span> <span class="toc-text">ch9</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch10"><span class="toc-number">10.</span> <span class="toc-text">ch10</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch11"><span class="toc-number">11.</span> <span class="toc-text">ch11</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch12"><span class="toc-number">12.</span> <span class="toc-text">ch12</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch13"><span class="toc-number">13.</span> <span class="toc-text">ch13</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch14"><span class="toc-number">14.</span> <span class="toc-text">ch14</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch15"><span class="toc-number">15.</span> <span class="toc-text">ch15</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch16-ALMOST"><span class="toc-number">16.</span> <span class="toc-text">ch16 | ALMOST</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch17-LUA"><span class="toc-number">17.</span> <span class="toc-text">ch17 | LUA</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch18-Mac"><span class="toc-number">18.</span> <span class="toc-text">ch18 | Mac</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch19"><span class="toc-number">19.</span> <span class="toc-text">ch19</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch20"><span class="toc-number">20.</span> <span class="toc-text">ch20</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch21"><span class="toc-number">21.</span> <span class="toc-text">ch21</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch22"><span class="toc-number">22.</span> <span class="toc-text">ch22</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch23"><span class="toc-number">23.</span> <span class="toc-text">ch23</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ch24"><span class="toc-number">24.</span> <span class="toc-text">ch24</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/01/13/f4694a75c77b/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&text=「WP-15」Rootme-Cracking WP"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&title=「WP-15」Rootme-Cracking WP"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&is_video=false&description=「WP-15」Rootme-Cracking WP"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-15」Rootme-Cracking WP&body=Check out this article: https://tr4cck.github.io/2022/01/13/f4694a75c77b/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&title=「WP-15」Rootme-Cracking WP"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&title=「WP-15」Rootme-Cracking WP"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&title=「WP-15」Rootme-Cracking WP"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&title=「WP-15」Rootme-Cracking WP"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&name=「WP-15」Rootme-Cracking WP&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/01/13/f4694a75c77b/&t=「WP-15」Rootme-Cracking WP"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2022
+    Tr4cck
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Archives</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/links/">Links</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

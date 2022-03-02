@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="DigitalCircuits走流程得到源代码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「WP-16」SUSCTF2022">
+<meta property="og:url" content="https://tr4cck.github.io/2022/02/27/23dc22daa374/index.html">
+<meta property="og:site_name" content="Track">
+<meta property="og:description" content="DigitalCircuits走流程得到源代码： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-27T12:46:31.000Z">
+<meta property="article:modified_time" content="2022-03-02T08:25:40.363Z">
+<meta property="article:author" content="Tr4cck">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Reverse">
+<meta property="article:tag" content="WP">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>「WP-16」SUSCTF2022</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="Track" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Archives</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/links/">Links</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/03/02/e17f814f31fb/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/01/13/f4694a75c77b/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/02/27/23dc22daa374/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&text=「WP-16」SUSCTF2022"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&title=「WP-16」SUSCTF2022"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&is_video=false&description=「WP-16」SUSCTF2022"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-16」SUSCTF2022&body=Check out this article: https://tr4cck.github.io/2022/02/27/23dc22daa374/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&title=「WP-16」SUSCTF2022"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&title=「WP-16」SUSCTF2022"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&title=「WP-16」SUSCTF2022"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&title=「WP-16」SUSCTF2022"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&name=「WP-16」SUSCTF2022&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/02/27/23dc22daa374/&t=「WP-16」SUSCTF2022"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DigitalCircuits"><span class="toc-number">1.</span> <span class="toc-text">DigitalCircuits</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hello-world"><span class="toc-number">2.</span> <span class="toc-text">hello_world</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tree"><span class="toc-number">3.</span> <span class="toc-text">tree</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dart"><span class="toc-number">4.</span> <span class="toc-text">dart</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        「WP-16」SUSCTF2022
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tr4cck</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-02-27T12:46:31.000Z" itemprop="datePublished">2022-02-27</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF-Reverse/">CTF-Reverse</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/CTF/" rel="tag">CTF</a>, <a class="tag-link-link" href="/tags/Reverse/" rel="tag">Reverse</a>, <a class="tag-link-link" href="/tags/WP/" rel="tag">WP</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="DigitalCircuits"><a href="#DigitalCircuits" class="headerlink" title="DigitalCircuits"></a>DigitalCircuits</h1><p>走流程得到源代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f1</span>(<span class="params">a, b</span>): <span class="comment"># and</span></span><br><span class="line">    <span class="keyword">if</span> a == <span class="string">&#x27;1&#x27;</span> <span class="keyword">and</span> b == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;1&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f2</span>(<span class="params">a, b</span>): <span class="comment"># or</span></span><br><span class="line">    <span class="keyword">if</span> a == <span class="string">&#x27;0&#x27;</span> <span class="keyword">and</span> b == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f3</span>(<span class="params">a</span>): <span class="comment"># not</span></span><br><span class="line">    <span class="keyword">if</span> a == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> a == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;1&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f4</span>(<span class="params">a, b</span>): <span class="comment"># xor</span></span><br><span class="line">    <span class="keyword">return</span> f2(f1(a, f3(b)), f1(f3(a), b))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f5</span>(<span class="params">x, y, z</span>): <span class="comment"># x ^ y ^ z, xy + zx + yz</span></span><br><span class="line">    s = f4(f4(x, y), z)</span><br><span class="line">    c = f2(f1(x, y), f1(z, f2(x, y)))</span><br><span class="line">    <span class="keyword">return</span> (s, c)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f6</span>(<span class="params">a, b</span>): <span class="comment"># add</span></span><br><span class="line">    ans = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    z = <span class="string">&#x27;0&#x27;</span> <span class="comment"># !</span></span><br><span class="line">    a = a[::-<span class="number">1</span>] <span class="comment"># !</span></span><br><span class="line">    b = b[::-<span class="number">1</span>] <span class="comment"># !</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        ans += f5(a[i], b[i], z)[<span class="number">0</span>] <span class="comment"># ans += a[i] ^ a[i] ^ z</span></span><br><span class="line">        z = f5(a[i], b[i], z)[<span class="number">1</span>] <span class="comment"># z = a[i]b[i] + a[i]z + b[i]z</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans[::-<span class="number">1</span>] <span class="comment"># !</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f7</span>(<span class="params">a, n</span>): <span class="comment"># shift left</span></span><br><span class="line">    <span class="keyword">return</span> a[n:] + <span class="string">&#x27;0&#x27;</span> * n</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f8</span>(<span class="params">a, n</span>): <span class="comment"># shift right</span></span><br><span class="line">    <span class="keyword">return</span> n * <span class="string">&#x27;0&#x27;</span> + a[:-n]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f9</span>(<span class="params">a, b</span>):</span><br><span class="line">    ans = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        ans += f4(a[i], b[i]) <span class="comment"># ans += a[i] ^ b[i]</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f10</span>(<span class="params">v0, v1, k0, k1, k2, k3</span>): <span class="comment"># circuit TEA-like</span></span><br><span class="line">    s = <span class="string">&#x27;00000000000000000000000000000000&#x27;</span></span><br><span class="line">    d = <span class="string">&#x27;10011110001101110111100110111001&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">        s = f6(s, d)</span><br><span class="line">        v0 = f6(v0, f9(f9(f6(f7(v1, <span class="number">4</span>), k0), f6(v1, s)), f6(f8(v1, <span class="number">5</span>), k1)))</span><br><span class="line">        v1 = f6(v1, f9(f9(f6(f7(v0, <span class="number">4</span>), k2), f6(v0, s)), f6(f8(v0, <span class="number">5</span>), k3)))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> v0 + v1</span><br><span class="line"></span><br><span class="line">k0 = <span class="string">&#x27;0100010001000101&#x27;</span>.zfill(<span class="number">32</span>)</span><br><span class="line">k1 = <span class="string">&#x27;0100000101000100&#x27;</span>.zfill(<span class="number">32</span>)</span><br><span class="line">k2 = <span class="string">&#x27;0100001001000101&#x27;</span>.zfill(<span class="number">32</span>)</span><br><span class="line">k3 = <span class="string">&#x27;0100010101000110&#x27;</span>.zfill(<span class="number">32</span>)</span><br><span class="line">flag = <span class="built_in">input</span>(<span class="string">&#x27;please input flag:&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> flag[<span class="number">0</span>:<span class="number">7</span>] != <span class="string">&#x27;SUSCTF&#123;&#x27;</span> <span class="keyword">or</span> flag[-<span class="number">1</span>] != <span class="string">&#x27;&#125;&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Error!!!The formate of flag is SUSCTF&#123;XXX&#125;&#x27;</span>)</span><br><span class="line">    time.sleep(<span class="number">5</span>)</span><br><span class="line">    exit(<span class="number">0</span>)</span><br><span class="line">flagstr = flag[<span class="number">7</span>:-<span class="number">1</span>]</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(flagstr) != <span class="number">24</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Error!!!The length of flag 24&#x27;</span>)</span><br><span class="line">    time.sleep(<span class="number">5</span>)</span><br><span class="line">    exit(<span class="number">0</span>)</span><br><span class="line">res = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(flagstr), <span class="number">8</span>): <span class="comment"># 8 / 4 + 4 bytes</span></span><br><span class="line">    v0 = flagstr[i:i + <span class="number">4</span>]</span><br><span class="line">    v0 = <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[i]))[<span class="number">2</span>:].zfill(<span class="number">8</span>) + <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[i + <span class="number">1</span>]))[<span class="number">2</span>:].zfill(<span class="number">8</span>) + <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[i + <span class="number">2</span>]))[<span class="number">2</span>:].zfill(<span class="number">8</span>) + <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[i + <span class="number">3</span>]))[<span class="number">2</span>:].zfill(<span class="number">8</span>)</span><br><span class="line">    v1 = <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[i + <span class="number">4</span>]))[<span class="number">2</span>:].zfill(<span class="number">8</span>) + <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[i + <span class="number">5</span>]))[<span class="number">2</span>:].zfill(<span class="number">8</span>) + <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[i + <span class="number">6</span>]))[<span class="number">2</span>:].zfill(<span class="number">8</span>) + <span class="built_in">bin</span>(<span class="built_in">ord</span>(flagstr[i + <span class="number">7</span>]))[<span class="number">2</span>:].zfill(<span class="number">8</span>)</span><br><span class="line">    res += f10(v0, v1, k0, k1, k2, k3)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> res == <span class="string">&#x27;001111101000100101000111110010111100110010010100010001100011100100110001001101011000001110001000001110110000101101101000100100111101101001100010011100110110000100111011001011100110010000100111&#x27;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;True&#x27;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;False&#x27;</span>)</span><br><span class="line">time.sleep(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<p>看出 TEA，直接解密：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cinttypes&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">uint32_t</span> cipher[] = &#123; <span class="number">1049184203</span>, <span class="number">3432269369</span>, <span class="number">825590664</span>, <span class="number">990603411</span>, <span class="number">3663885153</span>, <span class="number">992896039</span> &#125;;</span><br><span class="line">    <span class="type">uint32_t</span> key[] = &#123; <span class="number">17477</span>, <span class="number">16708</span>, <span class="number">16965</span>, <span class="number">17734</span> &#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i += <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="type">int</span> sum = <span class="number">0x9e3779b9</span> * <span class="number">32</span>;</span><br><span class="line">        <span class="type">uint32_t</span> tmp0 = cipher[i], tmp1 = cipher[i + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">32</span>; j++) &#123;</span><br><span class="line">            tmp1 -= ((tmp0 &lt;&lt; <span class="number">4</span>) + key[<span class="number">2</span>]) ^ (tmp0 + sum) ^ ((tmp0 &gt;&gt; <span class="number">5</span>) + key[<span class="number">3</span>]);</span><br><span class="line">            tmp0 -= ((tmp1 &lt;&lt; <span class="number">4</span>) + key[<span class="number">0</span>]) ^ (tmp1 + sum) ^ ((tmp1 &gt;&gt; <span class="number">5</span>) + key[<span class="number">1</span>]);</span><br><span class="line">            sum -= <span class="number">0x9e3779b9</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cipher[i] = tmp0;</span><br><span class="line">        cipher[i + <span class="number">1</span>] = tmp1;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s&quot;</span>, cipher);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每四字节小端序一下就行</p>
+<h1 id="hello-world"><a href="#hello-world" class="headerlink" title="hello_world"></a>hello_world</h1><p>分析后发现是关于 <a target="_blank" rel="noopener" href="https://github.com/ghdl/ghdl">ghdl</a> 的一个程序</p>
+<p>sub_14003CAB0 是关键位置，通过 v2 去选择操作：</p>
+<ul>
+<li>case 0 是输入，后面限制了长度是 44</li>
+<li>case 9 是取自己输入的每个字符</li>
+<li>case 10 是取 dword_1400F5C50 处的每个字符</li>
+<li>case 11 是与 dword_1400F5B80 的每个字符验证，每成功比对1个字符，*(_DWORD *)(v1 + 376) 就 + 1</li>
+<li>然后44个都弄完了之后，去case8最终验证<br>取dword_1400F5C50和 dword_1400F5B80 异或得到flag<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">0x00000005</span>, <span class="number">0x0000008F</span>, <span class="number">0x0000009E</span>, <span class="number">0x00000079</span>, <span class="number">0x0000002A</span>, <span class="number">0x000000C0</span>, <span class="number">0x00000068</span>, <span class="number">0x00000081</span>, <span class="number">0x0000002D</span>, <span class="number">0x000000FC</span>, <span class="number">0x000000CF</span>, <span class="number">0x000000A4</span>, <span class="number">0x000000B5</span>, <span class="number">0x00000055</span>, <span class="number">0x0000005F</span>, <span class="number">0x000000E4</span>, <span class="number">0x0000009D</span>, <span class="number">0x00000023</span>, <span class="number">0x000000D6</span>, <span class="number">0x0000001D</span>, <span class="number">0x000000F1</span>, <span class="number">0x000000E7</span>, <span class="number">0x00000097</span>, <span class="number">0x00000091</span>, <span class="number">0x00000006</span>, <span class="number">0x00000024</span>, <span class="number">0x00000042</span>, <span class="number">0x00000071</span>, <span class="number">0x0000003C</span>, <span class="number">0x00000058</span>, <span class="number">0x0000005C</span>, <span class="number">0x00000030</span>, <span class="number">0x00000019</span>, <span class="number">0x000000C6</span>, <span class="number">0x000000F5</span>, <span class="number">0x000000BC</span>, <span class="number">0x0000004B</span>, <span class="number">0x00000042</span>, <span class="number">0x0000005D</span>, <span class="number">0x000000DA</span>, <span class="number">0x00000058</span>, <span class="number">0x0000009B</span>, <span class="number">0x00000024</span>, <span class="number">0x00000040</span>]</span><br><span class="line">b = [<span class="number">0x00000056</span>, <span class="number">0x000000DA</span>, <span class="number">0x000000CD</span>, <span class="number">0x0000003A</span>, <span class="number">0x0000007E</span>, <span class="number">0x00000086</span>, <span class="number">0x00000013</span>, <span class="number">0x000000B5</span>, <span class="number">0x0000001D</span>, <span class="number">0x0000009D</span>, <span class="number">0x000000FC</span>, <span class="number">0x00000097</span>, <span class="number">0x0000008C</span>, <span class="number">0x00000031</span>, <span class="number">0x0000006B</span>, <span class="number">0x000000C9</span>, <span class="number">0x000000FB</span>, <span class="number">0x0000001A</span>, <span class="number">0x000000E2</span>, <span class="number">0x0000002D</span>, <span class="number">0x000000DC</span>, <span class="number">0x000000D3</span>, <span class="number">0x000000F1</span>, <span class="number">0x000000F4</span>, <span class="number">0x00000036</span>, <span class="number">0x00000009</span>, <span class="number">0x00000020</span>, <span class="number">0x00000042</span>, <span class="number">0x00000004</span>, <span class="number">0x0000006A</span>, <span class="number">0x00000071</span>, <span class="number">0x00000053</span>, <span class="number">0x00000078</span>, <span class="number">0x000000A4</span>, <span class="number">0x00000097</span>, <span class="number">0x0000008F</span>, <span class="number">0x0000007A</span>, <span class="number">0x00000072</span>, <span class="number">0x00000039</span>, <span class="number">0x000000E8</span>, <span class="number">0x0000003D</span>, <span class="number">0x000000FA</span>, <span class="number">0x00000040</span>, <span class="number">0x0000003D</span>]</span><br><span class="line"></span><br><span class="line">flag = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">44</span>):</span><br><span class="line">    flag.append(a[i] ^ b[i])</span><br><span class="line">    </span><br><span class="line">flag = [<span class="built_in">chr</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> flag]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&quot;</span>.join(flag))</span><br><span class="line"></span><br><span class="line"><span class="comment"># SUSCTF&#123;40a339d4-f940-4fe0-b382-cabb310d2ead&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h1><p>TODO</p>
+<h1 id="dart"><a href="#dart" class="headerlink" title="dart"></a>dart</h1><p>ing</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/links/">Links</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DigitalCircuits"><span class="toc-number">1.</span> <span class="toc-text">DigitalCircuits</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hello-world"><span class="toc-number">2.</span> <span class="toc-text">hello_world</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#tree"><span class="toc-number">3.</span> <span class="toc-text">tree</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dart"><span class="toc-number">4.</span> <span class="toc-text">dart</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/02/27/23dc22daa374/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&text=「WP-16」SUSCTF2022"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&title=「WP-16」SUSCTF2022"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&is_video=false&description=「WP-16」SUSCTF2022"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-16」SUSCTF2022&body=Check out this article: https://tr4cck.github.io/2022/02/27/23dc22daa374/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&title=「WP-16」SUSCTF2022"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&title=「WP-16」SUSCTF2022"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&title=「WP-16」SUSCTF2022"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&title=「WP-16」SUSCTF2022"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/02/27/23dc22daa374/&name=「WP-16」SUSCTF2022&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/02/27/23dc22daa374/&t=「WP-16」SUSCTF2022"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2022
+    Tr4cck
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Archives</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/links/">Links</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

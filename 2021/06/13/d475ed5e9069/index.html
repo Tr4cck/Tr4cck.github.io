@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Step One ELF64位程序，无壳，无符号表 运行提示输入key，随便输点东西，直接退出  Step Two拖进IDA找start函数，第一个参数就是main函数 1234567891011121314151617181920&#x2F;&#x2F; positive sp value has been detected, the output may be wrong!void __fastcall __no">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「WP-04」starCTF2021-wherekey">
+<meta property="og:url" content="https://tr4cck.github.io/2021/06/13/d475ed5e9069/index.html">
+<meta property="og:site_name" content="Track">
+<meta property="og:description" content="Step One ELF64位程序，无壳，无符号表 运行提示输入key，随便输点东西，直接退出  Step Two拖进IDA找start函数，第一个参数就是main函数 1234567891011121314151617181920&#x2F;&#x2F; positive sp value has been detected, the output may be wrong!void __fastcall __no">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-06-13T00:17:36.000Z">
+<meta property="article:modified_time" content="2022-03-02T08:38:15.486Z">
+<meta property="article:author" content="Tr4cck">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Reverse">
+<meta property="article:tag" content="WP">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>「WP-04」starCTF2021-wherekey</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="Track" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Archives</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/links/">Links</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2021/06/19/bb1071e8aecd/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2021/06/10/e10ec9a6789b/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/06/13/d475ed5e9069/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&text=「WP-04」starCTF2021-wherekey"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&is_video=false&description=「WP-04」starCTF2021-wherekey"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-04」starCTF2021-wherekey&body=Check out this article: https://tr4cck.github.io/2021/06/13/d475ed5e9069/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&name=「WP-04」starCTF2021-wherekey&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&t=「WP-04」starCTF2021-wherekey"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Step-One"><span class="toc-number">1.</span> <span class="toc-text">Step One</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Step-Two"><span class="toc-number">2.</span> <span class="toc-text">Step Two</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Step-Three"><span class="toc-number">3.</span> <span class="toc-text">Step Three</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FIN"><span class="toc-number">4.</span> <span class="toc-text">FIN</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        「WP-04」starCTF2021-wherekey
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tr4cck</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-06-13T00:17:36.000Z" itemprop="datePublished">2021-06-13</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF-Reverse/">CTF-Reverse</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/CTF/" rel="tag">CTF</a>, <a class="tag-link-link" href="/tags/Reverse/" rel="tag">Reverse</a>, <a class="tag-link-link" href="/tags/WP/" rel="tag">WP</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Step-One"><a href="#Step-One" class="headerlink" title="Step One"></a>Step One</h1><ul>
+<li>ELF64位程序，无壳，无符号表</li>
+<li>运行提示输入key，随便输点东西，直接退出</li>
+</ul>
+<h1 id="Step-Two"><a href="#Step-Two" class="headerlink" title="Step Two"></a>Step Two</h1><p>拖进IDA找start函数，第一个参数就是main函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// positive sp value has been detected, the output may be wrong!</span></span><br><span class="line"><span class="type">void</span> __fastcall __noreturn <span class="title function_">start</span><span class="params">(__int64 a1, __int64 a2, <span class="type">int</span> a3)</span></span><br><span class="line">&#123;</span><br><span class="line">  __int64 v3; <span class="comment">// rax</span></span><br><span class="line">  <span class="type">int</span> v4; <span class="comment">// esi</span></span><br><span class="line">  __int64 v5; <span class="comment">// [rsp-8h] [rbp-8h] BYREF</span></span><br><span class="line">  <span class="type">void</span> *retaddr; <span class="comment">// [rsp+0h] [rbp+0h] BYREF</span></span><br><span class="line"></span><br><span class="line">  v4 = v5;</span><br><span class="line">  v5 = v3;</span><br><span class="line">  sub_402B60(</span><br><span class="line">    (<span class="type">unsigned</span> <span class="type">int</span>)main,</span><br><span class="line">    v4,</span><br><span class="line">    (<span class="type">unsigned</span> <span class="type">int</span>)&amp;retaddr,</span><br><span class="line">    (<span class="type">unsigned</span> <span class="type">int</span>)sub_4037C0,</span><br><span class="line">    (<span class="type">unsigned</span> <span class="type">int</span>)sub_403860,</span><br><span class="line">    a3,</span><br><span class="line">    (__int64)&amp;v5);</span><br><span class="line">  __halt();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对main函数中的函数名和变量进行重命名，通过它们调用的一些系统调用可以做到这一点，我没处理完，不过大概长这样</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// local variable allocation has failed, the output may be wrong!</span></span><br><span class="line"><span class="type">int</span> __cdecl __noreturn <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> v3; <span class="comment">// edx</span></span><br><span class="line">  __int64 v4; <span class="comment">// rsi</span></span><br><span class="line">  __int64 v5; <span class="comment">// rax</span></span><br><span class="line">  __int64 v6; <span class="comment">// rdx</span></span><br><span class="line">  __int64 v7; <span class="comment">// rcx</span></span><br><span class="line">  u32 *v8; <span class="comment">// r8</span></span><br><span class="line">  u32 v9; <span class="comment">// er9</span></span><br><span class="line">  __int64 v10; <span class="comment">// rax</span></span><br><span class="line">  __int64 v11; <span class="comment">// rdx</span></span><br><span class="line">  __int64 v12; <span class="comment">// rcx</span></span><br><span class="line">  u32 *v13; <span class="comment">// r8</span></span><br><span class="line">  u32 v14; <span class="comment">// er9</span></span><br><span class="line">  fd_set v15; <span class="comment">// [rsp+10h] [rbp-90h] BYREF</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v16; <span class="comment">// [rsp+98h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v16 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  socket = sub_40245B();</span><br><span class="line">  sockfd = sub_4024EB();</span><br><span class="line">  dword_4C8570 = sub_40257B(*(__int64 *)&amp;argc, (__int64)argv, v3);</span><br><span class="line">  <span class="built_in">printf</span>((__int64)<span class="string">&quot;Please enter the key:&quot;</span>);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">memset</span>(&amp;v15, <span class="number">0</span>, <span class="keyword">sizeof</span>(v15));</span><br><span class="line">    v15.fds_bits[dword_4C8570 / <span class="number">64</span>] |= <span class="number">1LL</span> &lt;&lt; (dword_4C8570 % <span class="number">64</span>);</span><br><span class="line">    v15.fds_bits[sockfd / <span class="number">64</span>] |= <span class="number">1LL</span> &lt;&lt; (sockfd % <span class="number">64</span>);</span><br><span class="line">    sub_44E080(<span class="number">1024</span>, &amp;v15, <span class="number">0LL</span>, <span class="number">0LL</span>, <span class="number">0LL</span>);</span><br><span class="line">    <span class="keyword">if</span> ( (v15.fds_bits[sockfd / <span class="number">64</span>] &amp; (<span class="number">1LL</span> &lt;&lt; (sockfd % <span class="number">64</span>))) != <span class="number">0</span> )</span><br><span class="line">      sub_40223C();                             <span class="comment">// here</span></span><br><span class="line">    v4 = v15.fds_bits[dword_4C8570 / <span class="number">64</span>];</span><br><span class="line">    <span class="keyword">if</span> ( (v4 &amp; (<span class="number">1LL</span> &lt;&lt; (dword_4C8570 % <span class="number">64</span>))) != <span class="number">0</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      ((<span class="type">void</span> (__fastcall *)(__int64))((<span class="type">char</span> *)&amp;sub_401D44 + <span class="number">1</span>))((__int64)&amp;unk_4C5120);</span><br><span class="line">      sub_411D40(v5, v4, v6, v7, v8, v9);</span><br><span class="line">      sub_402072();</span><br><span class="line">      ((<span class="type">void</span> (__fastcall *)(__int64))((<span class="type">char</span> *)&amp;sub_401D44 + <span class="number">1</span>))((__int64)&amp;unk_4C5130);</span><br><span class="line">      sub_411D40(v10, v4, v11, v12, v13, v14);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>容易找到<code>sub_40223C</code>，再同样进行重命名如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// local variable allocation has failed, the output may be wrong!</span></span><br><span class="line"><span class="type">unsigned</span> __int64 <span class="title function_">sub_40223C</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  __int64 v0; <span class="comment">// rsi</span></span><br><span class="line">  __int64 v1; <span class="comment">// rdi</span></span><br><span class="line">  __int64 v2; <span class="comment">// rdx</span></span><br><span class="line">  <span class="type">int</span> v3; <span class="comment">// ecx</span></span><br><span class="line">  <span class="type">int</span> v4; <span class="comment">// er8</span></span><br><span class="line">  <span class="type">int</span> v5; <span class="comment">// er9</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 result; <span class="comment">// rax</span></span><br><span class="line">  <span class="type">socklen_t</span> fromlen; <span class="comment">// [rsp+8h] [rbp-18h] OVERLAPPED BYREF</span></span><br><span class="line">  <span class="type">signed</span> <span class="type">int</span> isRecv_4; <span class="comment">// [rsp+Ch] [rbp-14h]</span></span><br><span class="line">  <span class="type">void</span> *buf; <span class="comment">// [rsp+10h] [rbp-10h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v10; <span class="comment">// [rsp+18h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v10 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  isRecv_4 = <span class="number">0</span>;</span><br><span class="line">  fromlen = <span class="number">16</span>;</span><br><span class="line">  buf = (<span class="type">void</span> *)<span class="built_in">malloc</span>(<span class="number">10LL</span>);</span><br><span class="line">  sub_401120();</span><br><span class="line">  v0 = (__int64)buf;</span><br><span class="line">  v1 = (<span class="type">unsigned</span> <span class="type">int</span>)sockfd;</span><br><span class="line">  isRecv_4 = recvfrom(sockfd, buf, <span class="number">5uLL</span>, <span class="number">0</span>, &amp;from, &amp;fromlen);</span><br><span class="line">  <span class="keyword">if</span> ( isRecv_4 &gt; <span class="number">0</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v1 = (__int64)buf;</span><br><span class="line">    sub_4022DE((<span class="type">char</span> *)buf);                    <span class="comment">// here</span></span><br><span class="line">  &#125;</span><br><span class="line">  result = __readfsqword(<span class="number">0x28</span>u) ^ v10;</span><br><span class="line">  <span class="keyword">if</span> ( result )</span><br><span class="line">    sub_450C80(v1, v0, v2, v3, v4, v5);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到这里，结合hint，猜测是用户通过tty输入内容，并通过socket发送至本地，再判断对错</p>
+<p>容易发现<code>sub_4022DE</code>是接收到输入后的下一步操作</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> __int64 __fastcall <span class="title function_">sub_4022DE</span><span class="params">(<span class="type">char</span> *a1)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> *v2; <span class="comment">// rdi</span></span><br><span class="line">  __int64 v3; <span class="comment">// rcx</span></span><br><span class="line">  __int64 v4; <span class="comment">// r8</span></span><br><span class="line">  __int64 v5; <span class="comment">// r9</span></span><br><span class="line">  __int64 v6; <span class="comment">// rdx</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 result; <span class="comment">// rax</span></span><br><span class="line">  <span class="type">int</span> i; <span class="comment">// [rsp+18h] [rbp-18h]</span></span><br><span class="line">  <span class="type">int</span> v9; <span class="comment">// [rsp+1Ch] [rbp-14h]</span></span><br><span class="line">  <span class="type">char</span> v10[<span class="number">5</span>]; <span class="comment">// [rsp+23h] [rbp-Dh] BYREF</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v11; <span class="comment">// [rsp+28h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v11 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="keyword">if</span> ( !inp )</span><br><span class="line">    inp = <span class="built_in">malloc</span>(<span class="number">30LL</span>);</span><br><span class="line">  sub_401090();</span><br><span class="line">  v2 = (<span class="type">char</span> *)inp;</span><br><span class="line">  v9 = (<span class="type">unsigned</span> <span class="type">int</span>)sub_401190();</span><br><span class="line">  v6 = (<span class="type">unsigned</span> <span class="type">int</span>)cnt;</span><br><span class="line">  <span class="keyword">if</span> ( v9 &gt;= <span class="number">5</span> * cnt )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= <span class="number">4</span>; ++i )</span><br><span class="line">    &#123;</span><br><span class="line">      nullsub_3();</span><br><span class="line">      LayerOne((__int64)v10, i);</span><br><span class="line">      a1 = v10;</span><br><span class="line">      v2 = (<span class="type">char</span> *)(<span class="number">5</span> * cnt + inp);</span><br><span class="line">      v3 = (<span class="type">unsigned</span> <span class="type">int</span>)((<span class="type">int</span>)LayerTwo(v2, v10, <span class="number">5</span>) % <span class="number">257</span>);</span><br><span class="line">      v6 = (__int64)res;</span><br><span class="line">      res[<span class="number">5</span> * cnt + i] = v3;</span><br><span class="line">    &#125;</span><br><span class="line">    ++cnt;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( cnt &gt; <span class="number">4</span> )</span><br><span class="line">    <span class="keyword">return</span> proc_then();</span><br><span class="line">  result = __readfsqword(<span class="number">0x28</span>u) ^ v11;</span><br><span class="line">  <span class="keyword">if</span> ( result )</span><br><span class="line">    sub_450C80((__int64)v2, (__int64)a1, v6, v3, v4, v5);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：这里有一个mod257，待会儿反解的时候是需要考虑到的</strong></p>
+<p>俩加密函数内容如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">__int64 __fastcall <span class="title function_">LayerOne</span><span class="params">(__int64 a1, <span class="type">int</span> a2)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> v2; <span class="comment">// eax</span></span><br><span class="line">  <span class="type">int</span> counter; <span class="comment">// [rsp+18h] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  counter = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> ( a2 &lt;= <span class="number">24</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v2 = counter++;</span><br><span class="line">    *(_BYTE *)(a1 + v2) = aFlagAreYouSure[a2];</span><br><span class="line">    a2 += <span class="number">5</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> nullsub_2();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这个是把fake flag分成五组，取每一组的第一个字符，放在a1中</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a3 = 5</span></span><br><span class="line">__int64 __fastcall <span class="title function_">LayerTwo</span><span class="params">(<span class="type">char</span> *a1, <span class="type">char</span> *a2, <span class="type">int</span> a3)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v4; <span class="comment">// [rsp+1Ch] [rbp-8h]</span></span><br><span class="line">  <span class="type">int</span> i; <span class="comment">// [rsp+20h] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  v4 = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; a3; ++i )</span><br><span class="line">    v4 += a1[i] * a2[i];</span><br><span class="line">  <span class="keyword">return</span> v4;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>把两个数组的对应位置相乘再相加</p>
+</blockquote>
+<p>结合前面<code>flag</code>是一列一列取，而<code>inp</code>是一行一行取，还有一个<code>LayerTwo</code>是相乘，容易想到这就是一个矩阵乘法。有了这个认知后，跟进<code>proc_then</code>进行查看</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> __int64 __fastcall <span class="title function_">proc_then</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  __int64 v0; <span class="comment">// rbp</span></span><br><span class="line">  __int64 aim; <span class="comment">// rdi</span></span><br><span class="line">  __int64 v2; <span class="comment">// rdx</span></span><br><span class="line">  __int64 v3; <span class="comment">// rcx</span></span><br><span class="line">  __int64 v4; <span class="comment">// r8</span></span><br><span class="line">  __int64 v5; <span class="comment">// r9</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 result; <span class="comment">// rax</span></span><br><span class="line"></span><br><span class="line">  aim = (__int64)&amp;unk_4C5150;</span><br><span class="line">  <span class="keyword">if</span> ( !(<span class="type">unsigned</span> <span class="type">int</span>)sub_4010F0() )</span><br><span class="line">  &#123;</span><br><span class="line">    aim = <span class="number">3LL</span>;</span><br><span class="line">    sub_40FF90(<span class="number">3</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  result = __readfsqword(<span class="number">0x28</span>u) ^ *(_QWORD *)(v0 - <span class="number">8</span>);</span><br><span class="line">  <span class="keyword">if</span> ( result )</span><br><span class="line">    sub_450C80(aim, (__int64)res, v2, v3, v4, v5);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发现<code>aim</code>是乘完的结果，跟进<code>sub_40FF90</code>，发现他是<code>syscall</code>函数，结合系统调用号3，这里应该是close掉socket连接</p>
+<p><del>然后后面就不想分析了</del></p>
+<h1 id="Step-Three"><a href="#Step-Three" class="headerlink" title="Step Three"></a>Step Three</h1><p>写一下解密脚本，需要一点线性代数知识</p>
+<p>$$<br>AB&#x3D;X\<br>\rarr A&#x3D;XB^{-1}\<br>其中A代表输入，因为取的是行\<br>B代表fake\quad flag生成的矩阵，因为取的是列\<br>而X就是加密后的结果了</p>
+<p>$$</p>
+<p>使用sage求解（用<code>numpy</code>、<code>matlab</code>都可以。<del>甚至手算也可以</del>）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">sage: x = Matrix(GF(257), [[0x38,0x6D,0x4B,0x4B,0xB9],</span><br><span class="line">....:                      [0x8A,0xF9,0x8A,0xBB,0x5C],</span><br><span class="line">....:                      [0x8A,0x9A,0xBA,0x6B,0xD2],</span><br><span class="line">....:                      [0xC6,0xBB,0x05,0x90,0x56],</span><br><span class="line">....:                      [0x93,0xE6,0x12,0xBD,0x4F]])</span><br><span class="line">sage: b = Matrix(GF(257), [[102, 108, 97,  103, 123],</span><br><span class="line">....: ....:                [97, 114, 101, 95,  121],</span><br><span class="line">....: ....:                [111, 117, 95,  115, 117],</span><br><span class="line">....: ....:                [114, 101, 95,  102, 114],</span><br><span class="line">....: ....:                [105, 101, 110, 100, 125]])</span><br><span class="line">sage: flag = x*b.inverse()</span><br><span class="line"></span><br><span class="line">sage: for i in flag:</span><br><span class="line">....:     for j in i:</span><br><span class="line">....:         print(chr(j))</span><br><span class="line">....:       </span><br><span class="line">H</span><br><span class="line">a</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">_</span><br><span class="line">f</span><br><span class="line">0</span><br><span class="line">n</span><br><span class="line">_</span><br><span class="line">9</span><br><span class="line">n</span><br><span class="line">d</span><br><span class="line">_</span><br><span class="line">G</span><br><span class="line">0</span><br><span class="line">o</span><br><span class="line">d</span><br><span class="line">-</span><br><span class="line">1</span><br><span class="line">u</span><br><span class="line">c</span><br><span class="line">k</span><br><span class="line">-</span><br><span class="line">O</span><br><span class="line">H</span><br></pre></td></tr></table></figure>
+
+<p>得到<code>flag&#123;Ha23_f0n_9nd_G0od_luck_OH&#125;</code></p>
+<h1 id="FIN"><a href="#FIN" class="headerlink" title="FIN"></a>FIN</h1>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/links/">Links</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Step-One"><span class="toc-number">1.</span> <span class="toc-text">Step One</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Step-Two"><span class="toc-number">2.</span> <span class="toc-text">Step Two</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Step-Three"><span class="toc-number">3.</span> <span class="toc-text">Step Three</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FIN"><span class="toc-number">4.</span> <span class="toc-text">FIN</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/06/13/d475ed5e9069/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&text=「WP-04」starCTF2021-wherekey"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&is_video=false&description=「WP-04」starCTF2021-wherekey"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-04」starCTF2021-wherekey&body=Check out this article: https://tr4cck.github.io/2021/06/13/d475ed5e9069/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&name=「WP-04」starCTF2021-wherekey&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&t=「WP-04」starCTF2021-wherekey"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2022
+    Tr4cck
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Archives</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/links/">Links</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
