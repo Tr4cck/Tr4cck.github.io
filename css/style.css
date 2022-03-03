@@ -1490,66 +1490,47 @@ article .content .caption {
   content: ")";
 }
 .highlight {
-  background: #1d1f21;
-  color: #c5c8c6;
-/* selection color */
-}
-.highlight::selection,
-.highlight span::selection {
-  background: #373b41;
-}
-.highlight::-moz-selection,
-.highlight span::-moz-selection {
-  background: #373b41;
-}
-.highlight .code .title,
-.highlight .code .name {
-  color: #f0c674;
+  color: #4f424c;
+  background: #e7e9db;
 }
 .highlight .code .comment,
-.highlight .code .meta,
-.highlight .code .meta .keyword {
-  color: #707880;
+.highlight .code .quote {
+  color: #776e71;
+}
+.highlight .code .variable,
+.highlight .code .template-variable,
+.highlight .code .tag,
+.highlight .code .name,
+.highlight .code .selector-id,
+.highlight .code .selector-class,
+.highlight .code .regexp,
+.highlight .code .link,
+.highlight .code .meta {
+  color: #ef6155;
 }
 .highlight .code .number,
-.highlight .code .symbol,
-.highlight .code .literal,
-.highlight .code .deletion,
-.highlight .code .link {
-  color: #c66;
-}
-.highlight .code .string,
-.highlight .code .doctag,
-.highlight .code .addition,
-.highlight .code .regexp,
-.highlight .code .selector-attr,
-.highlight .code .selector-pseudo {
-  color: #b5bd68;
-}
-.highlight .code .attribute,
-.highlight .code .code,
-.highlight .code .selector-id {
-  color: #b294bb;
-}
-.highlight .code .keyword,
-.highlight .code .selector-tag,
-.highlight .code .bullet,
-.highlight .code .tag {
-  color: #81a2be;
-}
-.highlight .code .subst,
-.highlight .code .variable,
-.highlight .code .template-tag,
-.highlight .code .template-variable {
-  color: #8abeb7;
-}
-.highlight .code .type,
 .highlight .code .built_in,
 .highlight .code .builtin-name,
-.highlight .code .quote,
+.highlight .code .literal,
+.highlight .code .type,
+.highlight .code .params,
+.highlight .code .deletion {
+  color: #f99b15;
+}
+.highlight .code .title,
 .highlight .code .section,
-.highlight .code .selector-class {
-  color: #de935f;
+.highlight .code .attribute {
+  color: #fec418;
+}
+.highlight .code .string,
+.highlight .code .symbol,
+.highlight .code .bullet,
+.highlight .code .addition {
+  color: #48b685;
+}
+.highlight .code .keyword,
+.highlight .code .selector-tag {
+  color: #815ba4;
 }
 .highlight .code .emphasis {
   font-style: italic;
