@@ -6,16 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="SROP首先来点 pwn 的基础知识。  SROP 是一种高级的 ROP 技术，核心原理是 signal 被触发时，sigreturn 系统调用会间接的被触发。  signal 主要用于在类 unix 系统中实现进程间通信。来张图展示一下基本流程：   首先是内核向某个进程发送 signal，该进程会被暂时挂起，进入内核态 内核会将被挂起进程的上下文存在栈上，主要是所有的寄存器、signal信息以">
+    <meta name="description" content="找不到附件，就这样虚空复现一下好了 SROP首先来点 pwn 的基础知识。  SROP 是一种高级的 ROP 技术，核心原理是 signal 被触发时，sigreturn 系统调用会间接的被触发。  signal 主要用于在类 unix 系统中实现进程间通信。来张图展示一下基本流程：   首先是内核向某个进程发送 signal，该进程会被暂时挂起，进入内核态 内核会将被挂起进程的上下文存在栈上，主">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「WP-13」xhljCTF2020 flow">
 <meta property="og:url" content="https://tr4cck.github.io/2022/01/13/a499fd6b2654/index.html">
 <meta property="og:site_name" content="Track">
-<meta property="og:description" content="SROP首先来点 pwn 的基础知识。  SROP 是一种高级的 ROP 技术，核心原理是 signal 被触发时，sigreturn 系统调用会间接的被触发。  signal 主要用于在类 unix 系统中实现进程间通信。来张图展示一下基本流程：   首先是内核向某个进程发送 signal，该进程会被暂时挂起，进入内核态 内核会将被挂起进程的上下文存在栈上，主要是所有的寄存器、signal信息以">
+<meta property="og:description" content="找不到附件，就这样虚空复现一下好了 SROP首先来点 pwn 的基础知识。  SROP 是一种高级的 ROP 技术，核心原理是 signal 被触发时，sigreturn 系统调用会间接的被触发。  signal 主要用于在类 unix 系统中实现进程间通信。来张图展示一下基本流程：   首先是内核向某个进程发送 signal，该进程会被暂时挂起，进入内核态 内核会将被挂起进程的上下文存在栈上，主">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/advanced-rop/figure/ProcessOfSignalHandlering.png">
 <meta property="article:published_time" content="2022-01-13T15:34:16.000Z">
-<meta property="article:modified_time" content="2022-03-02T08:10:56.516Z">
+<meta property="article:modified_time" content="2022-03-04T03:24:25.314Z">
 <meta property="article:author" content="Tr4cck">
 <meta property="article:tag" content="Reverse">
 <meta property="article:tag" content="WP">
@@ -175,7 +175,8 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h1 id="SROP"><a href="#SROP" class="headerlink" title="SROP"></a>SROP</h1><p><strong>首先来点 pwn 的基础知识。</strong></p>
+    <p>找不到附件，就这样虚空复现一下好了</p>
+<h1 id="SROP"><a href="#SROP" class="headerlink" title="SROP"></a>SROP</h1><p><strong>首先来点 pwn 的基础知识。</strong></p>
 <blockquote>
 <p>SROP 是一种高级的 ROP 技术，核心原理是 signal 被触发时，sigreturn 系统调用会间接的被触发。</p>
 </blockquote>
