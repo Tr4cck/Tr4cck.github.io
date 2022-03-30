@@ -6,17 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="Write-in-Front这道题是关于 optee 即可信执行环境的开源内核，我们需要仔细了解 ARM 的 TrustZone 相关技术、 optee 的架构，尤其是文件安全存储的实现细节。做题过程中需要不停查询文档、翻阅源码、启动 qemu 调试等等。 Secure-Storage Reference: https:&#x2F;&#x2F;optee.readthedocs.io&#x2F;en&#x2F;latest&#x2F;archit">
+    <meta name="description" content="Write-in-Front这道题是关于 optee 即可信执行环境的开源内核，我们需要仔细了解 ARM 的 TrustZone 相关技术、 optee 的架构，尤其是文件安全存储的实现细节。做题过程中需要不停查询文档、翻阅源码、启动 qemu 调试等等，最好是自己拉源码去 build 一遍，至少可以先有一个直观的认知。 Secure-Storage Reference: https:&#x2F;&#x2F;opte">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析">
 <meta property="og:url" content="https://tr4cck.github.io/2022/03/30/97de84aec9e3/index.html">
 <meta property="og:site_name" content="Track">
-<meta property="og:description" content="Write-in-Front这道题是关于 optee 即可信执行环境的开源内核，我们需要仔细了解 ARM 的 TrustZone 相关技术、 optee 的架构，尤其是文件安全存储的实现细节。做题过程中需要不停查询文档、翻阅源码、启动 qemu 调试等等。 Secure-Storage Reference: https:&#x2F;&#x2F;optee.readthedocs.io&#x2F;en&#x2F;latest&#x2F;archit">
+<meta property="og:description" content="Write-in-Front这道题是关于 optee 即可信执行环境的开源内核，我们需要仔细了解 ARM 的 TrustZone 相关技术、 optee 的架构，尤其是文件安全存储的实现细节。做题过程中需要不停查询文档、翻阅源码、启动 qemu 调试等等，最好是自己拉源码去 build 一遍，至少可以先有一个直观的认知。 Secure-Storage Reference: https:&#x2F;&#x2F;opte">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/a51a584a02c1ae48692d34b7f286e040.png">
 <meta property="og:image" content="https://optee.readthedocs.io/en/latest/_images/meta_data_encryption.png">
 <meta property="article:published_time" content="2022-03-30T12:18:16.000Z">
-<meta property="article:modified_time" content="2022-03-30T15:38:49.589Z">
+<meta property="article:modified_time" content="2022-03-30T15:44:55.869Z">
 <meta property="article:author" content="Tr4cck">
 <meta property="article:tag" content="CTF">
 <meta property="article:tag" content="Reverse">
@@ -174,7 +174,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h1 id="Write-in-Front"><a href="#Write-in-Front" class="headerlink" title="Write-in-Front"></a>Write-in-Front</h1><p>这道题是关于 optee 即可信执行环境的开源内核，我们需要仔细了解 ARM 的 TrustZone 相关技术、 optee 的架构，尤其是文件安全存储的实现细节。做题过程中需要不停查询文档、翻阅源码、启动 qemu 调试等等。</p>
+    <h1 id="Write-in-Front"><a href="#Write-in-Front" class="headerlink" title="Write-in-Front"></a>Write-in-Front</h1><p>这道题是关于 optee 即可信执行环境的开源内核，我们需要仔细了解 ARM 的 TrustZone 相关技术、 optee 的架构，尤其是文件安全存储的实现细节。做题过程中需要不停查询文档、翻阅源码、启动 qemu 调试等等，最好是自己拉源码去 build 一遍，至少可以先有一个直观的认知。</p>
 <h1 id="Secure-Storage"><a href="#Secure-Storage" class="headerlink" title="Secure-Storage"></a>Secure-Storage</h1><blockquote>
 <p>Reference: <a target="_blank" rel="noopener" href="https://optee.readthedocs.io/en/latest/architecture/secure_storage.html">https://optee.readthedocs.io/en/latest/architecture/secure_storage.html</a></p>
 </blockquote>
@@ -197,6 +197,7 @@
 
 <p>解密涉及到 AES 的 GCM 和 AAD：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"><span class="keyword">from</span> hmac <span class="keyword">import</span> HMAC</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line">HUK = <span class="string">b&#x27;\x00&#x27;</span> * <span class="number">0x10</span></span><br><span class="line">chip_id = <span class="string">b&#x27;BEEF&#x27;</span> * <span class="number">8</span></span><br><span class="line">static_string = <span class="string">b&#x27;ONLY_FOR_tee_fs_ssk&#x27;</span></span><br><span class="line">message = chip_id + static_string + <span class="string">b&#x27;\x00&#x27;</span></span><br><span class="line">ta_uuid =  <span class="string">b&#x27;\xbb\x50\xe7\xf4\x37\x14\xbf\x4f\x87\x85\x8d\x35\x80\xc3\x49\x94&#x27;</span></span><br><span class="line"></span><br><span class="line">SSK = HMAC(HUK, message, digestmod = sha256).digest()</span><br><span class="line">TSK = HMAC(SSK, ta_uuid, digestmod = sha256).digest()</span><br><span class="line">FEK = AES_Decrypt_ECB(TSK, htree_img_enc_fek1)</span><br><span class="line"></span><br><span class="line">block_data = data[<span class="number">0x2000</span> : <span class="number">0x3000</span>]</span><br><span class="line">cipher = AES.new(FEK, AES.MODE_GCM, nonce = htree_node_img_iv1)</span><br><span class="line">cipher.update(htree_img_enc_fek1)</span><br><span class="line">cipher.update(htree_node_img_iv1)</span><br><span class="line"></span><br><span class="line">plaintext = cipher.decrypt_and_verify(block_data, htree_node_img_tag1)</span><br><span class="line"><span class="built_in">print</span> (plaintext)</span><br></pre></td></tr></table></figure>
+
   </div>
 </article>
 
