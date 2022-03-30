@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="一些简单题就略了（（ WxyVM1main： 1234567891011121314151617181920212223__int64 __fastcall main(int a1, char **a2, char **a3)&amp;#123;  char isok; &#x2F;&#x2F; [rsp+Bh] [rbp-5h]  int i; &#x2F;&#x2F; [rsp+Ch] [rbp-4h]  puts(&quot;[WxyVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「WP-19」CGCTF练习记录">
+<meta property="og:url" content="https://tr4cck.github.io/2022/03/18/5bade99274ec/index.html">
+<meta property="og:site_name" content="Track">
+<meta property="og:description" content="一些简单题就略了（（ WxyVM1main： 1234567891011121314151617181920212223__int64 __fastcall main(int a1, char **a2, char **a3)&amp;#123;  char isok; &#x2F;&#x2F; [rsp+Bh] [rbp-5h]  int i; &#x2F;&#x2F; [rsp+Ch] [rbp-4h]  puts(&quot;[WxyVM">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-18T11:47:33.000Z">
+<meta property="article:modified_time" content="2022-03-30T12:19:19.405Z">
+<meta property="article:author" content="Tr4cck">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Reverse">
+<meta property="article:tag" content="WP">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>「WP-19」CGCTF练习记录</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="Track" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Archives</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/links/">Links</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/03/30/97de84aec9e3/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/03/06/5586a733574a/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/03/18/5bade99274ec/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&text=「WP-19」CGCTF练习记录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&title=「WP-19」CGCTF练习记录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&is_video=false&description=「WP-19」CGCTF练习记录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-19」CGCTF练习记录&body=Check out this article: https://tr4cck.github.io/2022/03/18/5bade99274ec/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&title=「WP-19」CGCTF练习记录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&title=「WP-19」CGCTF练习记录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&title=「WP-19」CGCTF练习记录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&title=「WP-19」CGCTF练习记录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&name=「WP-19」CGCTF练习记录&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/03/18/5bade99274ec/&t=「WP-19」CGCTF练习记录"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WxyVM1"><span class="toc-number">1.</span> <span class="toc-text">WxyVM1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WxyVM2"><span class="toc-number">2.</span> <span class="toc-text">WxyVM2</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        「WP-19」CGCTF练习记录
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tr4cck</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-03-18T11:47:33.000Z" itemprop="datePublished">2022-03-18</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF-Reverse/">CTF-Reverse</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/CTF/" rel="tag">CTF</a>, <a class="tag-link-link" href="/tags/Reverse/" rel="tag">Reverse</a>, <a class="tag-link-link" href="/tags/WP/" rel="tag">WP</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>一些简单题就略了（（</p>
+<h1 id="WxyVM1"><a href="#WxyVM1" class="headerlink" title="WxyVM1"></a>WxyVM1</h1><p><code>main</code>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 __fastcall <span class="title">main</span><span class="params">(<span class="type">int</span> a1, <span class="type">char</span> **a2, <span class="type">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">char</span> isok; <span class="comment">// [rsp+Bh] [rbp-5h]</span></span><br><span class="line">  <span class="type">int</span> i; <span class="comment">// [rsp+Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;[WxyVM 0.0.1]&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;input your flag:&quot;</span>);</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, &amp;input);</span><br><span class="line">  isok = <span class="number">1</span>;</span><br><span class="line">  <span class="built_in">runVM</span>();</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">strlen</span>(&amp;input) != <span class="number">24</span> )</span><br><span class="line">    isok = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= <span class="number">23</span>; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( *(&amp;input + i) != dword_601060[i] )</span><br><span class="line">      isok = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( isok )</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;correct&quot;</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;wrong&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>runVM</code>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> __fastcall <span class="title">runVM</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">int</span> i; <span class="comment">// [rsp+0h] [rbp-10h]</span></span><br><span class="line">  <span class="type">char</span> v1; <span class="comment">// [rsp+8h] [rbp-8h]</span></span><br><span class="line">  <span class="type">int</span> v2; <span class="comment">// [rsp+Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= <span class="number">14999</span>; i += <span class="number">3</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v1 = byte_6010C0[i + <span class="number">2</span>];</span><br><span class="line">    v2 = byte_6010C0[i + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">switch</span> ( byte_6010C0[i] )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        *(&amp;input + v2) += v1;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        *(&amp;input + v2) -= v1;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">        *(&amp;input + v2) ^= v1;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">        *(&amp;input + v2) *= v1;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">        *(&amp;input + v2) ^= *(&amp;input + byte_6010C0[i + <span class="number">2</span>]);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>exp</code>:</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;opcode-list.dat&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> fin:</span><br><span class="line">    data = fin.read()</span><br><span class="line"></span><br><span class="line">pseudocode = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">14997</span>, -<span class="number">1</span>, -<span class="number">3</span>):</span><br><span class="line">    v2, v1 = data[i + <span class="number">1</span>], data[i + <span class="number">2</span>]</span><br><span class="line">    opcode = data[i]</span><br><span class="line">    match opcode:</span><br><span class="line">        case <span class="number">1</span>:</span><br><span class="line">            pseudocode += <span class="string">f&#x27;input[<span class="subst">&#123;v2&#125;</span>] -= <span class="subst">&#123;v1&#125;</span>\n&#x27;</span></span><br><span class="line">        case <span class="number">2</span>:</span><br><span class="line">            pseudocode += <span class="string">f&#x27;input[<span class="subst">&#123;v2&#125;</span>] += <span class="subst">&#123;v1&#125;</span>\n&#x27;</span></span><br><span class="line">        case <span class="number">3</span>:</span><br><span class="line">            pseudocode += <span class="string">f&#x27;input[<span class="subst">&#123;v2&#125;</span>] ^= <span class="subst">&#123;v1&#125;</span>\n&#x27;</span></span><br><span class="line">        case <span class="number">4</span>:</span><br><span class="line">            pseudocode += <span class="string">f&#x27;input[<span class="subst">&#123;v2&#125;</span>] //= <span class="subst">&#123;v1&#125;</span>\n&#x27;</span></span><br><span class="line">        case <span class="number">5</span>:</span><br><span class="line">            pseudocode += <span class="string">f&#x27;input[<span class="subst">&#123;v2&#125;</span>] ^= input[<span class="subst">&#123;data[v1]&#125;</span>]\n&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;pseudocode.dat&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> fout:</span><br><span class="line">    fout.write(pseudocode.encode())</span><br></pre></td></tr></table></figure>
+
+<h1 id="WxyVM2"><a href="#WxyVM2" class="headerlink" title="WxyVM2"></a>WxyVM2</h1><p>差不多，不同的是中间插入了一些花指令，导致无用操作，全部拿出来处理一下就行：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">lines = <span class="built_in">open</span>(<span class="string">&#x27;code.dat&#x27;</span>, <span class="string">&#x27;r&#x27;</span>).read().split(<span class="string">&#x27;\n&#x27;</span>)[::-<span class="number">1</span>]</span><br><span class="line">c_header = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">#include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="string">int main() &#123;</span></span><br><span class="line"><span class="string">  unsigned int byte_694100[25] = &#123;0xFFFFFFC0, 0xFFFFFF85, 0xFFFFFFF9, 0x0000006C, 0xFFFFFFE2, 0x00000014, 0xFFFFFFBB, 0xFFFFFFE4, 0x0000000D, 0x00000059, 0x0000001C, 0x00000023, 0xFFFFFF88, 0x0000006E, 0xFFFFFF9B, 0xFFFFFFCA, 0xFFFFFFBA, 0x0000005C, 0x00000037, 0xFFFFFFFF, 0x00000048, 0xFFFFFFD8, 0x0000001F, 0xFFFFFFAB, 0xFFFFFFA5&#125;;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;exp.c&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> fout:</span><br><span class="line">    fout.write(c_header)</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> lines:</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;dword&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> line:</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;+=&#x27;</span> <span class="keyword">in</span> line:</span><br><span class="line">                fout.write(<span class="string">&#x27;  &#x27;</span> + line.replace(<span class="string">&#x27;+=&#x27;</span>, <span class="string">&#x27;-=&#x27;</span>))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&#x27;-=&#x27;</span> <span class="keyword">in</span> line:</span><br><span class="line">                fout.write(<span class="string">&#x27;  &#x27;</span> + line.replace(<span class="string">&#x27;-=&#x27;</span>, <span class="string">&#x27;+=&#x27;</span>))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&#x27;--&#x27;</span> <span class="keyword">in</span> line:</span><br><span class="line">                fout.write(<span class="string">&#x27;  &#x27;</span> + line.replace(<span class="string">&#x27;--&#x27;</span>, <span class="string">&#x27;++&#x27;</span>))</span><br><span class="line">            <span class="keyword">elif</span> <span class="string">&#x27;++&#x27;</span> <span class="keyword">in</span> line:</span><br><span class="line">                fout.write(<span class="string">&#x27;  &#x27;</span> + line.replace(<span class="string">&#x27;++&#x27;</span>, <span class="string">&#x27;--&#x27;</span>))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                fout.write(<span class="string">&#x27;  &#x27;</span> + line)</span><br><span class="line">            fout.write(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    c_tail = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">  for (int i = 0; i &lt; 25; i++)</span></span><br><span class="line"><span class="string">    printf(&quot;%c&quot;, byte_694100[i] &amp; 0xff);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">    fout.write(c_tail)</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/links/">Links</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WxyVM1"><span class="toc-number">1.</span> <span class="toc-text">WxyVM1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WxyVM2"><span class="toc-number">2.</span> <span class="toc-text">WxyVM2</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/03/18/5bade99274ec/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&text=「WP-19」CGCTF练习记录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&title=「WP-19」CGCTF练习记录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&is_video=false&description=「WP-19」CGCTF练习记录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-19」CGCTF练习记录&body=Check out this article: https://tr4cck.github.io/2022/03/18/5bade99274ec/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&title=「WP-19」CGCTF练习记录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&title=「WP-19」CGCTF练习记录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&title=「WP-19」CGCTF练习记录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&title=「WP-19」CGCTF练习记录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/03/18/5bade99274ec/&name=「WP-19」CGCTF练习记录&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/03/18/5bade99274ec/&t=「WP-19」CGCTF练习记录"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2022
+    Tr4cck
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Archives</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/links/">Links</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

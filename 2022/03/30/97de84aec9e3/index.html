@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Write-in-Front这道题是关于 optee 即可信执行环境的开源内核，我们需要仔细了解 ARM 的 TrustZone 相关技术、 optee 的架构，尤其是文件安全存储的实现细节。做题过程中需要不停查询文档、翻阅源码、启动 qemu 调试等等。 Secure-Storage Reference: https:&#x2F;&#x2F;optee.readthedocs.io&#x2F;en&#x2F;latest&#x2F;archit">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析">
+<meta property="og:url" content="https://tr4cck.github.io/2022/03/30/97de84aec9e3/index.html">
+<meta property="og:site_name" content="Track">
+<meta property="og:description" content="Write-in-Front这道题是关于 optee 即可信执行环境的开源内核，我们需要仔细了解 ARM 的 TrustZone 相关技术、 optee 的架构，尤其是文件安全存储的实现细节。做题过程中需要不停查询文档、翻阅源码、启动 qemu 调试等等。 Secure-Storage Reference: https:&#x2F;&#x2F;optee.readthedocs.io&#x2F;en&#x2F;latest&#x2F;archit">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/a51a584a02c1ae48692d34b7f286e040.png">
+<meta property="og:image" content="https://optee.readthedocs.io/en/latest/_images/meta_data_encryption.png">
+<meta property="article:published_time" content="2022-03-30T12:18:16.000Z">
+<meta property="article:modified_time" content="2022-03-30T15:38:49.589Z">
+<meta property="article:author" content="Tr4cck">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Reverse">
+<meta property="article:tag" content="WP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/a51a584a02c1ae48692d34b7f286e040.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+      <link rel="alternate" href="/true" title="Track" type="application/atom+xml" />
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Archives</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/links/">Links</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/03/18/5bade99274ec/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/03/30/97de84aec9e3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&text=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&title=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&is_video=false&description=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析&body=Check out this article: https://tr4cck.github.io/2022/03/30/97de84aec9e3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&title=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&title=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&title=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&title=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&name=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&t=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Write-in-Front"><span class="toc-number">1.</span> <span class="toc-text">Write-in-Front</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Secure-Storage"><span class="toc-number">2.</span> <span class="toc-text">Secure-Storage</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Encrypted-TA-Structur"><span class="toc-number">3.</span> <span class="toc-text">Encrypted-TA-Structur</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hash-Tree"><span class="toc-number">4.</span> <span class="toc-text">Hash-Tree</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Decryption"><span class="toc-number">5.</span> <span class="toc-text">Decryption</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tr4cck</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-03-30T12:18:16.000Z" itemprop="datePublished">2022-03-30</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CTF-Reverse/">CTF-Reverse</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/CTF/" rel="tag">CTF</a>, <a class="tag-link-link" href="/tags/Reverse/" rel="tag">Reverse</a>, <a class="tag-link-link" href="/tags/WP/" rel="tag">WP</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Write-in-Front"><a href="#Write-in-Front" class="headerlink" title="Write-in-Front"></a>Write-in-Front</h1><p>这道题是关于 optee 即可信执行环境的开源内核，我们需要仔细了解 ARM 的 TrustZone 相关技术、 optee 的架构，尤其是文件安全存储的实现细节。做题过程中需要不停查询文档、翻阅源码、启动 qemu 调试等等。</p>
+<h1 id="Secure-Storage"><a href="#Secure-Storage" class="headerlink" title="Secure-Storage"></a>Secure-Storage</h1><blockquote>
+<p>Reference: <a target="_blank" rel="noopener" href="https://optee.readthedocs.io/en/latest/architecture/secure_storage.html">https://optee.readthedocs.io/en/latest/architecture/secure_storage.html</a></p>
+</blockquote>
+<p>从中可以看出加密过程如下图：<br><img src="https://img-blog.csdnimg.cn/img_convert/a51a584a02c1ae48692d34b7f286e040.png"></p>
+<p>我们的目标就是拿到 FEK 然后去解密 &#x2F;data&#x2F;tee&#x2F;2 这个文件，这个文件是 REE 的。Secure Enclave 先将它的明文形式写入 TEE_FileSystem ，然后通过 KeyManager 加密后调用 API 写入 REE_FileSystem</p>
+<h1 id="Encrypted-TA-Structur"><a href="#Encrypted-TA-Structur" class="headerlink" title="Encrypted-TA-Structur"></a>Encrypted-TA-Structur</h1><p>生成 FEK 所需的一些常量比较容易拿到，并且从 rootfs-cpio&#x2F;lib&#x2F;optee_armtz&#x2F;f4e750bb-1437-4fbf-8785-8d3580c34994.ta 这个被加密的 TA 中我们可以拿到一些值，怎么做到呢？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/OP-TEE/optee_os.git &amp;&amp; <span class="built_in">cd</span> optee_os <span class="comment"># 获取项目源码</span></span><br><span class="line">ctags -R * <span class="comment"># 方便阅读</span></span><br><span class="line">vim core/kernel/huk_subkey.c <span class="comment"># 拿 HUK 和 static string</span></span><br><span class="line">vim core/include/signed_hdr.h <span class="comment"># 描述 TA 文件结构</span></span><br></pre></td></tr></table></figure>
+<p>先看看文件头：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">shdr</span> &#123;</span></span><br><span class="line">    <span class="type">uint32_t</span> magic;</span><br><span class="line">    <span class="type">uint32_t</span> img_type;</span><br><span class="line">    <span class="type">uint32_t</span> img_size;</span><br><span class="line">    <span class="type">uint32_t</span> algo;</span><br><span class="line">    <span class="type">uint16_t</span> hash_size;</span><br><span class="line">    <span class="type">uint16_t</span> sig_size;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Commented out element used to visualize the layout dynamic part</span></span><br><span class="line"><span class="comment">     * of the struct.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * hash is accessed through the macro SHDR_GET_HASH and</span></span><br><span class="line"><span class="comment">     * signature is accessed through the macro SHDR_GET_SIG</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * uint8_t hash[hash_size];</span></span><br><span class="line"><span class="comment">     * uint8_t sig[sig_size];</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">shdr_bootstrap_ta</span> &#123;</span></span><br><span class="line">    <span class="type">uint8_t</span> uuid[<span class="keyword">sizeof</span>(TEE_UUID)];</span><br><span class="line">    <span class="type">uint32_t</span> ta_version;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">shdr_encrypted_ta</span> &#123;</span></span><br><span class="line">    <span class="type">uint32_t</span> enc_algo;</span><br><span class="line">    <span class="type">uint32_t</span> flags;</span><br><span class="line">    <span class="type">uint16_t</span> iv_size;</span><br><span class="line">    <span class="type">uint16_t</span> tag_size;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Commented out element used to visualize the layout dynamic part</span></span><br><span class="line"><span class="comment">     * of the struct.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * iv is accessed through the macro SHDR_ENC_GET_IV and</span></span><br><span class="line"><span class="comment">     * tag is accessed through the macro SHDR_ENC_GET_TAG</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * uint8_t iv[iv_size];</span></span><br><span class="line"><span class="comment">     * uint8_t tag[tag_size];</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>然后对照着看 16 进制编辑器看就能找到 uuid 的位置是 0x134，同时注意小端序的问题。或者可以整一个 010 模版然后导入进去，或许也挺方便？</p>
+<h1 id="Hash-Tree"><a href="#Hash-Tree" class="headerlink" title="Hash-Tree"></a>Hash-Tree</h1><p>哈希树在安全存储文件的加密和解密阶段发挥作用。它主要是用一个二叉树的想法来实现的，每个结点维护两个子结点和一个数据块。Meta Data 加密过程如下图。<strong>注意</strong>这个加密的数据是描述文件性质和属性的，而不是真正的文件内容：</p>
+<p><img src="https://optee.readthedocs.io/en/latest/_images/meta_data_encryption.png"></p>
+<p>看文档可以知道相关结构体定义在 core&#x2F;tee&#x2F;fs_htree.h 中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tee_fs_htree_node_image</span> &#123;</span> <span class="comment">// 一般节点</span></span><br><span class="line">    <span class="type">uint8_t</span> hash[TEE_FS_HTREE_HASH_SIZE];</span><br><span class="line">    <span class="type">uint8_t</span> iv[TEE_FS_HTREE_IV_SIZE];</span><br><span class="line">    <span class="type">uint8_t</span> tag[TEE_FS_HTREE_TAG_SIZE];</span><br><span class="line">    <span class="type">uint16_t</span> flags;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tee_fs_htree_meta</span> &#123;</span></span><br><span class="line">    <span class="type">uint64_t</span> length;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tee_fs_htree_imeta</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tee_fs_htree_meta</span> <span class="title">meta</span>;</span></span><br><span class="line">    <span class="type">uint32_t</span> max_node_id;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tee_fs_htree_image</span> &#123;</span> <span class="comment">// 顶部节点</span></span><br><span class="line">    <span class="type">uint8_t</span> iv[TEE_FS_HTREE_IV_SIZE];</span><br><span class="line">    <span class="type">uint8_t</span> tag[TEE_FS_HTREE_TAG_SIZE];</span><br><span class="line">    <span class="type">uint8_t</span> enc_fek[TEE_FS_HTREE_FEK_SIZE];</span><br><span class="line">    <span class="type">uint8_t</span> imeta[<span class="keyword">sizeof</span>(<span class="keyword">struct</span> tee_fs_htree_imeta)];</span><br><span class="line">    <span class="type">uint32_t</span> counter;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Decryption"><a href="#Decryption" class="headerlink" title="Decryption"></a>Decryption</h1><p>首先密文结构被记录在 core&#x2F;tee&#x2F;tee_ree_fs.c 中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">File layout</span><br><span class="line">[demo with input:</span><br><span class="line">BLOCK_SIZE = 4096,</span><br><span class="line">node_size = 66,</span><br><span class="line">block_nodes = 4096/(66*2) = 31 ]</span><br><span class="line"></span><br><span class="line">phys block 0:</span><br><span class="line">tee_fs_htree_image vers 0 @ offs = 0</span><br><span class="line">tee_fs_htree_image vers 1 @ offs = sizeof(tee_fs_htree_image)</span><br><span class="line"></span><br><span class="line">phys block 1:</span><br><span class="line">tee_fs_htree_node_image 0  vers 0 @ offs = 0</span><br><span class="line">tee_fs_htree_node_image 0  vers 1 @ offs = node_size</span><br><span class="line">tee_fs_htree_node_image 1  vers 0 @ offs = node_size * 2</span><br><span class="line">tee_fs_htree_node_image 1  vers 1 @ offs = node_size * 3</span><br><span class="line">...</span><br><span class="line">tee_fs_htree_node_image 30 vers 0 @ offs = node_size * 60</span><br><span class="line">tee_fs_htree_node_image 30 vers 1 @ offs = node_size * 61</span><br><span class="line"></span><br><span class="line">phys block 2:</span><br><span class="line">data block 0 vers 0</span><br><span class="line"></span><br><span class="line">phys block 3:</span><br><span class="line">data block 0 vers 1</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">phys block 62:</span><br><span class="line">data block 30 vers 0</span><br><span class="line"></span><br><span class="line">phys block 63:</span><br><span class="line">data block 30 vers 1</span><br><span class="line"></span><br><span class="line">phys block 64:</span><br><span class="line">tee_fs_htree_node_image 31  vers 0 @ offs = 0</span><br><span class="line">tee_fs_htree_node_image 31  vers 1 @ offs = node_size</span><br><span class="line">tee_fs_htree_node_image 32  vers 0 @ offs = node_size * 2</span><br><span class="line">tee_fs_htree_node_image 32  vers 1 @ offs = node_size * 3</span><br><span class="line">...</span><br><span class="line">tee_fs_htree_node_image 61 vers 0 @ offs = node_size * 60</span><br><span class="line">tee_fs_htree_node_image 61 vers 1 @ offs = node_size * 61</span><br><span class="line"></span><br><span class="line">phys block 65:</span><br><span class="line">data block 31 vers 0</span><br><span class="line"></span><br><span class="line">phys block 66:</span><br><span class="line">data block 31 vers 1</span><br><span class="line">...</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>结合上面的结构体发现确实是一对二的关系，那么我们只需要去拿对应的数据，解密就好🌶️：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"><span class="keyword">import</span> struct</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;2&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> fin:</span><br><span class="line">    data = fin.read()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_htree_image_data</span>(<span class="params">offset:<span class="built_in">int</span></span>):</span><br><span class="line">    htree_img_iv = data[offset + <span class="number">0x00</span>: offset + <span class="number">0x10</span>]</span><br><span class="line">    htree_img_tag = data[offset + <span class="number">0x10</span> : offset + <span class="number">0x20</span>]</span><br><span class="line">    htree_img_enc_fek = data[offset + <span class="number">0x20</span> : offset + <span class="number">0x30</span>]</span><br><span class="line">    htree_img_imeta = data[offset + <span class="number">0x30</span> : offset + <span class="number">0x40</span>]</span><br><span class="line">    htree_img_counter = struct.unpack(<span class="string">&quot;I&quot;</span>, data[offset + <span class="number">0x40</span> : offset + <span class="number">0x44</span>])[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> htree_img_iv, htree_img_tag, htree_img_enc_fek, htree_img_imeta, htree_img_counter</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_htree_node_image_data</span>(<span class="params">offset:<span class="built_in">int</span></span>):</span><br><span class="line">    htree_node_img_hash = data[offset + <span class="number">0x00</span>: offset + <span class="number">0x20</span>]</span><br><span class="line">    htree_node_img_iv = data[offset + <span class="number">0x20</span> : offset + <span class="number">0x30</span>]</span><br><span class="line">    htree_node_img_tag = data[offset + <span class="number">0x30</span> : offset + <span class="number">0x40</span>]</span><br><span class="line">    htree_node_img_flags = struct.unpack(<span class="string">&quot;H&quot;</span>, data[offset + <span class="number">0x40</span> : offset + <span class="number">0x42</span>])[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> htree_node_img_hash, htree_node_img_iv, htree_node_img_tag, htree_node_img_flags</span><br><span class="line"></span><br><span class="line"><span class="comment"># fs_htree_image_ver0</span></span><br><span class="line">htree_img_iv0, htree_img_tag0, htree_img_enc_fek0, htree_img_imeta0, htree_img_counter0 = get_htree_image_data(<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(binascii.hexlify, [htree_img_iv0, htree_img_tag0, htree_img_enc_fek0, htree_img_imeta0])))</span><br><span class="line"><span class="built_in">print</span>(htree_img_counter0)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fs_htree_image_ver1</span></span><br><span class="line">htree_img_iv1, htree_img_tag1, htree_img_enc_fek1, htree_img_imeta1, htree_img_counter1 = get_htree_image_data(<span class="number">0x44</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(binascii.hexlify, [htree_img_iv1, htree_img_tag1, htree_img_enc_fek1, htree_img_imeta1])))</span><br><span class="line"><span class="built_in">print</span>(htree_img_counter1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fs_htree_node_image_ver0</span></span><br><span class="line">htree_node_img_hash0, htree_node_img_iv0, htree_node_img_tag0, htree_node_img_flags0 = get_htree_node_image_data(<span class="number">0x1000</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(binascii.hexlify, [htree_node_img_hash0, htree_node_img_iv0, htree_node_img_tag0])))</span><br><span class="line"><span class="built_in">print</span>(htree_node_img_flags0)</span><br><span class="line"></span><br><span class="line"><span class="comment"># fs_htree_node_image_ver1</span></span><br><span class="line">htree_node_img_hash1, htree_node_img_iv1, htree_node_img_tag1, htree_node_img_flags1 = get_htree_node_image_data(<span class="number">0x1042</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(<span class="built_in">map</span>(binascii.hexlify, [htree_node_img_hash1, htree_node_img_iv1, htree_node_img_tag1])))</span><br><span class="line"><span class="built_in">print</span>(htree_node_img_flags1)</span><br></pre></td></tr></table></figure>
+
+<p>解密涉及到 AES 的 GCM 和 AAD：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> hashlib <span class="keyword">import</span> sha256</span><br><span class="line"><span class="keyword">from</span> hmac <span class="keyword">import</span> HMAC</span><br><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"></span><br><span class="line">HUK = <span class="string">b&#x27;\x00&#x27;</span> * <span class="number">0x10</span></span><br><span class="line">chip_id = <span class="string">b&#x27;BEEF&#x27;</span> * <span class="number">8</span></span><br><span class="line">static_string = <span class="string">b&#x27;ONLY_FOR_tee_fs_ssk&#x27;</span></span><br><span class="line">message = chip_id + static_string + <span class="string">b&#x27;\x00&#x27;</span></span><br><span class="line">ta_uuid =  <span class="string">b&#x27;\xbb\x50\xe7\xf4\x37\x14\xbf\x4f\x87\x85\x8d\x35\x80\xc3\x49\x94&#x27;</span></span><br><span class="line"></span><br><span class="line">SSK = HMAC(HUK, message, digestmod = sha256).digest()</span><br><span class="line">TSK = HMAC(SSK, ta_uuid, digestmod = sha256).digest()</span><br><span class="line">FEK = AES_Decrypt_ECB(TSK, htree_img_enc_fek1)</span><br><span class="line"></span><br><span class="line">block_data = data[<span class="number">0x2000</span> : <span class="number">0x3000</span>]</span><br><span class="line">cipher = AES.new(FEK, AES.MODE_GCM, nonce = htree_node_img_iv1)</span><br><span class="line">cipher.update(htree_img_enc_fek1)</span><br><span class="line">cipher.update(htree_node_img_iv1)</span><br><span class="line"></span><br><span class="line">plaintext = cipher.decrypt_and_verify(block_data, htree_node_img_tag1)</span><br><span class="line"><span class="built_in">print</span> (plaintext)</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Archives</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a href="/categories/">Categories</a></li>
+         
+          <li><a href="/links/">Links</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Write-in-Front"><span class="toc-number">1.</span> <span class="toc-text">Write-in-Front</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Secure-Storage"><span class="toc-number">2.</span> <span class="toc-text">Secure-Storage</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Encrypted-TA-Structur"><span class="toc-number">3.</span> <span class="toc-text">Encrypted-TA-Structur</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hash-Tree"><span class="toc-number">4.</span> <span class="toc-text">Hash-Tree</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Decryption"><span class="toc-number">5.</span> <span class="toc-text">Decryption</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/03/30/97de84aec9e3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&text=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&title=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&is_video=false&description=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析&body=Check out this article: https://tr4cck.github.io/2022/03/30/97de84aec9e3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&title=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&title=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&title=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&title=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&name=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/03/30/97de84aec9e3/&t=「WP-20」RWCTF2022 Trust-or-Not 基于OPTEE的安全存储分析"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2022
+    Tr4cck
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Archives</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Categories</a></li><!--
+     --><!--
+       --><li><a href="/links/">Links</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
