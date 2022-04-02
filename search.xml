@@ -4,7 +4,7 @@
   
     
     <entry>
-      <title>「Writeup-17」DefcampCTF2022 Rev 部分题解</title>
+      <title>「DefcampCTF2022」Rev 部分题解</title>
       <link href="/2022/03/31/89736fcf1fcd/"/>
       <url>/2022/03/31/89736fcf1fcd/</url>
       
@@ -33,7 +33,7 @@
     
     
     <entry>
-      <title>「Writeup-16」RWCTF2022 Trust_or_Not 基于 OPTEE 的安全存储分析</title>
+      <title>「RealWorldCTF2022」Rev | Trust_or_Not 基于 OPTEE 的安全存储分析</title>
       <link href="/2022/03/30/97de84aec9e3/"/>
       <url>/2022/03/30/97de84aec9e3/</url>
       
@@ -91,7 +91,7 @@
     
     
     <entry>
-      <title>「Writeup-15」HayyimCTF2022 Rev 部分题解</title>
+      <title>「HayyimCTF2022」Rev 部分题解</title>
       <link href="/2022/03/06/5586a733574a/"/>
       <url>/2022/03/06/5586a733574a/</url>
       
@@ -120,7 +120,7 @@
     
     
     <entry>
-      <title>「Writeup-14」TQLCTF2022 Tales-of-Arrow</title>
+      <title>「TQLCTF2022」Rev | Tales-of-Arrow 利用 asciicode 最高比特为 0 进行序列排除</title>
       <link href="/2022/03/02/e17f814f31fb/"/>
       <url>/2022/03/02/e17f814f31fb/</url>
       
@@ -149,7 +149,7 @@
     
     
     <entry>
-      <title>「Writeup-13」SUSCTF2022 Rev 部分题解</title>
+      <title>「SUSCTF2022」Rev 部分题解</title>
       <link href="/2022/02/27/23dc22daa374/"/>
       <url>/2022/02/27/23dc22daa374/</url>
       
@@ -207,7 +207,7 @@
     
     
     <entry>
-      <title>「Writeup-12」SCTF2021 Rev 简略总结</title>
+      <title>「SCTF2021」Rev 简略总结</title>
       <link href="/2022/01/13/bf93bf5d2313/"/>
       <url>/2022/01/13/bf93bf5d2313/</url>
       
@@ -236,7 +236,7 @@
     
     
     <entry>
-      <title>「Writeup-11」xhljCTF2020 flow 利用 SROP 隐藏控制流</title>
+      <title>「xhljCTF202」Rev | flow 利用 SROP 隐藏控制流</title>
       <link href="/2022/01/13/a499fd6b2654/"/>
       <url>/2022/01/13/a499fd6b2654/</url>
       
@@ -265,7 +265,7 @@
     
     
     <entry>
-      <title>「Writeup-10」hxpCTF2020 内核条件竞争复现</title>
+      <title>「hxpCTF2020」内核条件竞争复现</title>
       <link href="/2022/01/13/4276c5ff4ca1/"/>
       <url>/2022/01/13/4276c5ff4ca1/</url>
       
@@ -294,7 +294,7 @@
     
     
     <entry>
-      <title>「Writeup-09」TetCTF2021WP</title>
+      <title>「TetCTF2021」Rev</title>
       <link href="/2022/01/13/0f448c3e88dc/"/>
       <url>/2022/01/13/0f448c3e88dc/</url>
       
@@ -327,7 +327,7 @@
     
     
     <entry>
-      <title>「Writeup-08」SECCON2021 汇编调试与马尔可夫图灵机</title>
+      <title>「SECCONCTF2021」Rev | 汇编调试与马尔可夫图灵机</title>
       <link href="/2022/01/13/cce2e3481ea1/"/>
       <url>/2022/01/13/cce2e3481ea1/</url>
       
@@ -387,7 +387,7 @@
     
     
     <entry>
-      <title>「Writeup-07」零碎 WP 整理</title>
+      <title>「Writeup」零碎 WP 整理</title>
       <link href="/2021/12/12/f24246f1fc31/"/>
       <url>/2021/12/12/f24246f1fc31/</url>
       
@@ -412,7 +412,7 @@
     
     
     <entry>
-      <title>「Writeup-06」NCTF2021 0xbl4cb12d Rev</title>
+      <title>「NCTF2021」Rev 部分题解 by 0xbl4cb12d</title>
       <link href="/2021/11/29/6834068cea38/"/>
       <url>/2021/11/29/6834068cea38/</url>
       
@@ -530,7 +530,7 @@
     
     
     <entry>
-      <title>「Notes-05」C# 学习笔记</title>
+      <title>「C#」学习随笔</title>
       <link href="/2021/08/19/b25e2b0d59ff/"/>
       <url>/2021/08/19/b25e2b0d59ff/</url>
       
@@ -598,7 +598,7 @@
     
     
     <entry>
-      <title>「Writeup-05」图片逆向复现过程记录</title>
+      <title>「PE 修复」图片逆向复现过程记录</title>
       <link href="/2021/07/14/12acc391df06/"/>
       <url>/2021/07/14/12acc391df06/</url>
       
@@ -662,7 +662,7 @@
     
     
     <entry>
-      <title>「Notes-04」About Lambda Calculus</title>
+      <title>「Lambda-Calculus」学习随笔</title>
       <link href="/2021/06/19/bb1071e8aecd/"/>
       <url>/2021/06/19/bb1071e8aecd/</url>
       
@@ -689,7 +689,7 @@
     
     
     <entry>
-      <title>「Writeup-04」starCTF2021 wherekey</title>
+      <title>「starCTF2021」Rev | wherekey 本地 socket 通信</title>
       <link href="/2021/06/13/d475ed5e9069/"/>
       <url>/2021/06/13/d475ed5e9069/</url>
       
@@ -718,7 +718,7 @@
     
     
     <entry>
-      <title>「Notes-03」Go Tour</title>
+      <title>「Golang」Go Tour</title>
       <link href="/2021/06/10/e10ec9a6789b/"/>
       <url>/2021/06/10/e10ec9a6789b/</url>
       
@@ -749,7 +749,7 @@
     
     
     <entry>
-      <title>「Notes-02」StreamCipher 线性反馈移位寄存器</title>
+      <title>「StreamCipher」线性反馈移位寄存器</title>
       <link href="/2021/05/22/6f3890f43379/"/>
       <url>/2021/05/22/6f3890f43379/</url>
       
@@ -778,7 +778,7 @@
     
     
     <entry>
-      <title>「Notes-01」StreamCipher 线性同余生成器</title>
+      <title>「StreamCipher」线性同余生成器</title>
       <link href="/2021/05/20/2a93aeecc6a2/"/>
       <url>/2021/05/20/2a93aeecc6a2/</url>
       
@@ -807,7 +807,7 @@
     
     
     <entry>
-      <title>「Writeup-03」CISCN2021 部分 Rev 记录</title>
+      <title>「CISCN2021」Rev 部分题解</title>
       <link href="/2021/05/16/7f395e0159df/"/>
       <url>/2021/05/16/7f395e0159df/</url>
       
@@ -836,7 +836,7 @@
     
     
     <entry>
-      <title>「Writeup-02」MiniLCTF2021 cuttl3fish</title>
+      <title>「MiniLCTF2021」Writeup by cuttl3fish</title>
       <link href="/2021/05/16/a217d1073a20/"/>
       <url>/2021/05/16/a217d1073a20/</url>
       
@@ -863,7 +863,7 @@
     
     
     <entry>
-      <title>「Writeup-01」NPUCTF2020 BabyObfuscation 静态分析</title>
+      <title>「BUUOJ」NPUCTF2020 BabyObfuscation 静态分析</title>
       <link href="/2021/04/21/fec4652abe20/"/>
       <url>/2021/04/21/fec4652abe20/</url>
       
