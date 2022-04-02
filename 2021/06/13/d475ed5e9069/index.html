@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="Step One ELF64位程序，无壳，无符号表 运行提示输入key，随便输点东西，直接退出  Step Two拖进IDA找start函数，第一个参数就是main函数 1234567891011121314151617181920&#x2F;&#x2F; positive sp value has been detected, the output may be wrong!void __fastcall __no">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「WP-04」starCTF2021-wherekey">
+<meta property="og:title" content="「Writeup-04」starCTF2021 wherekey">
 <meta property="og:url" content="https://tr4cck.github.io/2021/06/13/d475ed5e9069/index.html">
 <meta property="og:site_name" content="Track">
 <meta property="og:description" content="Step One ELF64位程序，无壳，无符号表 运行提示输入key，随便输点东西，直接退出  Step Two拖进IDA找start函数，第一个参数就是main函数 1234567891011121314151617181920&#x2F;&#x2F; positive sp value has been detected, the output may be wrong!void __fastcall __no">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-06-13T00:17:36.000Z">
-<meta property="article:modified_time" content="2022-03-02T08:38:15.486Z">
+<meta property="article:modified_time" content="2022-04-02T05:28:16.420Z">
 <meta property="article:author" content="Tr4cck">
 <meta property="article:tag" content="CTF">
 <meta property="article:tag" content="Reverse">
@@ -39,7 +39,7 @@
       
     
     <!-- title -->
-    <title>「WP-04」starCTF2021-wherekey</title>
+    <title>「Writeup-04」starCTF2021 wherekey</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -110,16 +110,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/06/13/d475ed5e9069/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&text=「WP-04」starCTF2021-wherekey"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&is_video=false&description=「WP-04」starCTF2021-wherekey"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-04」starCTF2021-wherekey&body=Check out this article: https://tr4cck.github.io/2021/06/13/d475ed5e9069/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&name=「WP-04」starCTF2021-wherekey&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&t=「WP-04」starCTF2021-wherekey"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&text=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&is_video=false&description=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「Writeup-04」starCTF2021 wherekey&body=Check out this article: https://tr4cck.github.io/2021/06/13/d475ed5e9069/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&name=「Writeup-04」starCTF2021 wherekey&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&t=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -136,7 +136,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        「WP-04」starCTF2021-wherekey
+        「Writeup-04」starCTF2021 wherekey
     </h1>
 
 
@@ -249,16 +249,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2021/06/13/d475ed5e9069/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&text=「WP-04」starCTF2021-wherekey"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&is_video=false&description=「WP-04」starCTF2021-wherekey"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「WP-04」starCTF2021-wherekey&body=Check out this article: https://tr4cck.github.io/2021/06/13/d475ed5e9069/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「WP-04」starCTF2021-wherekey"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&name=「WP-04」starCTF2021-wherekey&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&t=「WP-04」starCTF2021-wherekey"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&text=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&is_video=false&description=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「Writeup-04」starCTF2021 wherekey&body=Check out this article: https://tr4cck.github.io/2021/06/13/d475ed5e9069/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&title=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&name=「Writeup-04」starCTF2021 wherekey&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2021/06/13/d475ed5e9069/&t=「Writeup-04」starCTF2021 wherekey"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

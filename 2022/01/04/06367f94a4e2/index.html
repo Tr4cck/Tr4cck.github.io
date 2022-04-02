@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="wine-6.23-1 参考：https:&#x2F;&#x2F;wiki.winehq.org&#x2F;Wine_Developer%27s_Guide&#x2F;Debugging_Wine  使用 winedbg ida.exe 启动调试器，单步调试，发现调试到下面的位置再尝试单步步进，但是 IDA 会直接启动，这个不知道被调用函数内部的调用： 0x000000017000c968 ntdll+0xc968: calll  *0">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「ArchLinux-02」拯救我的Wine">
+<meta property="og:title" content="「ArchLinux-02」拯救我的 Wine">
 <meta property="og:url" content="https://tr4cck.github.io/2022/01/04/06367f94a4e2/index.html">
 <meta property="og:site_name" content="Track">
 <meta property="og:description" content="wine-6.23-1 参考：https:&#x2F;&#x2F;wiki.winehq.org&#x2F;Wine_Developer%27s_Guide&#x2F;Debugging_Wine  使用 winedbg ida.exe 启动调试器，单步调试，发现调试到下面的位置再尝试单步步进，但是 IDA 会直接启动，这个不知道被调用函数内部的调用： 0x000000017000c968 ntdll+0xc968: calll  *0">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2022/01/04/sdBPNE2cOe7n6HG.png">
 <meta property="article:published_time" content="2022-01-04T14:51:44.000Z">
-<meta property="article:modified_time" content="2022-03-02T08:06:24.812Z">
+<meta property="article:modified_time" content="2022-04-02T05:26:15.560Z">
 <meta property="article:author" content="Tr4cck">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="ArchLinux">
@@ -42,7 +42,7 @@
       
     
     <!-- title -->
-    <title>「ArchLinux-02」拯救我的Wine</title>
+    <title>「ArchLinux-02」拯救我的 Wine</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -113,16 +113,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/01/04/06367f94a4e2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&text=「ArchLinux-02」拯救我的Wine"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的Wine"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&is_video=false&description=「ArchLinux-02」拯救我的Wine"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「ArchLinux-02」拯救我的Wine&body=Check out this article: https://tr4cck.github.io/2022/01/04/06367f94a4e2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的Wine"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的Wine"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的Wine"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的Wine"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&name=「ArchLinux-02」拯救我的Wine&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&t=「ArchLinux-02」拯救我的Wine"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&text=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&is_video=false&description=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「ArchLinux-02」拯救我的 Wine&body=Check out this article: https://tr4cck.github.io/2022/01/04/06367f94a4e2/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&name=「ArchLinux-02」拯救我的 Wine&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&t=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -139,7 +139,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        「ArchLinux-02」拯救我的Wine
+        「ArchLinux-02」拯救我的 Wine
     </h1>
 
 
@@ -223,16 +223,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://tr4cck.github.io/2022/01/04/06367f94a4e2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&text=「ArchLinux-02」拯救我的Wine"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的Wine"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&is_video=false&description=「ArchLinux-02」拯救我的Wine"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=「ArchLinux-02」拯救我的Wine&body=Check out this article: https://tr4cck.github.io/2022/01/04/06367f94a4e2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的Wine"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的Wine"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的Wine"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的Wine"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&name=「ArchLinux-02」拯救我的Wine&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&t=「ArchLinux-02」拯救我的Wine"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&text=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&is_video=false&description=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=「ArchLinux-02」拯救我的 Wine&body=Check out this article: https://tr4cck.github.io/2022/01/04/06367f94a4e2/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&title=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&name=「ArchLinux-02」拯救我的 Wine&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://tr4cck.github.io/2022/01/04/06367f94a4e2/&t=「ArchLinux-02」拯救我的 Wine"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
