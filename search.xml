@@ -4,13 +4,25 @@
   
     
     <entry>
-      <title>「HITCONCTF2021」Rev复现</title>
-      <link href="/2022/04/10/3227fda96455/"/>
-      <url>/2022/04/10/3227fda96455/</url>
+      <title>「Blog」Hexo-Catus主题折腾心路历程</title>
+      <link href="/2022/04/12/85dc68f5b2b8/"/>
+      <url>/2022/04/12/85dc68f5b2b8/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1 id="怪"><a href="#怪" class="headerlink" title="怪"></a>怪</h1><p>一开始它长成这样：<br><img src="https://s2.loli.net/2022/04/12/v3WCrbG7O2REe4P.png"><br>这是我在现成配置文件中能做到的最好效果了，但还是有种让人说不上来的奇怪。</p><ul><li>首先是首页的文章做不到分类显示，只有一个 Writing 躺在中间</li><li>其次是 categories 和 tags 的作用区分不明显，两者谁用来代替对方似乎都挺合适；</li><li>然后是页脚的右边部分似乎没有任何存在的必要，它的意义和 header 的意义似乎有一些重叠；</li><li>最后是搜索功能不直接，不会有任何人想要先点一下鼠标左键，等一会儿才能跳出一个空荡的搜索页面。</li></ul><h1 id="改"><a href="#改" class="headerlink" title="改"></a>改</h1><p>第一个问题实际上是需要在首页上再嵌入一个块，并且能够进行分类过滤，也就是能让我们在首页上看到不同的分类下的文章。<br>第一步是找到首页的位置，我们根据这个显眼的 <strong>Writing</strong> 来做一些文章。介绍一下我之前无聊时写的 zsh function <code>trackfile</code>，它能递归遍历当前目录下的文件，并检索是否存在指定字符串：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/zsh</span><br><span class="line"></span><br><span class="line">function trackfile () &#123;</span><br><span class="line">    filenames=$1</span><br><span class="line">    glue=(-o -name )</span><br><span class="line">    while [ $# -gt 2 ]; do</span><br><span class="line">        shift</span><br><span class="line">        set -A filenames $filenames $glue $1</span><br><span class="line">    done</span><br><span class="line">    find . -name $filenames | xargs grep --color -nse $2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>进入主题目录 <code>themes/catus/</code> ，找到 <code>index.ejs</code>，将源码中的遍历方式，从 posts 改为 categories：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;% site.categories.map(function(category) &#123; %&gt;</span><br><span class="line">  &lt;% if (category.name == &#x27;LIFE&#x27;) &#123; %&gt;</span><br><span class="line">    &lt;% var field_sort = theme.posts_overview.sort_updated ? &#x27;updated&#x27; : &#x27;date&#x27; %&gt;</span><br><span class="line">    &lt;% category.posts.sort(field_sort, &#x27;desc&#x27;).limit(theme.posts_overview.post_count || 5).map(function(post) &#123; %&gt;</span><br><span class="line">      &lt;li class=&quot;post-item&quot;&gt;</span><br><span class="line">        &lt;%- partial(&#x27;_partial/post/date&#x27;, &#123; post: post, class_name: &#x27;meta&#x27; &#125;) %&gt;</span><br><span class="line">        &lt;span&gt;&lt;%- partial(&#x27;_partial/post/title&#x27;, &#123; post: post, index: true, class_name: &#x27;&#x27; &#125;) %&gt;&lt;/span&gt;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">    &lt;% &#125;) %&gt;</span><br><span class="line">  &lt;% &#125; %&gt;</span><br><span class="line">&lt;% &#125;) %&gt;</span><br></pre></td></tr></table></figure><p>这样就好啦，同时我们也严格限制了 categories 的意义和数量，把它和首页绑定，并且让 tags 去承担分类的任务，这样整个网站的分类逻辑就更加清晰了。<br>以后想加啥分类就再加一坨这个代码，改一下过滤条件就好了。（似乎有点折磨，能不能给 hexo 加点功能呢？）但是两个块没办法做到水平排列，这是怎么会是呢？直到我查到一个叫做 flex 布局的东西，它是现代 css 用的比较多的布局方式。那么我的解决思路是把两个块用一个 section 标签包起来，并且给这个 section 一个名为 row 的 class，然后每个小 section 也优化一下 class：</p><figure class="highlight styl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.row</span></span><br><span class="line">  <span class="attr">--bs-gutter-x</span>: <span class="number">1.5rem</span></span><br><span class="line">  <span class="attr">--bs-gutter-y</span>: <span class="number">0</span></span><br><span class="line">  <span class="attribute">display</span>: flex</span><br><span class="line">  <span class="attribute">flex-wrap</span>: wrap</span><br><span class="line">  <span class="attribute">margin-top</span>: calc(-<span class="number">1</span> * var(--bs-gutter-y))</span><br><span class="line">  <span class="attribute">margin-right</span>: calc(-.<span class="number">5</span> * var(--bs-gutter-x))</span><br><span class="line">  <span class="attribute">margin-left</span>: calc(-.<span class="number">5</span> * var(--bs-gutter-x))</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.index-writing</span></span><br><span class="line">  <span class="attribute">flex</span>: <span class="number">0</span> <span class="number">0</span> auto</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">58.33333333%</span></span><br></pre></td></tr></table></figure><p>脚注好解决，找到 footer.ejs，把里面全部注释掉就好了。</p><h1 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h1><p>大概是这样，但还有很多可以修改的地方，希望不久之处能把其他的空白也利用上。一些小细节在我修改的过程中已经忘了，这或许也是另一种自然。</p>]]></content>
       
       
+      <categories>
+          
+          <category> TECHNOLOGY </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Frontend </tag>
+            
+        </tags>
       
     </entry>
     
@@ -26,18 +38,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -55,18 +63,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -84,18 +88,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -113,18 +113,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -142,18 +138,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -171,18 +163,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -200,18 +188,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> Rootme </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -229,18 +213,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> SCTF </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -258,18 +238,16 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Reverse </tag>
+            <tag> Rev </tag>
             
-            <tag> WP </tag>
-            
-            <tag> xhlj </tag>
+            <tag> Pwnable </tag>
             
         </tags>
       
@@ -287,18 +265,14 @@
       
       <categories>
           
-          <category> CTF-PWN </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> WP </tag>
-            
-            <tag> PWN </tag>
+            <tag> Pwnable </tag>
             
         </tags>
       
@@ -316,22 +290,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
-            
-            <tag> 反混淆 </tag>
-            
-            <tag> 复现 </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -349,18 +315,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -369,7 +331,7 @@
     
     
     <entry>
-      <title>「ArchLinux-02」拯救我的 Wine</title>
+      <title>「ArchLinux」拯救我的 Wine</title>
       <link href="/2022/01/04/06367f94a4e2/"/>
       <url>/2022/01/04/06367f94a4e2/</url>
       
@@ -378,7 +340,7 @@
       
       <categories>
           
-          <category> Linux </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
@@ -386,12 +348,6 @@
         <tags>
             
             <tag> Linux </tag>
-            
-            <tag> ArchLinux </tag>
-            
-            <tag> Wine </tag>
-            
-            <tag> 动态调试 </tag>
             
         </tags>
       
@@ -409,14 +365,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> [object Object] </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -434,18 +390,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -454,7 +406,7 @@
     
     
     <entry>
-      <title>「Journalctl-02」MoeCTF2021 办赛经验</title>
+      <title>MoeCTF2021 办赛经验</title>
       <link href="/2021/10/19/663cc9d2dc05/"/>
       <url>/2021/10/19/663cc9d2dc05/</url>
       
@@ -463,18 +415,14 @@
       
       <categories>
           
-          <category> Journalctl </category>
+          <category> LIFE </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 出题 </tag>
-            
-            <tag> 经验总结 </tag>
-            
-            <tag> MoeCTF2021 </tag>
+            <tag> Journalctl </tag>
             
         </tags>
       
@@ -483,7 +431,7 @@
     
     
     <entry>
-      <title>「Journalctl-01」MssCTF2021 出题经验</title>
+      <title>MssCTF2021 出题经验</title>
       <link href="/2021/10/19/b8929d6a1da3/"/>
       <url>/2021/10/19/b8929d6a1da3/</url>
       
@@ -492,18 +440,14 @@
       
       <categories>
           
-          <category> Journalctl </category>
+          <category> LIFE </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 出题 </tag>
-            
-            <tag> 经验总结 </tag>
-            
-            <tag> MssCTF2021 </tag>
+            <tag> Journalctl </tag>
             
         </tags>
       
@@ -512,7 +456,7 @@
     
     
     <entry>
-      <title>「ArchLinux-01」迁移家目录至家分区</title>
+      <title>「ArchLinux」迁移家目录至家分区</title>
       <link href="/2021/10/18/4884d4a13cc8/"/>
       <url>/2021/10/18/4884d4a13cc8/</url>
       
@@ -521,7 +465,7 @@
       
       <categories>
           
-          <category> Linux </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
@@ -529,12 +473,6 @@
         <tags>
             
             <tag> Linux </tag>
-            
-            <tag> ArchLinux </tag>
-            
-            <tag> Migration </tag>
-            
-            <tag> Home Directory </tag>
             
         </tags>
       
@@ -552,24 +490,14 @@
       
       <categories>
           
-          <category> Programs </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Notes </tag>
-            
-            <tag> Programs </tag>
-            
-            <tag> Code </tag>
-            
-            <tag> C# </tag>
-            
-            <tag> Unity </tag>
-            
-            <tag> Development </tag>
+            <tag> CS </tag>
             
         </tags>
       
@@ -587,22 +515,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 动态调试 </tag>
-            
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
-            
-            <tag> ReversingKR </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -620,22 +540,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
-            
-            <tag> 看雪论坛 </tag>
-            
-            <tag> 图片逆向 </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -653,20 +565,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
-            
-            <tag> CTFSHOW </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -684,16 +590,14 @@
       
       <categories>
           
-          <category> CS </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Notes </tag>
-            
-            <tag> Church Calculus </tag>
+            <tag> CS </tag>
             
         </tags>
       
@@ -711,18 +615,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
             <tag> Reverse </tag>
-            
-            <tag> WP </tag>
             
         </tags>
       
@@ -740,20 +640,14 @@
       
       <categories>
           
-          <category> Programs </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Notes </tag>
-            
-            <tag> Golang </tag>
-            
-            <tag> Programs </tag>
-            
-            <tag> Code </tag>
+            <tag> CS </tag>
             
         </tags>
       
@@ -771,18 +665,14 @@
       
       <categories>
           
-          <category> CTF-Cryptography </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
             <tag> Cryptography </tag>
-            
-            <tag> Notes </tag>
             
         </tags>
       
@@ -800,18 +690,14 @@
       
       <categories>
           
-          <category> CTF-Cryptography </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
             <tag> Cryptography </tag>
-            
-            <tag> Notes </tag>
             
         </tags>
       
@@ -829,18 +715,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
+            <tag> Rev </tag>
             
         </tags>
       
@@ -858,16 +740,14 @@
       
       <categories>
           
-          <category> CTF-Competition </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> WP </tag>
+            <tag> Writeup </tag>
             
         </tags>
       
@@ -885,20 +765,14 @@
       
       <categories>
           
-          <category> CTF-Reverse </category>
+          <category> TECHNOLOGY </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> CTF </tag>
-            
-            <tag> Reverse </tag>
-            
-            <tag> WP </tag>
-            
-            <tag> BUUOJ </tag>
+            <tag> Rev </tag>
             
         </tags>
       
