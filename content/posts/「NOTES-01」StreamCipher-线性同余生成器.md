@@ -1,10 +1,10 @@
 ---
 title: 「StreamCipher」线性同余生成器
 date: 2021-05-20 22:51:29
-tags: Cryptography
-categories: TECHNOLOGY
-mathjax: true
-toc: true
+tags:
+- Cryptography
+categories:
+- TECHNOLOGY
 ---
 
 

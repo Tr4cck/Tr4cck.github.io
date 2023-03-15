@@ -1,10 +1,10 @@
 ---
 title: 「ArchLinux」拯救我的 Wine
-mathjax: true
-toc: true
 date: 2022-01-04 22:51:44
-tags: Linux
-categories: TECHNOLOGY
+tags:
+- Linux
+categories:
+- TECHNOLOGY
 ---
 
 

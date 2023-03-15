@@ -1,10 +1,10 @@
 ---
 title: 「StreamCipher」线性反馈移位寄存器
 date: 2021-05-22 21:07:47
-tags: Cryptography
-categories: TECHNOLOGY
-mathjax: true
-toc: true
+tags:
+- Cryptography
+categories:
+- TECHNOLOGY
 ---
 
 

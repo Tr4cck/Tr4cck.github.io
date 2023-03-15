@@ -1,10 +1,10 @@
 ---
 title: 「Writeup」零碎 WP 整理
-mathjax: true
-toc: true
 date: 2021-12-12 16:06:41
-tags: Rev
-categories: TECHNOLOGY
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 ## HITCTF 2021

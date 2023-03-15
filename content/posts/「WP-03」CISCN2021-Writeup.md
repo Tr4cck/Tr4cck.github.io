@@ -1,10 +1,10 @@
 ---
 title: 「CISCN2021」Rev 部分题解
 date: 2021-05-16 22:35:43
-tags: Rev
-categories: TECHNOLOGY
-mathjax: true
-toc: true
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 Team: Mini-7

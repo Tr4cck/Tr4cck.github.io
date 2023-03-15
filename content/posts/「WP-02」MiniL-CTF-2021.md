@@ -1,10 +1,10 @@
 ---
 title: 「MiniLCTF2021」Writeup by cuttl3fish
 date: 2021-05-16 15:21:03
-tags: Writeup
-categories: TECHNOLOGY
-mathjax: true
-toc: true
+tags:
+- Writeup
+categories:
+- TECHNOLOGY
 ---
 
 # Mini-L2021

@@ -1,10 +1,10 @@
 ---
 title: 「RealWorldCTF2022」Rev | Trust_or_Not 基于 OPTEE 的安全存储分析
 date: 2022-03-30 20:18:16
-tags: Rev
-mathjax: true
-toc: true
-categories: TECHNOLOGY
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 ## TL;DR

@@ -1,10 +1,10 @@
 ---
 title: 「hxpCTF2020」内核条件竞争复现
-mathjax: true
-toc: true
 date: 2022-01-13 23:32:46
-tags: Pwnable
-categories: TECHNOLOGY
+tags:
+- Pwnable
+categories:
+- TECHNOLOGY
 ---
 
 ```c

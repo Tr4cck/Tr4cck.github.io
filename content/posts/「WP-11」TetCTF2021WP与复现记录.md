@@ -1,10 +1,10 @@
 ---
 title: 「TetCTF2021」Rev 部分Writeup
-mathjax: true
-toc: true
 date: 2022-01-13 23:31:09
-tags: Rev
-categories: TECHNOLOGY
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 质量很高，感谢越南黑客

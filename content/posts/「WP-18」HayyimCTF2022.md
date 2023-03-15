@@ -1,10 +1,10 @@
 ---
 title: 「HayyimCTF2022」Rev 部分题解
 date: 2022-03-06 21:55:13
-tags: Rev
-mathjax: true
-toc: true
-categories: TECHNOLOGY
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 ## ezrev

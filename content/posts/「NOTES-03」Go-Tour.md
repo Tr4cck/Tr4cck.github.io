@@ -1,9 +1,10 @@
 ---
 title: 「Golang」Go Tour
 date: 2021-06-10 17:04:27
-tags: CS
-categories: TECHNOLOGY
-mathjax: true
+tags:
+- CS
+categories:
+- TECHNOLOGY
 ---
 
 

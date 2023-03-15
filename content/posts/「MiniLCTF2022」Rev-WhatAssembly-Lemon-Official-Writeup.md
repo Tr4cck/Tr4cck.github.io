@@ -1,10 +1,10 @@
 ---
 title: 「MiniLCTF2022」Rev | WhatAssembly & Lemon Official Writeup
-toc: true
-mathjax: true
 date: 2022-05-10 22:04:07
-tags: Rev
-categories: TECHNOLOGY
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 ## MiniLCTF2022 WhatAssembly & Lemon Official Writeup

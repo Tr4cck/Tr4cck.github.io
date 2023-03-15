@@ -1,10 +1,10 @@
 ---
 title: 「CTFSHOW」Rev 随缘更新
 date: 2021-06-26 10:55:29
-tags: Rev
-categories: TECHNOLOGY
-mathjax: true
-toc: true
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 

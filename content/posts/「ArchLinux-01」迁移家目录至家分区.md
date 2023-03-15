@@ -1,10 +1,10 @@
 ---
 title: 「ArchLinux」迁移家目录至家分区
-mathjax: true
-toc: true
 date: 2021-10-18 19:57:11
-tags: Linux
-categories: TECHNOLOGY
+tags:
+- Linux
+categories:
+- TECHNOLOGY
 ---
 
 

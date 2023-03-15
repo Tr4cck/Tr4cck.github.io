@@ -1,10 +1,10 @@
 ---
 title: 「ReversingKR」缓慢刷题
 date: 2021-07-18 15:41:47
-tags: Rev
-categories: TECHNOLOGY
-mathjax: true
-toc: true
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 

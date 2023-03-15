@@ -1,10 +1,10 @@
 ---
 title: MssCTF2021 出题经验
-mathjax: true
-toc: true
 date: 2021-10-19 20:31:06
-tags: Journalctl
-categories: LIFE
+tags:
+- Journalctl
+categories:
+- LIFE
 ---
 
 

@@ -1,10 +1,10 @@
 ---
 title: 「SECCONCTF2021」Rev | 汇编调试与马尔可夫图灵机
-mathjax: true
-toc: true
 date: 2022-01-13 19:01:15
-tags: Rev
-categories: TECHNOLOGY
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 ## pyast64++.rev

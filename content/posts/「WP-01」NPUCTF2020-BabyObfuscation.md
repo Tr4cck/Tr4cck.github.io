@@ -1,9 +1,10 @@
 ---
 title: 「BUUOJ」NPUCTF2020 BabyObfuscation 静态分析
 date: 2021-04-21 15:05:23
-tags: Rev
-categories: TECHNOLOGY
-mathjax: true
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 

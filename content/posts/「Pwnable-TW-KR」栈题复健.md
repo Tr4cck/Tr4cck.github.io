@@ -1,10 +1,10 @@
 ---
 title: 「Pwnable」Stack based BOF challenge I did recently
-toc: true
-mathjax: true
 date: 2022-09-06 19:45:54
-tags: Pwnable
-categories: TECHNOLOGY
+tags:
+- Pwnable
+categories:
+- TECHNOLOGY
 ---
 
 ## Pwnable.TW - start

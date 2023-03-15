@@ -1,10 +1,10 @@
 ---
 title: 「Rootme-Cracking」做题平台练习记录
-mathjax: true
-toc: true
 date: 2022-01-13 23:34:37
-tags: Rev
-categories: TECHNOLOGY
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 

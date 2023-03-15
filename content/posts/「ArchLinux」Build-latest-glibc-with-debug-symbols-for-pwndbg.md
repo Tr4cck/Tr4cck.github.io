@@ -1,10 +1,10 @@
 ---
 title: 「ArchLinux」Build the latest glibc with debug symbols for pwndbg
-toc: true
-mathjax: true
 date: 2022-09-14 13:51:16
-tags: Linux
-categories: TECHNOLOGY
+tags:
+- Linux
+categories:
+- TECHNOLOGY
 ---
 
 ## Background

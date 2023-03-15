@@ -1,10 +1,10 @@
 ---
 title: 「SUSCTF2022」Rev 部分题解
-mathjax: true
-toc: true
 date: 2022-02-27 20:46:31
-tags: Rev
-categories: TECHNOLOGY
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 ## DigitalCircuits

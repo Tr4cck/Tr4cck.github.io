@@ -1,10 +1,10 @@
 ---
 title: 「HITCONCTF2021」Rev复现
 date: 2022-04-10 12:45:16
-tags: Rev
-mathjax: true
-toc: true
-categories: TECHNOLOGY
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 # cclemon

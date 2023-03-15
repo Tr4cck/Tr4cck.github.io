@@ -1,10 +1,10 @@
 ---
 title: 「starCTF2021」Rev | wherekey 本地 socket 通信
 date: 2021-06-13 08:17:36
-tags: Rev
-categories: TECHNOLOGY
-mathjax: true
-toc: true
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 

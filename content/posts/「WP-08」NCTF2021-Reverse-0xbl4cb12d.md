@@ -1,10 +1,10 @@
 ---
 title: 「NCTF2021」Rev 部分题解 by 0xbl4cb12d
-mathjax: true
-toc: true
 date: 2021-11-29 23:25:13
-tags: Rev
-categories: TECHNOLOGY
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 

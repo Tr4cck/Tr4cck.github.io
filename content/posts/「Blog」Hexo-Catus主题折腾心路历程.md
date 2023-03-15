@@ -1,10 +1,10 @@
 ---
 title: 「Blog」Hexo-Catus主题折腾心路历程
 date: 2022-04-12 13:50:54
-tags: Frontend
-categories: TECHNOLOGY
-toc: true
-mathjax: true
+tags:
+- Frontend
+categories:
+- TECHNOLOGY
 ---
 
 ## TL;DR

@@ -1,10 +1,10 @@
 ---
 title: 「C#」学习随笔
 date: 2021-08-19 23:06:35
-tags: CS
-categories: TECHNOLOGY
-mathjax: true
-toc: true
+tags:
+- CS
+categories:
+- TECHNOLOGY
 ---
 
 

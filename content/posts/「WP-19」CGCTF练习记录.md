@@ -1,10 +1,10 @@
 ---
 title: 「CGCTF」部分题练习记录
 date: 2022-03-18 19:47:33
-tags: Rev
-mathjax: true
-toc: true
-categories: TECHNOLOGY
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 ## WxyVM1

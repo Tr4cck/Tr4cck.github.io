@@ -1,10 +1,10 @@
 ---
 title: 「Lambda-Calculus」学习随笔
 date: 2021-06-19 23:06:35
-tags: CS
-categories: TECHNOLOGY
-mathjax: true
-toc: true
+tags:
+- CS
+categories:
+- TECHNOLOGY
 ---
 
 ## About Lambda Calculus

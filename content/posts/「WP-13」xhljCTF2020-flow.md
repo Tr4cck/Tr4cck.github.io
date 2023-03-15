@@ -1,12 +1,11 @@
 ---
 title: 「xhljCTF202」Rev | flow 利用 SROP 隐藏控制流
-mathjax: true
-toc: true
 date: 2022-01-13 23:34:16
+categories:
+- TECHNOLOGY
 tags:
-	- Pwnable
-	- Rev
-categories: TECHNOLOGY
+- Pwnable
+- Rev
 ---
 
 看帖看到，遗憾找不到附件，只能虚空复现一下

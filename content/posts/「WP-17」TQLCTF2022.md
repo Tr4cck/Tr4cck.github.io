@@ -1,10 +1,10 @@
 ---
 title: 「TQLCTF2022」Rev | Tales-of-Arrow 利用 asciicode 最高比特为 0 进行序列排除
 date: 2022-03-02 16:18:42
-tags: Rev
-mathjax: true
-toc: true
-categories: TECHNOLOGY
+tags:
+- Rev
+categories:
+- TECHNOLOGY
 ---
 
 get_lit 返回 i + 1 / - i - 1 然后根据后面的去还原那个 01 序列，给了输入长度是 17 个 ascii 字符。数据里面有干扰
