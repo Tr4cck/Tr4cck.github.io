@@ -1,9 +1,12 @@
 baseURL = 'http://tr4cck.github.io'
-languageCode = "zh-CN"
-theme = 'DoIt'
-languageName = "简体中文"
-hasCJKLanguage = true
 defaultContentLanguage = "zh-cn"
+languageCode = "zh-CN"
+hasCJKLanguage = true
+
+# 网站名称
+title = "Track' s Blog"
+
+theme = 'DoIt'
 
 [menu]
   [[menu.main]]
@@ -34,15 +37,31 @@ defaultContentLanguage = "zh-cn"
     title = ""
     weight = 3
 
+  [[menu.main]]
+    identifier = "about"
+    pre = "<span style=\"color: #0078D6\">&gt;&gt;</span>"
+    post = ""
+    name = "我是"
+    url = "/about/"
+    title = ""
+    weight = 3
+
+  [[menu.main]]
+    identifier = "friends"
+    pre = "<span style=\"color: #0078D6\">&gt;&gt;</span>"
+    post = ""
+    name = "友链"
+    url = "/firends/"
+    title = ""
+    weight = 3
+
 [params]
   #  DoIt 主题版本
   version = "0.3.X"
-  # 网站名称
-  title = "Tr4ccK"
   # 网站描述
   description = "All for me is known to me."
   # 网站关键词
-  keywords = ["Theme", "Hugo"]
+  keywords = ["Track", "Hugo"]
   #  网站默认主题样式 ("light", "dark", "black", "auto")
   defaultTheme = "auto"
   # 公共 git 仓库路径, 仅在 enableGitInfo 设为 true 时有效
@@ -51,9 +70,9 @@ defaultContentLanguage = "zh-cn"
   # ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
   #  日期格式
-  dateFormat = "2006-01-02"
+  dateFormat = "2023-03-14"
   # 网站图片, 用于 Open Graph 和 Twitter Cards
-  images = ["/logo.png"]
+  images = [""]
   #  开启 PWA 支持
   enablePWA = false
   #  版权信息
@@ -116,12 +135,11 @@ defaultContentLanguage = "zh-cn"
     #  页面头部导航栏标题配置
     [params.header.title]
       # LOGO 的 URL
-      # logo = "<span style=\"color: #0078D6\">&sharp;</span>"
       logo = ""
       # 标题名称
-      name = "Track's Blog"
+      name = "Track on You"
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
-      pre = ""
+      pre = "<span style=\"color: #0078D6\">&sharp; </span>"
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
       #  是否为标题显示打字机动画
@@ -135,8 +153,7 @@ defaultContentLanguage = "zh-cn"
     #  是否显示 Hugo 和主题信息
     hugo = true
     #  托管服务信息 (支持 HTML 格式)
-    # <a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a>
-    hostedOn = '' 
+    hostedOn = '<a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a>'
     #  是否显示版权信息
     copyright = true
     #  是否显示作者
@@ -184,7 +201,7 @@ defaultContentLanguage = "zh-cn"
       # 主页显示头像的 URL
       # 将你的头像文件放置于 static 或者 assets 目录下
       # 文件路径是相对于 static 或者 assets 目录的
-      avatarURL = "/images/1649821170935.jpeg"
+      avatarURL = "/images/avatar.jpeg"
       #  主页显示的网站标题 (支持 HTML 格式)
       title = ""
       # 主页显示的网站副标题
@@ -206,7 +223,7 @@ defaultContentLanguage = "zh-cn"
 
   # 作者的社交信息设置
   [params.social]
-    GitHub = "xxxx"
+    GitHub = "Tr4cck"
     Linkedin = ""
     Twitter = ""
     Instagram = ""
@@ -273,10 +290,10 @@ defaultContentLanguage = "zh-cn"
     Ko-Fi = ""
     BuyMeACoffee = ""
     Linktree = ""
-    QQ = ""
+    QQ = "1415223291"
     QQGroup = ""
     Email = "trackonyou@outlook.com"
-    RSS = true # 
+    RSS = true
 
   #  文章页面配置
   [params.page]
@@ -571,7 +588,7 @@ defaultContentLanguage = "zh-cn"
     # 光标的闪烁速度 (单位是毫秒)
     cursorSpeed = 1000
     # 光标的字符 (支持 HTML 格式)
-    cursorChar = "|"
+    cursorChar = "_"
     # 打字结束之后光标的持续时间 (单位是毫秒, "-1" 代表无限大)
     duration = -1
 
@@ -681,7 +698,7 @@ defaultContentLanguage = "zh-cn"
   name = "Tr4ccK"
   email = "trackonyou@outlook.com"
   link = "https://blog.trackonyou.top"
-  avatar = ""
+  avatar = "/images/avatar.jpeg"
   gravatarEmail = ""
 
 # 网站地图配置
@@ -729,4 +746,3 @@ defaultContentLanguage = "zh-cn"
 [taxonomies]
 category = "categories"
 tag = "tags"
-about="about"
