@@ -7,7 +7,6 @@ categories:
 - TECHNOLOGY
 ---
 
-
 ## ch1
 
 ```cpp
@@ -31,11 +30,11 @@ int __cdecl main(int argc, const char **argv, const char **envp)
 
 ## ch2
 
-printf 没有给出参数，看汇编即可发现 password
+printf 没有给出参数, 看汇编即可发现 password
 
 ## ch3
 
-找字符串发现 main 函数，发现明文比较
+找字符串发现 main 函数, 发现明文比较
 
 ## ch4
 
@@ -44,9 +43,6 @@ key = [0x18, 0xD6, 0x15, 0xCA, 0xFA, 0x77]
 magic = [0x50, 0xB3, 0x67, 0xAF, 0xA5, 0x0E, 0x77, 0xA3, 0x4A, 0xA2, 0x9B, 0x01, 0x7D, 0x89, 0x61, 0xA5, 0xA5, 0x02, 0x76, 0xB2, 0x70, 0xB8, 0x89, 0x03, 0x79, 0xB8, 0x71, 0x95, 0x9B, 0x28, 0x74, 0xBF, 0x61, 0xBE, 0x96, 0x12, 0x47, 0x95, 0x3E, 0xE1, 0xA5, 0x04, 0x6C, 0xA3, 0x73, 0xAC, 0x89]
 print(bytes([magic[i] ^ key[i%len(key)] for i in range(len(magic))]))
 ```
-
-
-
 
 ## ch5
 
@@ -93,7 +89,7 @@ puts("crack-me for Root-me by s4r");
   }
 ```
 
-结合汇编大概是一个先填充，然后按位比较的过程
+结合汇编大概是一个先填充, 然后按位比较的过程
 
 ## ch7
 
@@ -106,11 +102,9 @@ print(bytes([xx[i] ^ key[i%len(key)] for i in range(len(xx))]))
 # b'ImLovingGoLand'
 ```
 
-
-
 ## ch8
 
-是一个输出 flag 的题应该可以通过 gdb 直接调出来。下面是输出逻辑：
+是一个输出 flag 的题应该可以通过 gdb 直接调出来. 下面是输出逻辑:
 
 ```c
 void __noreturn blowfish()
@@ -140,11 +134,11 @@ void __noreturn blowfish()
 
 ![](https://s2.loli.net/2022/01/14/GbFiuP8CDoSnad2.png)
 
-file 完然后运行一下，发现就是一个口令验证器
+file 完然后运行一下, 发现就是一个口令验证器:
 
 ![](https://s2.loli.net/2022/01/14/PmZNFytAeQCk2wG.png)
 
-一处简单的花指令，patch 之后是一个明文比较
+一处简单的花指令, patch 之后是一个明文比较
 
 ## ch10
 
@@ -164,18 +158,18 @@ var jsEventHandler = function jsEventHandler(event) {
 };
 ```
 
-发现输入之后触发这个地方的 js 。惭愧，我不是很懂 js 相关技术，好在题目提示了 wasm 之后去分析wasm。先`gcc index.c -c -o index` 编译。通过字符串可以发现有口令检测相关函数。大概读了一下发现先在初始化了一个 md5 数据，然后在 check_password 处进行 md5 的比较，我是直接查到了。
+发现输入之后触发这个地方的 js. 惭愧, 我不是很懂 js 相关技术, 好在题目提示了 wasm 之后去分析wasm. 先`gcc index.c -c -o index` 编译. 通过字符串可以发现有口令检测相关函数. 大概读了一下发现先在初始化了一个 md5 数据, 然后在 check_password 处进行 md5 的比较, 直接查到 md5.
 
 ## ch11
 
-对于 arm 还有不少要去了解的，好在现在的反编译工具已经特别方便，但这其实也是阻碍进步的一把双刃剑。
+对于 arm 还有不少要去了解的, 好在现在的反编译工具已经特别方便, 但这其实也是阻碍进步的一把双刃剑.
 
-题目是六个方程，刚好能解出来。
+题目是六个方程, 刚好能解出来.
 
 ## ch12
-> 一开始没看到题目给了用户名，迷惑了好久
 
-一个比较简单的 keygen 的题目，猜测应该是出题人用汇编手写出来的，先从 `byte_600260` 出读 32 个字节，再从 `.m.key` 中连续着读 32 个字节，通过下面的 `check` 进行比对：
+一个比较简单的 keygen 的题目, 猜测应该是出题人用汇编手写出来的, 先从 `byte_600260` 出读 32 个字节, 再从 `.m.key` 中连续着读 32 个字节, 通过下面的 `check` 进行比对:
+
 ```c
 __int64 __fastcall sub_400146(__int64 a1, __int64 a2)
 {
@@ -192,7 +186,9 @@ __int64 __fastcall sub_400146(__int64 a1, __int64 a2)
   }
   return 0LL;
 ```
-来个 keygen：
+
+来个 keygen:
+
 ```python
 import hashlib
 name = b'root-me.org'
@@ -201,7 +197,9 @@ print(hashlib.sha256(passwd).hexdigest())
 ```
 
 ## ch13
-rider 里面看一下，下面是生成字符串：
+
+rider 里面看一下, 下面是生成字符串：
+
 ```c#
 public static string mqsldfksdfgljk(string data, string key)
 {
@@ -218,7 +216,9 @@ public static string mqsldfksdfgljk(string data, string key)
   return new string(chArray);
 }
 ```
-下面是调用，输入内容与上面生成的字符串比较：
+
+下面是调用, 输入内容与上面生成的字符串比较:
+
 ```c#
 private void Button1_Click(object sender, EventArgs e)
 {
@@ -237,7 +237,9 @@ private void Button1_Click(object sender, EventArgs e)
   }
 }
 ```
-太久不写 C# 了，所以就用 python 模拟一个：
+
+太久不写 C# 了, 所以就用 python 模拟一个:
+
 ```python
 import base64
 key = b'I_Gu3$$_Y0u_Ju5t_Fl4gg3d_!!!'
@@ -245,15 +247,16 @@ data = base64.b64decode('B29mVBJ7cDdtRAYAHh0GKw1yX1g4IV9QOA==')
 print(bytes([data[i] ^ key[i % len(key)] for i in range(len(data))]))
 ```
 
-
 ## ch14
-rider 里面看一下，只有一个 Program 类，猜测是个纯逆算法的题：
-```c#
 
-```
+rider 里面看一下, 只有一个 Program 类, 猜测是个纯逆算法的题.
+
+
 
 ## ch15
-file 发现为 python3.1 的 bytecode，直接 pycdc 可以看到源码：
+
+file 发现为 python3.1 的 bytecode, 直接 pycdc 可以看到源码:
+
 ```python
 # Source Generated with Decompyle++
 # File: ch19.pyc (Python 3.1)
@@ -290,7 +293,9 @@ if __name__ == '__main__':
     else:
         print('Try Again !')
 ```
-简单逆一下就行：
+
+简单逆一下就行:
+
 ```python
 SOLUCE = [57, 73, 79, 16, 18, 26, 74, 50, 13, 38, 13, 79, 86, 86, 87]
 KEY = b'I know, you love decrypting Byte Code !'
@@ -303,7 +308,8 @@ for x in SOLUCE:
 print(bytes(flag))
 ```
 
-## ch16 | ALMOST
+## ch16
+
 ```python
 from malduck import *
 
@@ -313,21 +319,23 @@ print(key)
 ```
 
 ## ch17 | LUA
+
 ```
 Reverse/Root-Me/ch17 
 ➜ file ch45.out 
 ch45.out: Lua bytecode, version 5.1
 ```
 
-
 ## ch18 | Mac
 
 ## ch19
-实现了一个矩阵一样的数据结构，里面依次往里填充 `ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_
-` 然后进行比较
+
+实现了一个矩阵一样的数据结构, 里面依次往里填充 `ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_` 然后进行比较.
 
 ## ch20
-开局一个 ptrace 检测反调，password 在运行时以命令行的形式传入。输入的每一个字符约束为 `ch & 8 == 0`，随便模拟一下生成目标字符串：
+
+开局一个 ptrace 检测反调, password 在运行时以命令行的形式传入. 输入的每一个字符约束为 `ch & 8 == 0`, 随便模拟一下生成目标字符串:
+
 ```c
 #include <stdio.h>
 
@@ -398,10 +406,12 @@ int main() {
 ```
 
 ## ch21
-有一万种做法的样子...可以改跳转，也可以通过溢出覆盖函数指针的值让它指向 asm 函数
+
+可以改跳转, 也可以通过溢出覆盖函数指针的值让它指向 asm 函数.
 
 ## ch22
-边调边改寄存器，即对比结果，然后在内存中把程序事先有的正确 password 拿出来，往里面一输：
+
+边调边改寄存器, 即对比结果, 然后在内存中把程序事先有的正确 password 拿出来, 往里面一输:
 
 ![](https://s3.bmp.ovh/imgs/2022/01/1cd496388a34ce38.png)
 

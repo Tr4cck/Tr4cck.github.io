@@ -13,7 +13,7 @@ categories:
 
 #### Topic Idea
 
-考虑到整体难度偏高，就想出一道签到题平衡一下难度，同时又要让选手在短时间内学到一些东西。结合之前在HITCON2021遇到过 lemon lang 的题，前段时间也稍微研究了一下它的解释器源码，于是就出了这一道运行就送 flag 的题给师傅们随便玩玩。
+考虑到整体难度偏高, 就想出一道签到题平衡一下难度, 同时又要让选手在短时间内学到一些东西. 结合之前在HITCON2021遇到过 lemon lang 的题, 前段时间也稍微研究了一下它的解释器源码, 于是就出了这一道运行就送 flag 的题给师傅们随便玩玩.
 
 #### Source Code
 
@@ -58,7 +58,7 @@ print("[+] Done!");
 
 #### Bytecode form semantics
 
-import source
+import source:
 
 ```
 0: const 25 ; <module 'main'> 
@@ -69,21 +69,21 @@ import source
 24: module 6 590
 ```
 
-store global constant
+store global constant:
 
 ```
 30: const 27 ; 221492336 
 35: store 0 0
 ```
 
-function definition
+function definition:
 
 ```
 38: const 28 ; next 
 43: define 0 0 0 0 80
 ```
 
-class definition
+class definition:
 
 ```
 83: const 32 ; n 
@@ -101,7 +101,7 @@ class definition
 495: store 0 2
 ```
 
-set array
+set array:
 
 ```
 102: array 0
@@ -110,7 +110,7 @@ set array
 113: setattr
 ```
 
-loop and condition statement
+loop and condition statement:
 
 ```
 313: const 72 ; 0 
@@ -121,7 +121,7 @@ loop and condition statement
 328: jz 371
 ```
 
-function call
+function call:
 
 ```
 333: self
@@ -135,7 +135,7 @@ function call
 353: pop
 ```
 
-bit xor
+bit xor:
 
 ```
 441: load 0 0
@@ -147,7 +147,7 @@ bit xor
 455: bxor
 ```
 
-用 lemon lang 复现逻辑运行即可
+用 lemon lang 复现逻辑运行即可.
 
 #### Q & A
 
@@ -159,13 +159,13 @@ bit xor
 
 #### Topic Idea
 
-同样来自于前一段时间的学习，结合最近国内比赛比较少涉及到 wasm 相关的逆向，就想到加入一个简化过的 chacha20 让大家对 wasm 有一个初步的认识。
+同样来自于前一段时间的学习, 结合最近国内比赛比较少涉及到 wasm 相关的逆向, 就想到加入一个简化过的 chacha20 让大家对 wasm 有一个初步的认识.
 
 #### Source Code
 
 ##### HTML Part
 
-核心标签：
+核心标签:
 
 ```html
 <input class="form--block-text"
@@ -299,9 +299,9 @@ all:
 > 
 > [Execution — WebAssembly 2.0](https://webassembly.github.io/spec/core/exec/index.html)
 
-使用 wasm2c 将 wasm 转译为 C ，发现可读性依然很差。此时经典的思路是把 c 编译成 relocatable file，再利用反编译工具帮我们去掉一些语义上的抽象层，从而更好地分析。
+使用 wasm2c 将 wasm 转译为 C, 发现可读性依然很差. 此时经典的思路是把 c 编译成 relocatable file, 再利用反编译工具帮我们去掉一些语义上的抽象层, 从而更好地分析.
 
-不同优化会导致代码结构的变化，自己尝试一下便知。下面其实就没有什么好说的了，wasm 是典型的栈虚拟机，慢慢分析就好了，也不复杂，我也没做什么代码混淆。
+不同优化会导致代码结构的变化, 自己尝试一下便知. 下面其实就没有什么好说的了, wasm 是典型的栈虚拟机, 慢慢分析就好了, 也不复杂, 我也没做什么代码混淆.
 
 ##### Check Function
 
@@ -435,7 +435,7 @@ __int64 __fastcall w2c_check(unsigned int flag_arr, unsigned int key_arr, unsign
 
 ##### Quarou Function
 
-逻辑重叠比较大，xor + 8-bit ROL
+逻辑重叠比较大, xor + 8-bit ROL
 
 ```c
 _DWORD *__fastcall w2c_qua_rou(unsigned int new_space, unsigned int a, unsigned int b, unsigned int c, unsigned int d)
@@ -521,7 +521,7 @@ _DWORD *__fastcall w2c_qua_rou(unsigned int new_space, unsigned int a, unsigned 
 
 ##### Keygen
 
-其实发现 key 只是做一个初始状态的填充，没有实际作用，即一个没有密钥的 chacha20。源码插桩记录每次 state 的变化，依次取后 8-byte 拼接即可：
+其实发现 key 只是做一个初始状态的填充, 没有实际作用, 即一个没有密钥的 chacha20. 源码插桩记录每次 state 的变化, 依次取后 8-byte 拼接即可:
 
 ```python
 key = b'D33.B4T0'
@@ -560,5 +560,3 @@ for j in range(0, len(enc), 16):
 
     print(bytes(state))
 ```
-
-# 

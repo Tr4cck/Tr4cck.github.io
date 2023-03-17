@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
 ### Warm up
 
-init 函数指针中存着初始化 s1 的过程，照着跑一遍得到 s1 , 然后异或密文就没了
+init 函数指针中存着初始化 s1 的过程, 照着跑一遍得到 s1, 然后异或密文:
 
 ```python
 s1 = [ord(ch) for ch in list('qasxcytgsasxcvrefghnrfghnjedfgbhn')]
@@ -93,12 +93,10 @@ print(bytes([x ^ y for x, y in zip(s1_proced, s2)]))
 
 ### elf
 
-修 4 个字节。其中 3 个为 elf 文件的 `magic number`，还有一个是第 17 个字节——因为该文件有 PHT 表，所以肯定不是可重定位文件，改成可执行文件。然后拖进 IDA，发现算了一下 0 的 MD5，取成一个 8*16 的 byte 数组，然后异或就没了。
+修 4 个字节. 其中 3 个为 elf 文件的 `magic number`, 还有一个是第 17 个字节——因为该文件有 PHT 表, 所以肯定不是可重定位文件, 改成可执行文件. 然后拖进 IDA, 发现算了一下 0 的 MD5, 取成一个 8*16 的 byte 数组然后异或.
 
 ## MTCTF 2021
 
 ### Random
 
-random-key 生成过程中使用触发除 0 异常使控制流改变，可以静态分析出大概的触发链是啥。好在出题人没在里面加反调试，于是可以在 IDA 调试过程中手动改变 EIP 的值（未曾设想的道路），使程序往预期的方向走，然后就把 key 调出来了，然后就没了。
-
-![](https://md.innerspace.top/uploads/upload_f7f67072f4097a64753d2a28e7e2aedf.png)
+random-key 生成过程中使用触发除 0 异常使控制流改变, 可以静态分析出大概的触发链是啥. 好在出题人没在里面加反调试, 于是可以在 IDA 调试过程中手动改变 EIP 的值 (未曾设想的道路), 使程序往预期的方向走, 然后就把 key 调出来了, 然后就没了.

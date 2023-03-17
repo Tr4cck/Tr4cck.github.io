@@ -7,15 +7,14 @@ categories:
 - TECHNOLOGY
 ---
 
-
 ## Step One
 
-- ELF64位程序，无壳，无符号表
-- 运行提示输入key，随便输点东西，直接退出
+- ELF 64 位程序, 无壳, 无符号表
+- 运行提示输入 key, 随便输点东西, 直接退出
 
 ## Step Two
 
-拖进IDA找start函数，第一个参数就是main函数
+拖进 IDA 找 start 函数, 第一个参数就是 main 函数:
 
 ```c
 // positive sp value has been detected, the output may be wrong!
@@ -40,7 +39,7 @@ void __fastcall __noreturn start(__int64 a1, __int64 a2, int a3)
 }
 ```
 
-对main函数中的函数名和变量进行重命名，通过它们调用的一些系统调用可以做到这一点，我没处理完，不过大概长这样
+对 main 函数中的函数名和变量进行重命名, 通过它们调用的一些系统调用可以做到这一点, 我没处理完, 不过大概长这样:
 
 ```c
 // local variable allocation has failed, the output may be wrong!
@@ -87,7 +86,7 @@ int __cdecl __noreturn main(int argc, const char **argv, const char **envp)
 }
 ```
 
-容易找到`sub_40223C`，再同样进行重命名如下
+容易找到 `sub_40223C`, 再同样进行重命名如下:
 
 ```c
 // local variable allocation has failed, the output may be wrong!
@@ -125,9 +124,7 @@ unsigned __int64 sub_40223C()
 }
 ```
 
-到这里，结合hint，猜测是用户通过tty输入内容，并通过socket发送至本地，再判断对错
-
-容易发现`sub_4022DE`是接收到输入后的下一步操作
+到这里, 结合 hint, 猜测是用户通过 tty 输入内容, 并通过 socket 发送至本地, 再判断对错. 容易发现 `sub_4022DE` 是接收到输入后的下一步操作:
 
 ```c
 unsigned __int64 __fastcall sub_4022DE(char *a1)
@@ -173,9 +170,9 @@ unsigned __int64 __fastcall sub_4022DE(char *a1)
 }
 ```
 
-**注：这里有一个mod257，待会儿反解的时候是需要考虑到的**
+**注**: 这里有一个 mod257, 待会儿反解的时候是需要考虑到的.
 
-俩加密函数内容如下
+俩加密函数内容如下:
 
 ```c
 __int64 __fastcall LayerOne(__int64 a1, int a2)
@@ -194,7 +191,7 @@ __int64 __fastcall LayerOne(__int64 a1, int a2)
 }
 ```
 
-> 这个是把fake flag分成五组，取每一组的第一个字符，放在a1中
+> 这个是把 fake flag 分成五组, 取每一组的第一个字符, 放在 a1 中.
 
 ```c
 // a3 = 5
@@ -212,7 +209,7 @@ __int64 __fastcall LayerTwo(char *a1, char *a2, int a3)
 
 > 把两个数组的对应位置相乘再相加
 
-结合前面`flag`是一列一列取，而`inp`是一行一行取，还有一个`LayerTwo`是相乘，容易想到这就是一个矩阵乘法。有了这个认知后，跟进`proc_then`进行查看
+结合前面 `flag` 是一列一列取, 而 `inp` 是一行一行取, 还有一个 `LayerTwo` 是相乘, 容易想到这就是一个矩阵乘法. 有了这个认知后, 跟进 `proc_then` 进行查看:
 
 ```c
 unsigned __int64 __fastcall proc_then()
@@ -238,13 +235,11 @@ unsigned __int64 __fastcall proc_then()
 }
 ```
 
-发现`aim`是乘完的结果，跟进`sub_40FF90`，发现他是`syscall`函数，结合系统调用号3，这里应该是close掉socket连接
-
-~~然后后面就不想分析了~~
+发现 `aim` 是乘完的结果, 跟进 `sub_40FF90`, 发现他是 `syscall` 函数, 结合系统调用号3, 这里应该是close掉socket连接.
 
 ## Step Three
 
-写一下解密脚本，需要一点线性代数知识
+写一下解密脚本, 需要一点线性代数知识:
 
 $$
 AB=X\\
@@ -255,7 +250,7 @@ B代表fake\quad flag生成的矩阵，因为取的是列\\
 
 $$
 
-使用sage求解（用`numpy`、`matlab`都可以。~~甚至手算也可以~~）
+使用 sage 求解 (用 `numpy`、`matlab` 都可以):
 
 ```sage
 sage: x = Matrix(GF(257), [[0x38,0x6D,0x4B,0x4B,0xB9],
@@ -301,6 +296,4 @@ O
 H
 ```
 
-得到`flag{Ha23_f0n_9nd_G0od_luck_OH}`
-
-## FIN
+得到 `flag{Ha23_f0n_9nd_G0od_luck_OH}`

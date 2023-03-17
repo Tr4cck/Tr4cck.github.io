@@ -21,7 +21,7 @@ categories:
 
 ### web1 easy-java | kyr
 
-不会java，枯嘞
+不会 java, 枯嘞.
 
 ```java
 New java.io.BufferedReader(New java.io.FileReader("/flag")).readLine()
@@ -31,9 +31,9 @@ New java.io.BufferedReader(New java.io.FileReader("/flag")).readLine()
 
 ### 抓猫猫 | kyr
 
->  hint：kawaii neko chan says that : what doesn't kill u makes u stronger
+>  hint：kawaii neko chan says that : what doesn't kill u makes u stronger.
 
-so what u should do is follow what she said , 然后同时连俩 bot 让他们对线，看看谁更腻害
+so what u should do is follow what she said, 然后同时连俩 bot 让他们对线, 看看谁更腻害.
 
 ### 好白给的签到题 | kyr
 
@@ -60,7 +60,7 @@ while 1:
 
 ### 土 块 | kyr
 
-把题目中的`game`函数拿出来研究，如下
+把题目中的 `game` 函数拿出来研究, 如下:
 
 ```python
 from tukuai import game
@@ -84,7 +84,7 @@ display(qc.draw(output='mpl'))
 display(plot_histogram(result.get_counts(qc)))
 ```
 
-画出几个图出来看看，只要绘出 bot 的输出 = my coin 的量子电路即可，如下
+画出几个图出来看看, 只要绘出 bot 的输出 = my coin 的量子电路即可, 如下:
 
 ```
        ┌──────────────────────┐┌───┐        
@@ -100,23 +100,24 @@ q12_1: ┤1                     ├──■──┤ X ├┤M├
 
 ### 0oooops | track
 
-> 这道题涉及到windows的异常处理机制SEH
+> 这道题涉及到 windows 的异常处理机制 SEH
 
 #### SEH
 
-这个题不涉及太多SEH的底层，大概有以下几个点需要了解的：
+这个题不涉及太多 SEH的 底层, 大概有以下几个点需要了解的:
 
-- SEH实际包含两个主要功能：结束处理（termination handling）和异常处理（exception handling)
-- 每当你建立一个try块，它必须跟随一个 `__finally`块或一个`__except`块。
-- 一个`try`块之后不能既有finally块又有except块。但可以在try-except块中嵌套try-finally块，反过来 也可以。
-- `__try`,`__finally`关键字用来标出结束处理程序两段代码的轮廓
-  不管保护体（try块） 是如何退出的。不论你在保护体中使用return，还是goto，或者是longjump，结束处理程序 （finally块）都将被调用。
-- 在try使用`__leave`关键字会引起跳转到try块的结尾
-- 给`ms_exc.registration.TryLevel`赋值是用于处理嵌套的try
+- SEH 实际包含两个主要功能: 结束处理 (termination handling) 和异常处理 (exception handling)
+- 每当你建立一个 try 块, 它必须跟随一个 `__finally` 块或一个 `__except` 块
+- 一个 `try` 块之后不能既有 finally 块又有 except 块. 但可以在try-except块中嵌套try-finally块, 反过来也可以
+- `__try`, `__finally` 关键字用来标出结束处理程序两段代码的轮廓
+  
+  不管 try 块是如何退出的. 不论你在保护体中使用 return, 还是 goto, 或者是 longjump, 结束处理程序 (finally 块) 都将被调用
+- 在 try 使用 `__leave` 关键字会引起跳转到 try 块的结尾
+- 给 `ms_exc.registration.TryLevel` 赋值是用于处理嵌套的 try
 
 > 学习自HAPPY师傅的博客
 
-然后看看题，main函数直接看发现异常，于是看汇编，定位到伪代码异常处。IDA的分析结果如下
+然后看看题, main函数直接看发现异常, 于是看汇编, 定位到伪代码异常处. IDA的分析结果如下:
 
 ```assembly
 .text:00412330 loc_412330:                             ; CODE XREF: _main_0+15C↑j
@@ -130,9 +131,7 @@ q12_1: ┤1                     ├──■──┤ X ├┤M├
 .text:0041234B                 div     edx
 ```
 
-
-
-发现非常明显的**除零异常**还有**eax清零后却试图访问它的内存**，以及SEH结构。不需要对它进行任何patch，因为必须让程序捕获到这个异常，才会去执行`__except_filter`，也就是
+发现非常明显的**除零异常**还有 **eax 清零后却试图访问它的内存**, 以及SEH结构. 不需要对它进行任何 patch, 因为必须让程序捕获到这个异常, 才会去执行 `__except_filter`, 也就是:
 
 ```assembly
 text:00412356 loc_412356:                             ; DATA XREF: .rdata:stru_41A238↓o
@@ -150,9 +149,7 @@ text:00412356 loc_412356:                             ; DATA XREF: .rdata:stru_4
 .text:00412376                 retn
 ```
 
-
-
-稍微看一看`sub_411131`函数的内部逻辑
+稍微看一看 `sub_411131` 函数的内部逻辑
 
 ```c
 int __cdecl sub_411DD0(int a1, _EXCEPTION_POINTERS *a2)
@@ -179,7 +176,7 @@ int __cdecl sub_411DD0(int a1, _EXCEPTION_POINTERS *a2)
 }
 ```
 
-可以发现将运算结果存在v5中，但是只有奇数位，不妨试着还原一下（伪代码）
+可以发现将运算结果存在 v5 中, 但是只有奇数位, 不妨试着还原一下:
 
 ```c
 char magic_1[] = "!V -}VG-bp}m-nG!b|ra GyGE|Drp D";
@@ -189,25 +186,23 @@ char magic_1[] = "!V -}VG-bp}m-nG!b|ra GyGE|Drp D";
     }
 ```
 
-并且如果满足条件，将会改变eip的值，将进程从异常中跳出来，不妨看看跳到了哪里
+并且如果满足条件, 将会改变 eip 的值, 将进程从异常中跳出来, 不妨看看跳到了哪里:
 
 ```python
 print(hex(0x41234B + 63))
 ```
 
-那里是congratulations的提示信息，但很明显我们还没拿到完整的flag
+那里是 congratulations 的提示信息，但很明显我们还没拿到完整的 flag.
 
 #### VEH && TLS
 
-查看IDA的Exports窗口可以看到TlsCallback_0_0
+查看 IDA 的 Exports 窗口可以看到 TlsCallback_0_0
 
-> TLS，Thread Local Storage 线程局部存储，TLS回调函数的调用运行要先于PE代码执行，该特性使它可以作为一种反调试技术使用。
->
-> TLS是各线程的独立的数据存储空间，使用TLS技术可在线程内部独立使用或修改进程的全局数据或静态数据。
+> TLS (Thread Local Storage) 线程局部存储, TLS 回调函数的调用运行要先于PE代码执行, 该特性使它可以作为一种反调试技术使用.
+> 
+> TLS 是各线程的独立的数据存储空间, 使用 TLS 技术可在线程内部独立使用或修改进程的全局数据或静态数据.
 
-
-
-return了一个奇怪的函数
+return 了一个奇怪的函数
 
 ```c
 PVOID __stdcall TlsCallback_0_0(int a1, int a2, int a3)
@@ -276,29 +271,29 @@ int __stdcall sub_411BD0(_EXCEPTION_POINTERS *a1)
 }
 ```
 
-（Handler显然是第二段解密），因为我实在是太菜了，又查了一下这个函数的功能，发现了另一个异常处理机制VEH
+(Handler显然是第二段解密), 因为我实在是太菜了, 又查了一下这个函数的功能, 发现了另一个异常处理机制 VEH
 
-VEH处理流程
+VEH 处理流程:
 
-> - CPU捕获异常信息
-> - 通过KiDispatchException进行分发(EIP=KiUserExceptionDispatcher)
-> - KiUserExceptionDispatcher调用RtIDispatchException.
-> - RtIDispatchException查找VEH处理函数链表并调用相关处理函数
-> - 代码返回到KiUserExceptionDispatcher
-> - 调用ZwContinue再次进入0环(ZwContinue调用NtContinue,主要作用就是恢复 TRAPFRAME然后通过_KiServiceExit返回到3环)。
-> - 线程再次返回3环后,从修正后的位置开始执行
->
+> - CPU 捕获异常信息
+> - 通过 KiDispatchException 进行分发 (EIP = KiUserExceptionDispatcher)
+> - KiUserExceptionDispatcher 调用 RtIDispatchException
+> - RtIDispatchException 查找 VEH 处理函数链表并调用相关处理函数
+> - 代码返回到 KiUserExceptionDispatcher
+> - 调用 ZwContinue 再次进入 0 环 (ZwContinue 调用 NtContinue, 主要作用就是恢复 TRAPFRAME 然后通过 _KiServiceExit 返回到 3 环)
+> - 线程再次返回 3 环后, 从修正后的位置开始执行
+> 
 > 学习自：https://blog.csdn.net/weixin_42052102/article/details/83540134
 
 #### EXP
 
-**这样一来整个流程大致明了了**
+**这样一来整个流程**:
 
-- VEH抓到`0xC0000005`
-- SEH抓到`0xC0000094`
-- 分别的flag在各自的handler里面
+- VEH 抓到 `0xC0000005`
+- SEH 抓到 `0xC0000094`
+- 分别的 flag 在各自的 handler 里面
 
-脚本如下，写的比较乱
+脚本如下, 写的比较乱:
 
 ```c
 #include <stdio.h>
@@ -329,24 +324,24 @@ int main() {
 
 #### Pre_check
 
-这题居然让我电脑报毒了，让我康康！（康不懂，爬了
+这题居然让我电脑报毒了，让我康康! (康不懂，爬了
 
-main函数很混乱，但仔细看能看出一点东西，貌似是创建一个进程，尝试把另一个文件读进来，然后开始执行？还看见一个熟悉的SMC
+main 函数很混乱, 但仔细看能看出一点东西, 貌似是创建一个进程, 尝试把另一个文件读进来, 然后开始执行? 还看见一个熟悉的 SMC.
 
-看了hint之后搜到了傀儡进程，一个最基本傀儡进程的实现如下
+看了 hint 之后搜到了傀儡进程, 一个最基本傀儡进程的实现如下
 
-- CreateProcess创建进程，传入参数CREATE_SUSPENDED使进程挂起
-- NtUnmapViewOfSection清空新进程的内存数据
-- VirtualAllocEx申请新的内存
-- WriteProcessMemory向内存写入payload
-- SetThreadContext设置入口点
-- ResumeThread唤醒进程，执行payload
+- CreateProcess 创建进程, 传入参数 CREATE_SUSPENDED 使进程挂起
+- NtUnmapViewOfSection 清空新进程的内存数据
+- VirtualAllocEx 申请新的内存
+- WriteProcessMemory 向内存写入 payload
+- SetThreadContext 设置入口点
+- ResumeThread 唤醒进程, 执行 payload
 
 #### Dump
 
-emmm直接调的话，由于各种奇怪的反调试，好像没法成功，于是我打开了010editor，直接把傀儡进程在运行前全都异或回去，并dump出来单独分析
+emmm 直接调的话, 由于各种奇怪的反调试, 好像没法成功, 于是我打开了010editor, 直接把傀儡进程在运行前全都异或回去, 并dump出来单独分析.
 
-清晰的main函数
+清晰的 main 函数:
 
 ```c
 int __cdecl main_0(int argc, const char **argv, const char **envp)
@@ -371,7 +366,7 @@ int __cdecl main_0(int argc, const char **argv, const char **envp)
 }
 ```
 
-把`off_40A040`一路往下点，就看到加密逻辑
+把 `off_40A040` 一路往下点，就看到加密逻辑:
 
 ```c
 char __cdecl sub_4014F0(int a1, int a2)
@@ -390,7 +385,7 @@ char __cdecl sub_4014F0(int a1, int a2)
 }
 ```
 
-挺常规的，直接还原？
+挺常规的, 直接还原:
 
 ```python
 magic_1 = [0x5A,0x46,0x59,0x46,0x7B,0x5C,0x43,0x51,0x74,0x63,0x47,0x0E,0x4C,0x68,0x0E,0x4C,0x68,0x43,0x47,0x03,0x68,0x51,0x5E,0x44,0x03,0x68,0x51,0x0E,0x5E,0x50,0x1E,0x4A]
@@ -403,13 +398,11 @@ print(flag)
 # miniLctf{Th1s_1s_th4_fak4_f1ag!}
 ```
 
-我aklsjdaiwjdawijdaiwdjqw（
+我 aklsjdaiwjdawijdaiwdjqw (
 
 #### EXP
 
-又是上一题一样的，在Exports里面有`TlsCallback_0_0`
-
-里面有对于`off_40A040`的指向进行处理，然后就没啥问题了
+又是上一题一样的, 在 Exports 里面有 `TlsCallback_0_0`. 里面有对于 `off_40A040`的 指向进行处理，然后就没啥问题了:
 
 ```python
 magic_1 = [0x5A,0x46,0x59,0x46,0x7B,0x5C,0x43,0x51,0x74,0x63,0x47,0x0E,0x4C,0x68,0x0E,0x4C,0x68,0x43,0x47,0x03,0x68,0x51,0x5E,0x44,0x03,0x68,0x51,0x0E,0x5E,0x50,0x1E,0x4A]
@@ -431,5 +424,4 @@ print(flag)
 
 # FIN
 
-还是太菜了，虽然是校内rk3，但这分数太惨了，加油加油！
-
+还是太菜了, 虽然是校内rank3, 但这分数太惨了, 加油加油!

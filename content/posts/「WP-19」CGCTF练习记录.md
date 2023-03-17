@@ -1,5 +1,5 @@
 ---
-title: 「CGCTF」部分题练习记录
+title: 「CGCTF」部分练习记录
 date: 2022-03-18 19:47:33
 tags:
 - Rev
@@ -9,7 +9,8 @@ categories:
 
 ## WxyVM1
 
-`main`：
+`main`:
+
 ```cpp
 __int64 __fastcall main(int a1, char **a2, char **a3)
 {
@@ -36,7 +37,8 @@ __int64 __fastcall main(int a1, char **a2, char **a3)
 }
 ```
 
-`runVM`：
+`runVM`:
+
 ```cpp
 void __fastcall runVM()
 {
@@ -73,6 +75,7 @@ void __fastcall runVM()
 ```
 
 `exp`:
+
 ```py
 with open('opcode-list.dat', 'rb') as fin:
     data = fin.read()
@@ -99,7 +102,8 @@ with open('pseudocode.dat', 'wb') as fout:
 
 ## WxyVM2
 
-差不多，不同的是中间插入了一些花指令，导致无用操作，全部拿出来处理一下就行：
+差不多, 不同的是中间插入了一些花指令, 导致无用操作, 全部拿出来处理一下就行:
+
 ```py
 lines = open('code.dat', 'r').read().split('\n')[::-1]
 c_header = '''

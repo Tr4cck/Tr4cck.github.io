@@ -9,7 +9,7 @@ categories:
 
 ## pyast64++.rev
 
-题目实现了一个简单的 py 汇编器。将可执行文件拖进 IDA 可以看到非常多成对的 push-pop 操作，并且简单调试一下发现函数调用栈是一种奇怪的结构，即：
+题目实现了一个简单的 py 汇编器. 将可执行文件拖进 IDA 可以看到非常多成对的 push-pop 操作, 并且简单调试一下发现函数调用栈是一种奇怪的结构:
 
 ```
 --------
@@ -23,20 +23,20 @@ categories:
 ........
 ```
 
-猜测出题人没有对编译出来的汇编代码做优化，函数实现、传参以及用于栈保护的 canary 也是一种比较原始的实现。大概有两种思路：
+猜测出题人没有对编译出来的汇编代码做优化, 函数实现、传参以及用于栈保护的 canary 也是一种比较原始的实现. 大概有两种思路:
 
-- 分析附件给出的 py，写汇编器的恢复
-- 直接逆二进制文件，比较耗时但应该可做
+- 分析附件给出的 py, 写汇编器的恢复
+- 直接逆二进制文件, 比较耗时但应该可做
 
-比赛时选择了后者，因为觉得是一种比较好上手的思路，后面可以研究这个汇编器的实现，看看能否恢复出抽象语法树。
+比赛时选择了后者, 因为觉得是一种比较好上手的思路, 后面可以研究这个汇编器的实现, 看看能否恢复出抽象语法树.
 
-程序流程大致如下：
+程序流程大致如下:
 
 ```
 read flag -> check -> compare
 ```
 
-比较套路化的过程，主要是调试的时候由于赋值是通过 push-pop 对，比较耗时耗力。然后由于栈结构的变化，使得 IDA 的 F5 基本是不能细看，推荐主要看汇编，不太明白的地方 F5 参考一下。代码恢复结果：
+比较套路化的过程, 主要是调试的时候由于赋值是通过 push-pop pairs, 比较耗时耗力. 然后由于栈结构的变化, 使得 IDA 的 F5 基本是不能细看, 推荐主要看汇编, 不太明白的地方 F5 参考一下. 代码恢复结果:
 
 ```python
 S = []
@@ -83,7 +83,7 @@ for cnt in range(10):
 enc = [0x4B, 0xCB, 0xBE, 0x7E, 0xB8, 0xA9, 0x1B, 0x4A, 0x23, 0x53, 0x71, 0x41, 0xCF, 0xC1, 0x1B, 0x89, 0x25, 0x62, 0x00, 0x44, 0xDB, 0x71, 0x15, 0xB4, 0xDF, 0x87, 0x05, 0x81, 0xBD, 0xC8, 0xF5, 0x64, 0x75, 0x3E, 0xC0, 0x65, 0xEF, 0x5C, 0xB6, 0x88, 0x9F, 0xEB, 0xA6, 0x5A, 0x4A, 0x85, 0x53, 0x4E, 0x06, 0xE1, 0x65, 0x67, 0x52, 0x4E, 0x90, 0xCD, 0x82, 0xEE, 0xAF, 0xF5, 0xAC, 0x3E, 0x9D, 0xB0]
 ```
 
-exp：
+exp:
 
 ```python
 ans = []
@@ -123,13 +123,17 @@ print(bytes(enc))
 ```
 
 ## sed-programming
-题目利用实现 sed 工具的核心算法 markov-algorithm 的图灵完备性，实现了一门编程语言。下面先来了解一下 markov-algorithm。
-### markov-algorithm
-是一个字符串重写系统，数学上被证明是图灵完备的，意味着可以基于它实现通用计算模型、数学表达式、编程语言实现等。它主要由两个部分组成：可应用的字母表 + 映射方法集合$\{D=f(L) | L \rarr D\}$，其中 L 和 D 均表示由字母表中符号组成的任意的字符串，我们假设 $\rarr$ 不存在于字母表中，否则需要重新找一个分割字符串。
 
-举个 🌰 方便理解：
+题目利用实现 sed 工具的核心算法 markov-algorithm 的图灵完备性, 实现了一门编程语言. 下面先来了解一下 markov-algorithm.
+
+### markov-algorithm
+
+是一个字符串重写系统, 数学上被证明是图灵完备的, 意味着可以基于它实现通用计算模型、数学表达式、编程语言实现等. 它主要由两个部分组成: 可应用的字母表 + 映射方法集合 $\{D=f(L) | L \rarr D\}$, 其中 L 和 D 均表示由字母表中符号组成的任意的字符串, 我们假设 $\rarr$ 不存在于字母表中, 否则需要重新找一个分割字符串.
+
+举个 🌰 方便理解:
 
 alphabet = {|, *, a, b, c}
+
 $$
 f = 
 \begin{cases}
@@ -137,27 +141,30 @@ f =
 ab \rarr ba \\
 b \rarr \\
 *| \rarr b* \\
-* \rarr c \\
-|c \rarr c \\
-ac \rarr c| \\
-c \rarr .
+
+- \rarr c \\
+  |c \rarr c \\
+  ac \rarr c| \\
+  c \rarr .
 
 \end{cases}
 $$
-将该算法应用字母表中的任意字符串 V 的过程是一个离散的基本步骤序列。我们假设 V′ 是在算法的前一步中得到的词（或者是原始词 V，如果当前的步骤是第一步）。如果替换公式中没有包含在 V′ 中的左手边，那么算法就终止了，其工作结果被认为是字符串 V′。否则，将选择左手边包含在 V′ 中的 **第一个** 替换公式。如果这个替换公式的形式是 L→D，那么在R L S形式的字符串 V′ 的所有可能的表示中，选择一个最短的 R，之后字符串R D S被认为是当前步骤的结果，需要在下一步骤中进一步处理。
 
-比如上面的 🌰 ，|*|| 的结果是 || ，可以自己验证一下。
+将该算法应用字母表中的任意字符串 V 的过程是一个离散的基本步骤序列. 我们假设 V′ 是在算法的前一步中得到的词 (或者是原始词 V，如果当前的步骤是第一步). 如果替换公式中没有包含在 V′ 中的左手边, 那么算法就终止了, 其工作结果被认为是字符串 V′. 否则, 将选择左手边包含在 V′ 中的 **第一个** 替换公式. 如果这个替换公式的形式是 L→D, 那么在 R L S 形式的字符串 V′ 的所有可能的表示中, 选择一个最短的 R, 之后字符串 R D S 被认为是当前步骤的结果, 需要在下一步骤中进一步处理.
+
+比如上面的 🌰, |*|| 的结果是 ||, 可以自己验证一下.
 
 ### sed
 
-[info sed](https://www.gnu.org/software/sed/manual/sed.html)，sed 功能强大，支持正则匹配，这道题用了三个：
+[sed](https://www.gnu.org/software/sed/manual/sed.html) 功能强大, 支持正则匹配, 这道题用了三个:
 
--   `s`ubstitute
+- `s`ubstitute
 
--    `t`est. Jump if a substitution is done.
--   `p`rint. Print the result after every substitution.
+- `t`est. Jump if a substitution is done
 
-我们可以先从后面单个字符的替换开始：
+- `p`rint. Print the result after every substitution
+
+我们可以先从后面单个字符的替换开始:
 
 ```
 s/S/1IlIl11IIll11IlIl11IIll11IlIl11IlIl11IIll11IIll1/;tt
@@ -169,7 +176,7 @@ s/b/1IlIl11IIll11IIll11IlIl11IlIl11IlIl11IIll11IlIl1/;tt
 s/q/1IlIl11IIll11IIll11IIll11IlIl11IlIl11IlIl11IIll1/;tt
 ```
 
-发现长度一致且为 8 的倍数，猜测是 ascii code。尝试定义映射集如下：
+发现长度一致且为 8 的倍数, 猜测是 ascii code. 尝试定义映射集如下:
 
 ```python
 R = [
@@ -207,12 +214,12 @@ for line in open('checker/checker0.sed'):
     print("p") # log
 ```
 
-其实可以随便定，然后就可以读一下变换出来的源码，发现程序是基于 cursor 的一种变换：
+其实可以随便定, 然后就可以读一下变换出来的源码, 发现程序是基于 cursor 的一种变换:
 
--   生成 cursor，然后不停做类似 rol 的操作
--   每 3bit 分为一组，并替换成 count('1') % 2 然后重复 0b1101 次
+- 生成 cursor，然后不停做类似 rol 的操作
+- 每 3bit 分为一组，并替换成 count('1') % 2 然后重复 0b1101 次
 
-用 python 先把比较数提取出来，思路是一个正则比较，每次都从 bin(n) 去找 bin(n+1)，那么第二个 t 后面的一位就是待比较的数，如下：
+用 python 先把比较数提取出来, 思路是一个正则比较, 每次都从 bin(n) 去找 bin(n+1), 那么第二个 t 后面的一位就是待比较的数, 如下:
 
 ```python
 import re
@@ -230,7 +237,7 @@ print(target)
 print("target:", "".join(target[k] for k in range(len(target))))
 ```
 
-然后 exp 由于某些位已知，思路类似：
+然后 exp 由于某些位已知, 思路类似:
 
 ```python
 N = 13

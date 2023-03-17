@@ -7,14 +7,13 @@ categories:
 - TECHNOLOGY
 ---
 
-
 ## 前言
 
-BBS上的资源都没有好好利用（懊恼。从头翻BBS，看到Skye师傅17年发的一个做题网站`ReversingKR`
+BBS 上的资源都没有好好利用 (懊恼. 从头翻 BBS, 看到 Skye 师傅 17 年发的一个做题网站 `ReversingKR`
 
 ## Easy-CrackMe
 
-VC写的32位exe程序，我们可以通过字符串定位到关键函数
+VC 写的 32 位 exe 程序, 我们可以通过字符串定位到关键函数:
 
 ```c
 int __cdecl sub_401080(HWND hDlg)
@@ -33,13 +32,9 @@ int __cdecl sub_401080(HWND hDlg)
 }
 ```
 
-
-
 ## Easy-Keygen
 
-> 我才发现这种解密脚本应该叫`Keygen`...
-
-main函数处理完之后如下
+main 函数处理完之后如下:
 
 ```c
 int __cdecl main(int argc, const char **argv, const char **envp)
@@ -83,17 +78,17 @@ int __cdecl main(int argc, const char **argv, const char **envp)
 }
 ```
 
-调试器选择IDA
+调试器选择 IDA:
 
 ![keygen.png](https://i.loli.net/2021/07/18/xTEJWKoyFa4gfuw.png)
 
-调的时候观察Buffer，可以发现Buffer存的是
+调的时候观察 Buffer, 可以发现 Buffer 存的是:
 
 ```c
 hex(ord(input[i]) ^ v6[i])][2:]
 ```
 
-keygen如下
+keygen 如下:
 
 ```python
 base = [16, 32, 48]
@@ -108,96 +103,92 @@ for i in range(0, 16, 2):
     each_hex = int(serial[i]+serial[i+1], 16)
     print(chr(each_hex^num[index]), end="")
     index += 1
-    
+
 # K3yg3nm3
 ```
 
-
-
 ## Easy-Unpack
 
-> 题目要求OEP就是flag
+> 题目要求 OEP 就是 flag
 
 ![1](https://i.loli.net/2021/07/18/FjnMg4DBKRICfuO.png)
 
-OD看入口特征，先push再call。我们先单步执行一下
+OD 看入口特征, 先 push 再 call, 我们先单步执行一下:
 
 ![2](https://i.loli.net/2021/07/18/oJBCwj2LuU6fiPl.png)
 
-发现ESP变了，我们把ESP的值那个位置设一个硬件断点，我们可以在`调试——硬件断点`窗口看到硬件断点。接下来我们F9将程序高速运行起来，接着单步执行，这个单步的过程会比较长，我们需要耐心一点
+发现 ESP 变了, 我们把 ESP 的值那个位置设一个硬件断点, 我们可以在 `调试——硬件断点` 窗口看到硬件断点. 接下来我们 F9 将程序高速运行起来, 接着单步执行, 这个单步的过程会比较长, 我们需要耐心一点
 
-跟到这里
+跟到这里:
 
 ![3](https://i.loli.net/2021/07/18/BTAN43gfWncGeY9.png)
 
-我们删除分析，脱壳，发现这里就是OEP了
+我们删除分析, 脱壳, 发现这里就是OEP了.
 
 ## Music Player
 
 ### First-patch
 
-题目README告诉我们这个播放器只能播放一分钟，我们要做的就是让它播放超过一分钟。直接想到的思路就是修改跳转，所以我们需要先找到跳转的位置，进一步的，我们就需要找到失败的特征。先随便找个`.mp3`文件，播放到底，发现弹窗了，弹窗内容有个`1? ???`，所以我们就在OD里面搜索字符串，希望能定位到一个位置
+题目 README 告诉我们这个播放器只能播放一分钟, 我们要做的就是让它播放超过一分钟. 直接想到的思路就是修改跳转, 所以我们需要先找到跳转的位置, 进一步的我们就需要找到失败的特征. 先随便找个 `.mp3` 文件, 播放到底, 发现弹窗了, 弹窗内容有个 `1? ???`, 所以我们就在OD里面搜索字符串, 希望能定位到一个位置:
 
 ![4](https://i.loli.net/2021/07/18/wCzbi3u5I1g8MGs.png)
 
-跟过去看一眼，下面不远处就有`MsgBox`函数，推测就是这里了，但我们还需要找到这样一个结构：比较的指令紧跟一个跳转，并且跳转能被patch成直接跳过弹窗
+跟过去看一眼, 下面不远处就有 `MsgBox` 函数, 推测就是这里了, 但我们还需要找到这样一个结构: 比较的指令紧跟一个跳转, 并且跳转能被patch成直接跳过弹窗:
 
 ![5](https://i.loli.net/2021/07/18/d7nDw9Mh5IlvJPR.png)
 
-往上翻一翻，果然找到了
+往上翻一翻, 果然找到了:
 
 ![6](https://i.loli.net/2021/07/18/LCTNxPqWFRGySJ9.png)
 
-直接暴力patch成jmp，跳过跳转。但这题还是比较坑的，因为只patch这一处的话，等到一分钟以后会弹出另一个runtime error的弹窗。所以我们找另一处，这一处涉及到一个调试的技巧。
+直接暴力 patch 成jmp, 跳过跳转. 但这题还是比较坑的, 因为只 patch 这一处的话, 等到一分钟以后会弹出另一个 runtime error 的弹窗. 所以我们找另一处, 这一处涉及到一个调试的技巧.
 
 ### Another-patch
 
-我们在上一处patch的jmp那里断一个断点，然后让程序运行到这个位置，一开始发现只能播放一秒就停下了，但如果我们继续往下跟的话，会发现这整个jmp处在一个巨大的循环里面。所以我们只需要一直F9，程序会始终断在断点处，每次播放一秒。
+我们在上一处 patch 的 jmp 那里断一个断点, 然后让程序运行到这个位置, 一开始发现只能播放一秒就停下了, 但如果我们继续往下跟的话, 会发现这整个 jmp 处在一个巨大的循环里面. 所以我们只需要一直 F9, 程序会始终断在断点处, 每次播放一秒.
 
-**PS：**至于这里为什么要用一个循环来实现还在跟，等到深入分析一下再来更新，如果有师傅看到也可以在下面留言。
-
-我们让播放器播放到59秒，然后往下单步执行，发现一个比较远的跳转，下面不远处有MsgBox，于是Patch。然后播放到一分钟发现标题处变成了flag
+我们让播放器播放到 59 秒, 然后往下单步执行, 发现一个比较远的跳转, 下面不远处有 MsgBox, 于是 Patch. 然后播放到一分钟发现标题处变成了 flag.
 
 ## Replace
 
-这题运行起来挺像MFC的，有窗口控件，用`ResourcceHacker`也能搜到控件ID为`1002`。根据这个ID的十六进制`3EAh`定位到关键代码处，或者根据字符串`Correct!`来定位会比较直观。先不着急调试，先看看大概的跳转流程：
+这题运行起来挺像 MFC 的, 有窗口控件, 用 `ResourcceHacker` 也能搜到控件 ID 为 `1002`. 根据这个 ID 的十六进制 `3EAh` 定位到关键代码处, 或者根据字符串 `Correct!` 来定位会比较直观. 先不着急调试, 先看看大概的跳转流程:
 
 ![7](https://i.loli.net/2021/07/18/ogQlVFHLEeAfwZN.png)
 
-`loc_401071`刚好跳过了正确的位置使得函数retn，正确的位置似乎被独立出来了。我们x一下`loc_401071`，发现有一个跳转：
+`loc_401071` 刚好跳过了正确的位置使得函数 retn, 正确的位置似乎被独立出来了. 我们 x 一下 `loc_401071`, 发现有一个跳转:
 
 ![8](https://i.loli.net/2021/07/18/s5jDKCJNrymbozB.png)
 
-然后上OD，定位到同样的位置，并且在获取输入的位置下一个断点。
+然后上 OD, 定位到同样的位置, 并且在获取输入的位置下一个断点:
 
 ![9.png](https://i.loli.net/2021/07/18/Og7WLVvDMuyIa3A.png)
 
-由于一般返回值会存在eax里面，我们获取输入之后不断观察eax值的变化，先输入0观察变化。下面一行汇编把eax赋值给一个变量，紧跟着call了一个函数。过了这个函数之后eax加1，然后往后跟，可以猜测这个函数还有一个功能：改变那个变量的值
+由于一般返回值会存在 eax 里面, 我们获取输入之后不断观察 eax 值的变化, 先输入 0 观察变化. 下面一行汇编把 eax 赋值给一个变量, 紧跟着 call 了一个函数. 过了这个函数之后 eax 加 1, 然后往后跟, 可以猜测这个函数还有一个功能, 改变那个变量的值:
 
 ![10](https://i.loli.net/2021/07/18/6WzdXyaOqVPwfJv.png)
 
-到这里发现eax的值为`0x601605CB`。然后我们换一个输入，比如10，会发现跟到这里之后eax变成`0x601605D5`，是不是发现了什么？
+到这里发现 eax 的值为 `0x601605CB`. 然后我们换一个输入, 比如 10, 会发现跟到这里之后 eax 变成 `0x601605D5`, 是不是发现了什么:
 
 ```
 0x601605CB - 0 == 0x601605CB
 0x601605D5 - 10 == 0x601605CB
 ```
 
-你可以继续试，但都是这样的规律，这个暂时没用，往下跟，发现call了`0x004066F`的位置，里面的内容比较有意思
+可以继续试, 都是这样的规律. 往下跟, 发现call了 `0x004066F` 的位置，里面的内容比较有意思:
 
 ![11](https://i.loli.net/2021/07/18/5WQNK1w6bJZTh29.png)
 
-它把eax的值指向的内容搞成了nop。结合IDA的分析，我们很容易想到构造eax的值，使得它等于正确代码块上面的那一处jmp的地址即可。于是输入为
+它把 eax 的值指向的内容搞成了 nop. 结合 IDA 的分析, 我们很容易想到构造 eax 的值, 使得它等于正确代码块上面的那一处 jmp 的地址即可. 于是输入为:
 
-`0x100401071-0x601605CB`
+`0x100401071 - 0x601605CB`
 
-至于这里为什么要是把地址的最高位写成1，涉及到补码的问题，在4字节的地址上，这个符号位会被截断（还在验证，希望师傅能指出错误
+至于这里为什么要是把地址的最高位写成 1, 涉及到补码的问题, 在 4 字节的地址上, 这个符号位会被截断.
 
 ## Ransomeware
 
 ![12.png](https://i.loli.net/2021/07/18/3sPTRMnFLdWjpCe.png)
 
-IDA加载就发现了这个问题了，我们进汇编窗口发现一大坨花指令，也难怪加载不出来了，其中整个`sub_401000`都是花指令，这个函数整个就是一个空函数，然后同样的花指令在`main`函数也有一坨，去掉以后看到`main`函数了
+IDA 加载就发现了这个问题了, 我们进汇编窗口发现一大坨花指令, 也难怪加载不出来了, 其中整个 `sub_401000` 都是花指令, 这个函数整个就是一个空函数, 然后同样的花指令在`main` 函数也有一坨, 去掉以后看到 `main` 函数了:
 
 ```c
 int __cdecl main(int argc, const char **argv, const char **envp)
@@ -276,7 +267,7 @@ int __cdecl main(int argc, const char **argv, const char **envp)
 }
 ```
 
-我们结合提示，可以猜测这个file文件就是一个被加密过后的exe。**PS：**这一步个人觉得是最考验脑洞的地方了。联系到PE文件结构，一般在004Eh的位置会有一句固定的字符串`This program cannot be run in DOS mode`。这题也没别的信息了，大概率就是利用这个点，然后我们可以拿到异或的key，keygen如下：
+我们结合提示, 可以猜测这个 file 文件就是一个被加密过后的 exe. **PS**: 这一步个人觉得是最考验脑洞的地方了. 联系到PE文件结构, 一般在 004Eh 的位置会有一句固定的字符串 `This program cannot be run in DOS mode`. 这题也没别的信息了, 大概率就是利用这个点, 然后我们可以拿到异或的key, keygen如下:
 
 ```python
 # 004e~0073
@@ -291,7 +282,7 @@ print(key)
 # letsplaychess letsplaychess letsplayches
 ```
 
-然后还原文件：
+然后还原文件:
 
 ```python
 enc_data = open('./file', 'rb').read()
@@ -302,37 +293,37 @@ origin_data = bytes([(enc_data[i] ^ 0xff)^key[i % len(key)] for i in range(len(e
 origin_file.write(origin_data)
 ```
 
-再拖一下IDA，搜字符串就有明文的flag了
+再拖一下 IDA, 搜字符串就有明文的 flag 了
 
 ## Easy-ELF
 
-比较简单也比较常规，先不写了。
+比较简单也比较常规, 先不写了.
 
 ## CSHOP
 
-C#逆向，我们有两种方法
+C# 逆向, 我们有两种方法
 
 ### 静态逆向 ×
 
-用Rider载入可以定位到关键的代码，但是flag是乱序的，那么长总不可能直接试出来吧，也太没技术含量了（，但算法应该也能逆出来，但它加了混淆，先挂个坑——去混淆的工具+逆算法
+用 Rider 载入可以定位到关键的代码, 但是 flag 是乱序的, 那么长总不可能直接试出来吧, 也太没技术含量了, 但算法应该也能逆出来, 但它加了混淆, 先挂个坑——去混淆的工具 + 逆算法
 
 ### 改资源 √
 
-我们要用到一个SpyLite的工具搜窗口句柄
+我们要用到一个 SpyLite 的工具搜窗口句柄:
 
 ![13.png](https://i.loli.net/2021/07/18/XAbiphuwIB9qOeQ.png)
 
-打开子窗口列表，容易看到`BUTTON`
+打开子窗口列表, 容易看到 `BUTTON`:
 
 ![14](https://i.loli.net/2021/07/18/oeaVHRq9CNQ2FLz.png)
 
-把BUTTON最大化之后点一下，再把最大化关掉，就可以看到flag了
+把 BUTTON 最大化之后点一下, 再把最大化关掉, 就可以看到 flag 了:
 
 ![15](https://i.loli.net/2021/07/18/hpez1gy3kFmqUWX.png)
 
 ## HateIntel
 
-关键函数：
+关键函数:
 
 ```c
 int sub_2224()
@@ -360,7 +351,7 @@ int sub_2224()
 }
 ```
 
-拐进`enc`里面：
+拐进 `enc` 里面:
 
 ```c
 // _con = 4
@@ -377,7 +368,7 @@ void __fastcall enc(char *_input, int _con)
 }
 ```
 
-`sub_2494`函数：
+`sub_2494` 函数:
 
 ```c
 // a = 1
@@ -397,7 +388,7 @@ char __fastcall sub_2494(unsigned __int8 ch, int a)
 }
 ```
 
-keygen爆破脚本如下：
+keygen 爆破脚本如下:
 
 ```python
 aim = [ 68, 246, 245, 87, 245, 198, 150, 182, 86, 245, 20, 37, 212, 245, 150, 230, 55, 71, 39, 87, 54, 71, 150, 3, 230, 243,
@@ -419,7 +410,7 @@ print(flag)
 
 ## Position
 
-因为缺少 dll，linux 下用 wine 也跑不起来，翻函数表加字符串，找到关键函数，发现就是一个比较。keygen 如下：
+因为缺少 dll, linux 下用 wine 也跑不起来, 翻函数表加字符串, 找到关键函数, 发现就是一个比较. keygen 如下:
 
 ```python
 from itertools import product
@@ -454,4 +445,4 @@ for i in range(ord('a'), ord('z') + 1, 1):
         print(chr(i) + chr(tail))
 ```
 
-发现前两个是有多解，最后两个只有 mp 这一种情况，一个个试一下就行
+发现前两个是有多解, 最后两个只有 mp 这一种情况, 一个个试一下就行

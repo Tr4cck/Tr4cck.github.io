@@ -7,7 +7,6 @@ categories:
 - TECHNOLOGY
 ---
 
-
 ## Method One
 
 程序的大概意思就是一个猜数游戏，如果连续猜中若干次，就算会拿到 flag，背后的生成相应数的核心代码如下
@@ -26,21 +25,21 @@ class SecurePrng(object):
         return (self.x ^ self.y)
 ```
 
-显然，我们猜出前两轮还是比较容易的，毕竟概率也有 0.25。这里当我们猜出前两轮后，使用 Z3 来求解出初始的 x 和 y，那么我们就可以顺利的猜出剩下的值了。不妨进行一波数学推导
+显然, 我们猜出前两轮还是比较容易的, 毕竟概率也有 0.25. 这里当我们猜出前两轮后, 使用 Z3 来求解出初始的 x 和 y, 那么我们就可以顺利的猜出剩下的值了. 不妨进行一波数学推导: 
 
-**注：$\bigoplus$表示异或**
 $$
-p = 4646704883\\
-x_0 = random.randint(0, p)\\
-y_0 = random.randint(0, p)\\
-x_1 = (2x_0 + 3) \% p\\
-y_1 = (3y_0 + 9) \% p\\
-sol_1 = x_1 \bigoplus y_1\\
-x_2 = (2x_1 + 3) \% p = (2((2x_0 + 3) \% p) + 3) \% p\\
-y_2 = (3y_1 + 9) \% p = (3((3x_0 + 9) \% p) + 9) \% p\\
+p = 4646704883 \\
+x_0 = random.randint(0, p) \\
+y_0 = random.randint(0, p) \\
+x_1 = (2x_0 + 3) \% p \\
+y_1 = (3y_0 + 9) \% p \\
+sol_1 = x_1 \bigoplus y_1 \\
+x_2 = (2x_1 + 3) \% p = (2((2x_0 + 3) \% p) + 3) \% p \\
+y_2 = (3y_1 + 9) \% p = (3((3x_0 + 9) \% p) + 9) \% p \\
 sol_2 = x_2 \bigoplus y_2
 $$
-思路大概就是，如果能猜到$sol_1$和$sol_2$，就能直接得到$x_0$和$y_0$，如此以来，就能算得所有的值
+
+思路大概就是, 如果能猜到 $sol_1$ 和 $sol_2$, 就能直接得到 $x_0$ 和 $y_0$, 如此以来, 就能算得所有的值:
 
 ```python
 from z3 import *
@@ -61,51 +60,51 @@ s.add(s2== s2cor)
 s.add( ( ( ( 2 * x + 3 ) % p ) ^ ( ( 3 * y + 9 ) % p ) )==s1)
 s.add(( ( ( 2 * ( ( 2 * x + 3 ) % p )  + 3 ) % p ) ^ ( ( 3 * ( (  3 * y + 9 ) % p) + 9 ) % p ) )==s2)
 while s.check() == sat:
-	class SecurePrng(object):
-		def __init__(self,x,y):
-			self.p = 4646704883L
-			self.x = x
-			self.y = y
-		def next(self):
-			self.x = (2 * self.x + 3) % self.p
-			self.y = (3 * self.y + 9) % self.p
-			return (self.x ^ self.y)	
-		def getX(self):
-			return self.x
-		def getY(self):
-			return self.y
-	m = s.model() # 解向量
-	pMy = 4646704883L
-	myObj = SecurePrng(int(str(m[x]))%pMy,int(str(m[y]))%pMy) # 直接将解传进去，得到下一个结果。事实上这一步是验证解，因为可能有多组解
-	mySol1 = myObj.next()
-	mySol2 = myObj.next()
-	if mySol1 == s1cor and mySol2 == s2cor and int(str(m[x]))<= pMy and int(str(m[y])) <= pMy :
-		print "x = " + str(m[x]) + " ; y = " + str(m[y]) 
-	s.add(Or(x != s.model()[x], y != s.model()[y]))
+    class SecurePrng(object):
+        def __init__(self,x,y):
+            self.p = 4646704883L
+            self.x = x
+            self.y = y
+        def next(self):
+            self.x = (2 * self.x + 3) % self.p
+            self.y = (3 * self.y + 9) % self.p
+            return (self.x ^ self.y)    
+        def getX(self):
+            return self.x
+        def getY(self):
+            return self.y
+    m = s.model() # 解向量
+    pMy = 4646704883L
+    myObj = SecurePrng(int(str(m[x]))%pMy,int(str(m[y]))%pMy) # 直接将解传进去，得到下一个结果。事实上这一步是验证解，因为可能有多组解
+    mySol1 = myObj.next()
+    mySol2 = myObj.next()
+    if mySol1 == s1cor and mySol2 == s2cor and int(str(m[x]))<= pMy and int(str(m[y])) <= pMy :
+        print "x = " + str(m[x]) + " ; y = " + str(m[y]) 
+    s.add(Or(x != s.model()[x], y != s.model()[y]))
 ```
 
-下面可以重写PRNG，达到利用的目的
+下面可以重写PRNG，达到利用的目的:
 
 ```python
 class SecurePrng(object):
-	def __init__(self):
-		self.i = 0
-		self.p = 4646704883L
-		self.x = 3714993585 % self.p
-		self.y = 2248563082 % self.p
-	
+    def __init__(self):
+        self.i = 0
+        self.p = 4646704883L
+        self.x = 3714993585 % self.p
+        self.y = 2248563082 % self.p
+
     def next(self):
-		print self.i
-		self.i += 1
-		self.x = (2 * self.x + 3) % self.p
-		self.y = (3 * self.y + 9) % self.p
-		return (self.x ^ self.y)
-	
+        print self.i
+        self.i += 1
+        self.x = (2 * self.x + 3) % self.p
+        self.y = (3 * self.y + 9) % self.p
+        return (self.x ^ self.y)
+
     def getX(self):
-		return self.x
+        return self.x
 
     def getY(self):
-		return self.y
+        return self.y
 ```
 
 ## Method Two
@@ -115,17 +114,17 @@ class SecurePrng(object):
 下面是原文摘录
 
 > 这里我们考虑另外一种方法，**依次从低比特位枚举到高比特位获取 x 的值**，之所以能够这样做，是依赖于这样的观察
->
+> 
 > - a + b = c，c 的第 i 比特位的值只受 a 和 b 该比特位以及更低比特位的影响。**因为第 i 比特位进行运算时，只有可能收到低比特位的进位数值。**
 > - a - b = c，c 的第 i 比特位的值只受 a 和 b 该比特位以及更低比特位的影响。**因为第 i 比特位进行运算时，只有可能向低比特位的借位。**
 > - a * b = c，c 的第 i 比特位的值只受 a 和 b 该比特位以及更低比特位的影响。因为这可以视作多次加法。
 > - a % b = c，c 的第 i 比特位的值只受 a 和 b 该比特位以及更低比特位的影响。因为这可视为多次进行减法。
 > - a ^ b = c，c 的第 i 比特位的值只受 a 和 b 该比特位的影响。这一点是显而易见的。
->
+> 
 > **注：个人感觉这个技巧非常有用。**
->
+> 
 > 此外，我们不难得知 p 的比特位为 33 比特位。具体利用思路如下
->
+> 
 > 1. 首先获取两次猜到的值，这个概率有 0.25。
 > 2. 依次从低比特位到高比特位依次枚举**第一次迭代后的 x 的相应比特位**。
 > 3. 根据自己枚举的值分别计算出第二次的值，只有当对应比特位正确，可以将其加入候选正确值。需要注意的是，这里由于取模，所以我们需要枚举到底减了多少次。

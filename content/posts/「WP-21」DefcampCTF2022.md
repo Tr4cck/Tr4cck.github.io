@@ -8,7 +8,9 @@ categories:
 ---
 
 ## algorithm
-给了源代码：
+
+给了源代码:
+
 ```python
 flag = '[test]'
 hflag = flag.encode('hex')
@@ -43,7 +45,9 @@ print(r)
 
 # 242712673639869973827786401934639193473972235217215301
 ```
-可以看出是 10 进制 flag 每两位传入 polinom，考虑直接打表开爆：
+
+可以看出是 10 进制 flag 每两位传入 polinom, 考虑直接打表开爆:
+
 ```python
 import binascii
 from pprint import pprint
@@ -85,15 +89,19 @@ while n < len(cipher):
             continue
 print(num)
 ```
-注意最后一位可能是 1 个数，也可能是 2 个数，那只需要挨个去试一下就好了
+
+注意最后一位可能是 1 个数, 也可能是 2 个数, 那只需要挨个去试一下就好了
 
 ## rsa-factory-RE部分
-> 题目使用了 cython 中的 `cythonize` 功能将 python 转译成 c 的实现，然后再编译出 **共享目标文件** 。
+
+> 题目使用了 cython 中的 `cythonize` 功能将 python 转译成 c 的实现, 然后再编译出**共享目标文件**.
 
 ### 大致框架
-具体而言，将文件拖进 IDA，通过 Strings Window 可以发现不少位于 rodata 段的 python 字符串，即 `__pyx_string_tab` ，并且通过 xref 可以定位到关键函数 `_pyx_pymod_exec_test`。里面首先检查了一下 python 版本为 3.6，大概知道意思就不用扣细节了，因为有很多不太重要的边界检查之类的操作。
 
-下面是 import 一些模块：
+具体而言, 将文件拖进 IDA, 通过 Strings Window 可以发现不少位于 rodata 段的 python 字符串, 即 `__pyx_string_tab`, 并且通过 xref 可以定位到关键函数 `_pyx_pymod_exec_test`. 里面首先检查了一下 python 版本为 3.6, 大概知道意思就不用扣细节了, 因为有很多不太重要的边界检查之类的操作.
+
+下面是 import 一些模块:
+
 ```c
 // from Crypto.Util.number import *
 v29 = (__int64 *)_Pyx_Import_constprop_24(_pyx_n_s_Crypto_Util_number, v8);
@@ -122,12 +130,14 @@ if ( v44 )
 v67 = _Pyx_ImportFrom(v29, _pyx_n_s_FLAG);
 ```
 
-下面的 `_pyx_d` 是一个全局字典，可以通过它去索引一般的 PyObject：
+下面的 `_pyx_d` 是一个全局字典, 可以通过它去索引一般的 PyObject:
+
 ```c
 PyDict_SetItem(_pyx_d, _pyx_n_s_gcd, v64)
 ```
 
-然后设置了两个 CyFunction 分别是 `keygen` 和 `encrypt`：
+然后设置了两个 CyFunction 分别是 `keygen` 和 `encrypt`:
+
 ```c
 v68 = _Pyx_CyFunction_New_constprop_22(
     &_pyx_mdef_4test_1keygen,
@@ -144,7 +154,8 @@ v69 = _Pyx_CyFunction_New_constprop_22(
     _pyx_codeobj__5);
 ```
 
-然后是设置一些变量的值：
+然后是设置一些变量的值:
+
 ```c
 // nbit = 1024 dbit = 256
 v29 = (__int64 *)_pyx_int_1024;
@@ -156,7 +167,8 @@ v71 = _pyx_d;
 if ( (int)PyDict_SetItem(v71, v70, v29) < 0 )
 ```
 
-下面的内容其实也大同小异，直接给出大概的翻译结果：
+下面的内容其实也大同小异, 直接给出大概的翻译结果:
+
 ```python
 e, n1, n2 = keygen(dbit, nbit)
 FLAG = long(FLAG.encode("utf-8").hex(), 16)
@@ -170,25 +182,31 @@ print(f'enc2 = {c2}')
 ```
 
 ### encrypt
-参数是两个：
+
+参数是两个:
+
 ```c
 v22 = _PyDict_GetItem_KnownHash(a3, _pyx_n_s_msg, *(_QWORD *)(_pyx_n_s_msg + 24));
 v23 = (_QWORD *)_PyDict_GetItem_KnownHash(a3, _pyx_n_s_pubkey, *(_QWORD *)(_pyx_n_s_pubkey + 24));
 ```
 
-其中 pubkey 是一个二元组，然后关键在于：
+其中 pubkey 是一个二元组，然后关键在于:
+
 ```c
 v14 = (_QWORD *)PyNumber_Power(v8, v11, v12);
 ```
 
-大概能看到是一个比较常规的 rsa 加密过程，所以：
+大概能看到是一个比较常规的 rsa 加密过程, 所以:
+
 ```python
 def encrypt(msg, pubkey : tuple):
     return pow(msg, pubkey[0], pubkey[1])
 ```
 
 ### keygen
-同样是两个参数 dbit 和 nbit，分析流程和上述大概相同，就是长了很多，并且多次用到了前一千行处赋值的变量，尽量多给变量重命名可以提升一点点效率 :( ：
+
+同样是两个参数 dbit 和 nbit, 分析流程和上述大概相同, 就是长了很多, 并且多次用到了前一千行处赋值的变量, 尽量多给变量重命名可以提升一点点效率 XD:
+
 ```python
 def keygen(nbit, dbit):
     if dbit * 2 < nbit:
@@ -219,7 +237,9 @@ def keygen(nbit, dbit):
 ```
 
 ## can-you-crack-this
-要求输入一个 `public key` 和一个 `serial key`，关键明显在于 `verify_serial` 中，我们期望它返回 1。
+
+要求输入一个 `public key` 和一个 `serial key`, 关键明显在于 `verify_serial` 中, 我们期望它返回 1.
+
 ```c
 while ( 1 )
 {
@@ -252,7 +272,9 @@ while ( 1 )
   std::string::erase(a2, 0LL, v3 + v6);
 }
 ```
-一个主循环，大意是 `serial key` 是被 `-` 分割开的，我们将每组 split 后的结果连同 `public key` 的一个字符传入 `verify_char` 函数。
+
+一个主循环, 大意是 `serial key` 是被 `-` 分割开的, 我们将每组 split 后的结果连同 `public key` 的一个字符传入 `verify_char` 函数.
+
 ```c
 _BOOL8 __fastcall verify_char(__int64 a1, char a2)
 {
@@ -284,14 +306,17 @@ _BOOL8 __fastcall verify_char(__int64 a1, char a2)
   return v5 && v6 && v5 != v6 && (v6 - v5) % 0x64 == a2;
 }
 ```
-约束大概是这么几条：
+
+约束大概是这么几条:
+
 - v5 必须是 `countSetBits` 之后返回奇数
 - v5 不能重复
 - v5 必须小于等于 0x10E47F4C575565
 - v2 必须是 printable 字符
 - 然后 fib(x) - v5 % 0x64 == a2
 
-keygen 也不是特别难写，枚举一下就好了。虽然远程环境连不上了不知道对不对（逃：
+keygen 也不是特别难写, 枚举一下就好了. 虽然远程环境连不上了不知道对不对:
+
 ```c
 #include <stdio.h>
 #include <stdint.h>

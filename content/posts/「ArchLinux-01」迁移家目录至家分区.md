@@ -7,52 +7,63 @@ categories:
 - TECHNOLOGY
 ---
 
-
 ## 工作环境
 
 ```
-                   -`                    track@Track-Arch
-                  .o+`                   ----------------
-                 `ooo/                   OS: Arch Linux x86_64
-                `+oooo:                  Host: 82AX Lenovo Legion Y7000P2020H
-               `+oooooo:                 Kernel: 5.14.12-arch1-1
-               -+oooooo+:                Uptime: 31 mins
-             `/:-:++oooo+:               Packages: 1681 (pacman)
-            `/++++/+++++++:              Shell: fish 3.3.1
-           `/++++++++++++++:             Resolution: 1920x1080
-          `/+++ooooooooooooo/`           DE: Plasma 5.23.0
-         ./ooosssso++osssssso+`          WM: KWin
-        .oossssso-````/ossssss+`         WM Theme: Breeze 微风
-       -osssssso.      :ssssssso.        Theme: Layan [Plasma], Breeze [GTK2/3]
-      :osssssss/        osssso+++.       Icons: Fluent [Plasma], Fluent [GTK2/3]
-     /ossssssss/        +ssssooo/-       Terminal: st
-   `/ossssso+/:-        -:/+osssso+-     Terminal Font: JetBrainsMono Nerd Font
-  `+sso+:-`                 `.-/+oso:    CPU: Intel i7-10875H (16) @ 5.100GHz
- `++:.                           `-/+/   GPU: NVIDIA GeForce RTX 2060 Mobile
- .`                                 `/   GPU: Intel CometLake-H GT2 [UHD Graphics]
-                                         Memory: 4282MiB / 15868MiB
-                                         GPU Driver: i915
-                                         CPU Usage: 6%
-                                         Disk (/): 44G / 457G (11%)
-                                         Battery0: 100% [Full]
+      /\           The storm is coming and you cannot stop it. 
+     /  \           • track 
+    /\   \          • i7-10875H (16) [81.0°C] 
+   /      \        ﬙ • GeForce RTX 2060 Mobile 
+  /   ,,   \        • 1d 2h 36m 
+ /   |  |  -\      ﴾ • 7.47GiB / 15.49GiB 
+/_-''    ''-_\      • 104G / 457G (24%) 
+                    • 205G / 469G (46%) 
+                    • Linux 6.2.5-arch1-1 
+                    • Plasma 5.27.2 
+                    • kwin 
+                    • zsh 5.9 
+                    • 2653 (pacman) 
 ```
 
 ## 为什么要使用家分区代替家目录
 
-众所周知 `ArchLinux` 是一个不太稳定的系统，如果你没有很好的备份你的操作系统的话，可能在某次 `pacman -Syyu` 之后你的系统就挂掉了。那么家分区的创建可以很好的避免重装系统带来的痛苦，因为你的所有软件的配置文件等等主要文件基本都放在了家目录下，如果有一个家分区，那么我们就不需要完全重建分区标并格式化，只需把家分区挂载到家目录，就可以有一个几乎无差别的体验。
+众所周知 `arch` 是一个不太稳定的 Linux 发行版, 如果你不太了解它的话, 可能在某次 `Syyu` 之后你的系统就挂掉了. 那么家分区的创建可以很好的减轻重装系统带来的痛苦, 因为你的所有软件的配置文件等等都将放在一个独立的磁盘上. 那么我们就不需要对它重建分区表或格式化, 只需把家分区挂载到家目录, 就可以有一个几乎无差别的体验.
 
 ## 如何迁移
 
 ### 迁移之前
 
-- [ ] 当然你最好有一块儿新的硬盘，这会给你带来很大的便利
-- [ ] 确保你知道关于 `Linux` 的一些基本知识，包括但不限于挂载、分区表、格式化之类的
+- [ ] 当然你最好有一块新的硬盘，这会给你带来很大的便利
+- [ ] 确保你知道关于 `Linux` 的一些基本知识，包括但不限于挂载、分区表、格式化
 
 ### 开始迁移
 
 首先使用 `sudo fdisk -l` 查看你要用来充当家分区的那个设备：
 
-![](https://i.loli.net/2021/10/18/oXnyCasSFpEmqvi.png)
+```
+Disk /dev/nvme1n1：476.94 GiB，512110190592 字节，1000215216 个扇区
+磁盘型号：WDC PC SN730 SDBPNTY-512G-1101          
+单元：扇区 / 1 * 512 = 512 字节
+扇区大小(逻辑/物理)：512 字节 / 512 字节
+I/O 大小(最小/最佳)：512 字节 / 512 字节
+磁盘标签类型：gpt
+磁盘标识符：8A2B1D47-FB8A-1445-8C3D-F79911E19791
+
+设备            起点       末尾       扇区   大小 类型
+/dev/nvme1n1p1  2048 1000215182 1000213135 476.9G Linux 文件系统
+
+Disk /dev/nvme0n1：465.76 GiB，500107862016 字节，976773168 个扇区
+磁盘型号：WDC WDS500G2B0C-00PXH0                  
+单元：扇区 / 1 * 512 = 512 字节
+扇区大小(逻辑/物理)：512 字节 / 512 字节
+I/O 大小(最小/最佳)：512 字节 / 512 字节
+磁盘标签类型：gpt
+磁盘标识符：A923A28F-7A38-C84C-BEF8-ADFDFDA258A5
+
+设备              起点      末尾      扇区   大小 类型
+/dev/nvme0n1p1    2048   2099199   2097152     1G Linux 文件系统
+/dev/nvme0n1p2 2099200 976773134 974673935 464.8G Linux 文件系统
+```
 
 比如说我的是 `/dev/nvme1n1` 这个设备。接着使用 `sudo fdisk /dev/nvme1n1` 进入 `fdisk`，然后先 `g`，接着 `n` ，一路回车表示使用默认值，最后 `w` 即可写入。
 
@@ -60,7 +71,7 @@ categories:
 
 格式化使用 `sudo mkfs.ext4 /dev/nvme1n1p1`。
 
-**注意：**格式化的是分区而不是设备！
+**注意：** 格式化的是分区而不是设备！
 
 之后就是挂载了，我们使用 `sudo mount /dev/nvme1n1p1 /mnt` 将设备挂载到 `/mnt` 目录，可以选择删除 `/mnt/lost+found`。
 
@@ -68,10 +79,10 @@ categories:
 
 接着 `cd /` 避免挂载失败，然后更改挂载点 ：
 
- ```bash
- sudo umount /dev/nvme1n1p1
- sudo mount /dev/nvme1n1p1 /home
- ```
+```bash
+sudo umount /dev/nvme1n1p1
+sudo mount /dev/nvme1n1p1 /home
+```
 
 随后测试一下 `df /dev/nvme1n1p1` 这个命令帮助我们查看设备的使用情况和挂载情况。
 

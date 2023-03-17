@@ -11,7 +11,7 @@ categories:
 
 ### First Look
 
-查看一下开了什么保护：
+查看一下开了什么保护:
 
 ```plaintext
 [*] '/home/track/Binary/Pwnable/TW/start/start'
@@ -22,7 +22,7 @@ categories:
     PIE:      No PIE (0x8048000)
 ```
 
-IDA 分析一下程序流程：
+IDA 分析一下程序流程:
 
 ```plaintext
 .text:08048060 ; __int64 start()
@@ -62,7 +62,7 @@ man syscall 看一下 i386 arch 的 syscall ABI:
        i386          ebx   ecx   edx   esi   edi   ebp   -
 ```
 
-以及调用约定：
+以及调用约定:
 
 ```plaintext
        Arch/ABI    Instruction           System  Ret  Ret  Error    Notes
@@ -71,11 +71,11 @@ man syscall 看一下 i386 arch 的 syscall ABI:
        i386        int $0x80             eax     eax  edx  -
 ```
 
-一次 write 在 stdout 打印栈上字符串，一次 read 从 stdin 读 0x3c 个字节到栈上，之后将 esp 抬高 0x14 个字节后到达 retn addr 返回。
+一次 write 在 stdout 打印栈上字符串，一次 read 从 stdin 读 0x3c 个字节到栈上，之后将 esp 抬高 0x14 个字节后到达 retn addr 返回.
 
 ### Bug
 
-可以有一次栈溢出的机会，结合保护全关，我们直接在栈上写 shellcode 即可。这种时候我们一般会选择找一条 `jmp esp` 的 gadget，这题显然是没有的。只能转而泄露栈上地址，这就需要两次溢出。简单调试一下看看栈上的情况：
+可以有一次栈溢出的机会, 结合保护全关, 我们直接在栈上写 shellcode 即可. 这种时候我们一般会选择找一条 `jmp esp` 的 gadget, 这题显然是没有的. 只能转而泄露栈上地址, 这就需要两次溢出. 简单调试一下看看栈上的情况:
 
 ```plaintext
 pwndbg> 
@@ -113,7 +113,7 @@ LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
 06:0018│     0xffffc2bc —▸ 0xffffc2c0 ◂— 0x1        ; God bless you
 ```
 
-发现由于开头的 `push esp` 栈上会存着一个 old esp 的地址，只需要溢出控制返回到调用 write 写地址的部分即可。所以第一部分 payload 构造：
+发现由于开头的 `push esp` 栈上会存着一个 old esp 的地址, 只需要溢出控制返回到调用 write 写地址的部分即可. 所以第一部分 payload 构造:
 
 ```python
 write_gadget = 0x8048087
@@ -123,7 +123,7 @@ payload = flat([
 ])
 ```
 
-打印的前四字节就是 old esp 的地址，后续再溢出一次写 shellcode 即可。我选择的 shellcode: 
+打印的前四字节就是 old esp 的地址, 后续再溢出一次写 shellcode 即可. 我选择的 shellcode:
 
 ```x86asm
 xor    %eax,%eax
@@ -226,11 +226,11 @@ Pwnable/TW/orw
  0011: 0x06 0x00 0x00 0x7fff0000  return ALLOW
 ```
 
-写一段 orw 的 shellcode 就好了
+写一段 orw 的 shellcode 就好了.
 
 ### EXP
 
-注意入栈顺序即可：
+注意入栈顺序即可:
 
 ```python
 #!/usr/bin/env python
@@ -306,7 +306,7 @@ irt()
 
 ### TL;DR
 
-欢迎之后登录，要求两个栈上变量等于要求的值。漏洞出在如下代码：
+欢迎之后登录, 要求两个栈上变量等于要求的值. 漏洞出在如下代码:
 
 ```c
   __isoc99_scanf("%d", v1);
@@ -315,7 +315,7 @@ irt()
   __isoc99_scanf("%d", v2);
 ```
 
-有两个任意地址写。再返回去看看 welcome 函数发现有一个 100 字节的输入，看似没有什么问题但实际上调试一下发现可以在 welcome 的栈帧溢出覆盖到 login 栈上的变量，然后写 fflush 的 got 表到 system 函数上即可。
+有两个任意地址写. 再返回去看看 welcome 函数发现有一个 100 字节的输入, 看似没有什么问题但实际上调试一下发现可以在 welcome 的栈帧溢出覆盖到 login 栈上的变量, 然后写 fflush 的 got 表到 system 函数上即可.
 
 ### EXP
 
@@ -376,7 +376,7 @@ irt()
 
 ### TL;DR
 
-IDA 看一下关键的 vuln 函数：
+IDA 看一下关键的 vuln 函数:
 
 ```c
 void __fastcall vul(void *arr)
@@ -435,7 +435,7 @@ void __fastcall vul(void *arr)
 }
 ```
 
-发现作者使用 rop 和栈迁移技术执行了自己在 vuln 中布置的 rop chain. 稍微调试一下就可以发现 readn 有一个 0x30 字节的栈溢出，使用 __ctype_b_loc 限制了输入，但是可以简单地使用 \x00 绕过
+发现作者使用 rop 和栈迁移技术执行了自己在 vuln 中布置的 rop chain. 稍微调试一下就可以发现 readn 有一个 0x30 字节的栈溢出, 使用 __ctype_b_loc 限制了输入, 但是可以简单地使用 \x00 绕过.
 
 ### EXP
 
@@ -510,7 +510,8 @@ p.interactive()
 ## CSAWCTF2022 - how2pwn
 
 ### TL;DR
-有意思的 shellcode 挑战。
+
+有意思的 shellcode 挑战.
 
 ## TODO
 

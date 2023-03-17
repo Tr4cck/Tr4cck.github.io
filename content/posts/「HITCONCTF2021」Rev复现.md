@@ -9,7 +9,7 @@ categories:
 
 # cclemon
 
-先给出附件，有点长，忍耐一下（x：
+先给出附件:
 
 ```
 0: const 26 ; <module 'src'>
@@ -296,9 +296,11 @@ categories:
 832: pop
 ```
 
-搜索一下，可以找到[项目地址](https://github.com/lemon-lang/lemon.git)，文档里关于 bytecode 的啥也没有，让我很异或，但是这语言就像 c 混合 python 一样，所以学起来还挺快。
-只能手撕字节码🌶️，毕竟有了解过 python bytecode 的话看这个也挺好猜的。它是一种类似多层双链表的内存管理结构，然后 GC 也是基于此的，如果有兴趣可以看看源码，挺好理解的，除了有些地方可能有点离谱（bushi）。
-还原如下，有点长：
+搜索一下, 可以找到[项目地址](https://github.com/lemon-lang/lemon.git), 文档里关于 bytecode 啥也没有, 让我很异或, 但是这语言就像 c 混合 python 一样, 所以学起来还挺快.
+
+只能手撕字节码🌶️, 毕竟有了解过 python bytecode 的话看这个也挺好猜的. 它是一种类似多层双链表的内存管理结构, 然后 GC 也是基于此的. 如果有兴趣可以看看源码, 挺好理解的, 除了有些地方可能有点离谱.
+
+还原如下，有点长:
 
 ```
 // bytecode report
@@ -378,18 +380,20 @@ while (v9 < v7) {
 print("hitcon{" + v14.__string() + "}"); // like `str` in python
 ```
 
-跑一遍就有 flag 咯，但是当然是要翻译成 C 来跑啦，这里就不给了，毕竟长的可能和上面还原的东西差不多（x
+跑一遍就有 flag 咯, 但是当然是要翻译成 C 来跑啦, 这里就不给了, 毕竟长的可能和上面还原的东西差不多 (x
 
 # mercy
 
 ## Background
 
-原题改自 DEFCON-25-Final 的 cLEMENCy，具体的开发者心路历程可以看看这篇[博客](https://blog.legitbs.net/2017/10/clemency-showing-mercy.html)，看了之后特别震撼，两三年时间开发一个新的硬件架构，并且赛前给出文档和工具链。然后当年的选手视角来看这道题的话，比较有代表性的是[这篇](https://blog.trailofbits.com/2017/07/30/an-extra-bit-of-analysis-for-clemency/)，看看这段话：
+原题改自 DEFCON-25-Final 的 cLEMENCy, 具体的开发者心路历程可以看看这篇[博客](https://blog.legitbs.net/2017/10/clemency-showing-mercy.html), 看了之后特别震撼, 两三年时间开发一个新体系结构, 并且赛前给出文档和工具链. 然后当年的选手视角来看这道题的话, 比较有代表性的是[这篇](https://blog.trailofbits.com/2017/07/30/an-extra-bit-of-analysis-for-clemency/), 看看这段话:
 
 > Ryan, Sophia, and I wrote and used a Binary Ninja processor module for cLEMENCy during the event. This helped our team analyze challenges with Binary Ninja’s graph view and dataflow analyses faster than if we’d relied on the limited disassembler and debugger provided by the organizers. We are releasing this processor module today in the interest of helping others who want to try out the challenges on their own.
 
-或许这就是神仙吧，赛中写工具的外国猛男（x
+或许这就是神仙吧, 赛中写工具的外国猛男 (x
 
 ## Analysis
 
-不说了，那么现在来看看这个架构吧。它最有特点的就是**中端序**和 1 byte = 9 bits。那么怎么理解这两个特点，或者说具体影响了哪些地方呢？
+不说了, 那么现在来看看这个架构吧. 它最有特点的就是**中端序**和 1 byte = 9 bits. 那么怎么理解这两个特点, 或者说具体影响了哪些地方呢?
+
+TODO

@@ -8,10 +8,12 @@ categories:
 ---
 
 ## ezrev
+
 ![](https://s2.loli.net/2022/03/06/7cDjRM6xHskCyL8.png)
-调试到图示位置就好，把经过加密的字符串拿出来，异或常数回去，再解 base64
+调试到图示位置就好, 把经过加密的字符串拿出来, 异或常数回去, 再解 base64
 
 ## frontdoor
+
 > 长亭大佬的博客：
 > http://acez.re/the-weak-bug-exploiting-a-heap-overflow-in-vmware/
 > 
@@ -21,11 +23,13 @@ categories:
 ```
 frontdoor: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=f47091b37f50d1af957cae20439f9847e30d4611, for GNU/Linux 3.2.0, stripped
 ```
-无壳，有 **ASLR**
 
-init 函数里面打开了 `/tmp/vm` 文件，写入一段完整 elf 文件并赋予了可执行权限，dump 出来备用
+无壳, 有 **ASLR**.
 
-主函数中设置了 sigaction 信号处理变量，将 SIGSEGV 与一个输出 "this binary must be executed inside vmware" 的函数绑定起来。完成绑定后调用一个检测并初始化的函数：
+init 函数里面打开了 `/tmp/vm` 文件, 写入一段完整 elf 文件并赋予了可执行权限, dump 出来备用.
+
+主函数中设置了 sigaction 信号处理变量, 将 SIGSEGV 与一个输出 "this binary must be executed inside vmware" 的函数绑定起来. 完成绑定后调用一个检测并初始化的函数:
+
 ```cpp
 __int64 __fastcall sub_55D13CE0E723(int a1, __int64 a2, __int64 a3, __int64 a4)
 {
@@ -61,7 +65,9 @@ __int64 __fastcall sub_55D13CE0E723(int a1, __int64 a2, __int64 a3, __int64 a4)
   return 1LL;
 }
 ```
-主要看最后一次的调用，里面是一个类似自解密的函数，同时给一块内存进行了初始化。试着调试的过程中遇到一些问题，比如字符串初始化的时候直接触发信号导致无法调试，或者直接跳转到输入的位置却发现 scanf 函数调用失败等等。后来没办法，还是用 vmware 起了个 ubuntu20.04 远程调试，发现：
+
+主要看最后一次的调用, 里面是一个类似自解密的函数, 同时给一块内存进行了初始化. 试着调试的过程中遇到一些问题, 比如字符串初始化的时候直接触发信号导致无法调试, 或者直接跳转到输入的位置却发现 scanf 函数调用失败等等. 后来没办法, 还是用 vmware 起了个 ubuntu20.04 远程调试, 发现:
+
 ```cpp
 v11 = 'a';
 v12 = ' ';
@@ -81,7 +87,9 @@ for ( i = 0; i <= 25; ++i )
   LOBYTE(v11) = v11 + 1;
 }
 ```
-这个循环就是利用 RPCI 的 `info-set guestinfo.%c ` 初始化一系列小写字母的键值对为空，完成输入为 26 * 'a' 之后进入一个类似的循环：
+
+这个循环就是利用 RPCI 的 `info-set guestinfo.%c ` 初始化一系列小写字母的键值对为空, 完成输入为 26 * 'a' 之后进入一个类似的循环:
+
 ```cpp
 var1C = 'a';
 var1A = 'b';
@@ -102,8 +110,9 @@ for ( var4C = 0; var4C < strlen(a1); ++var4C )
   LOBYTE(var1C) = var1C + 1;
 }
 ```
-再次调用 `info-set guestinfo.%c a` 设定值为 a，即输入
-之后进入关键逻辑：
+
+再次调用 `info-set guestinfo.%c a` 设定值为 a, 即输入, 之后进入关键逻辑:
+
 ```cpp
 v191 = __readfsqword(0x28u);
 v107 = aElcvxntymrz;
@@ -115,7 +124,9 @@ sub_5581F9D23805(mem1, (__int64)s, 4096LL);
 sub_5581F9D23A98(mem1, &v105, (unsigned __int64 *)v106);
 free(s);
 ```
-调试发现是取出一个固定字符串为 key 的 value，然后进行和字符串本身进行异或存入内存中。之后进入一个循环：
+
+调试发现是取出一个固定字符串为 key 的 value, 然后进行和字符串本身进行异或存入内存中. 之后进入一个循环:
+
 ```cpp
 sum = 0;
 v183 = 'a';
@@ -134,9 +145,11 @@ for ( i = 0; i <= 25; ++i )
   LOBYTE(v183) = v183 + 1;
 }
 ```
-调试观察 sum 的变化发现作用是取出键 'a' ~ 'z' 对应的值，即输入，进行累加。
 
-接下来一部分：
+调试观察 sum 的变化发现作用是取出键 'a' ~ 'z' 对应的值, 即输入, 进行累加.
+
+接下来一部分:
+
 ```cpp
 sub_5581F9D233C9(
     ((xor_v | (xor_c << 8) | (xor_l << 16) | (xor_e << 24)) << (sum % 32 + 1)) | ((xor_v | (xor_c << 8) | (xor_l << 16) | (xor_e << 24)) >> (31 - sum % 32)),
@@ -153,7 +166,9 @@ sub_5581F9D23805(mem1, (__int64)v163, 4096LL);
 sub_5581F9D23A98(mem1, &v105, (unsigned __int64 *)v106);
 free(v163);
 ```
-`sub_5581F9D233C9` 第一个参数是一个循环 32-bit 的循环左移，第二个参数是一块未初始化内存，第三个参数表示16进制。那我们可以大概猜测一下功能就是做一些操作之后写回内存：
+
+`sub_5581F9D233C9` 第一个参数是一个循环 32-bit 的循环左移, 第二个参数是一块未初始化内存, 第三个参数表示 16 进制. 那我们可以大概猜测一下功能就是做一些操作之后写回内存:
+
 ```cpp
 ......
 
@@ -181,10 +196,12 @@ do
 }
 while ( v10 < v9 );
 ```
-发现是加完然后头尾交换。后面差不多就是一直重复上述操作。
 
-然后最后它执行了一下我们最开始 dump 出来的 /tmp/vm ，应该是用来 check 之类的，分析一下提出数据。用最后一组数稍微测一下，可以得到 sum % 32 == 28。
-最终 exp：
+发现是加完然后头尾交换. 后面差不多就是一直重复上述操作.
+
+然后最后它执行了一下我们最开始 dump 出来的 /tmp/vm, 应该是用来 check 之类的, 分析一下提出数据. 用最后一组数稍微测一下, 可以得到 sum % 32 == 28.
+最终 exp:
+
 ```python
 def ROL(a, b):
   return ((a << (b % 32)) | (a >> (32 - b % 32)))
@@ -214,10 +231,12 @@ for i in range(26):
 ```
 
 ## Ouroboros
-函数逻辑比较简单，就是整理游戏规则比较麻烦，下图是所有填充的情况：
+
+函数逻辑比较简单, 就是整理游戏规则比较麻烦, 下图是所有填充的情况:
 ![](https://s2.loli.net/2022/03/10/MbH6aRqk9cGBPAn.jpg)
 
-然后看判断：
+然后看判断:
+
 ```cpp
 for ( i = 0; i < 7; ++i )
 {
@@ -306,4 +325,5 @@ for ( i = 0; i < 7; ++i )
     return 0;
 }
 ```
-发现和题目名一样，要求连起来，然后提取一下点，手动连一下就行
+
+发现和题目名一样, 要求连起来, 然后提取一下点, 手动连一下就行.

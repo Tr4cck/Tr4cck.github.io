@@ -13,9 +13,9 @@ Members: cyxq \ avalon \ wanan \ track
 
 ## glass
 
-### Android部分
+### Android Part
 
-使用jadx-gui反编译附件中的apk，定位到`MainActivity`，得到
+使用 jadx-gui 反编译附件中的 apk, 定位到 `MainActivity`, 得到:
 
 ```java
 package com.ciscn.glass;
@@ -60,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-容易发现明显的JNI特征，故将apk解包出来，得到so文件。
+容易发现明显的 JNI 特征, 故将 apk 解包出来, 得到 so 文件.
 
 ### JNI
 
-拖进IDA，定位到`Java_com_ciscn_glass_MainActivity_checkFlag`，看看`sub_FFC`
+拖进 IDA, 定位到 `Java_com_ciscn_glass_MainActivity_checkFlag`, 看看 `sub_FFC`:
 
 ```c
 int __fastcall sub_FFC(char *_box, char *_key, int _key_len)
@@ -96,11 +96,11 @@ int __fastcall sub_FFC(char *_box, char *_key, int _key_len)
 }
 ```
 
-发现明显的RC4特征，但有所不同
+发现明显的 RC4 特征, 但有所不同.
 
 ### Angr
 
-采用一种特殊的办法：将so文件复制下来稍加修改
+采用一种特殊的办法: 将 so 文件复制下来稍加修改:
 
 ```c
 #include "defs.h"
@@ -208,7 +208,7 @@ int main() {
 }
 ```
 
-以上代码和原代码作用相同，编译出可执行文件后，使用angr爆破
+以上代码和原代码作用相同, 编译出可执行文件后, 使用 angr 爆破
 
 ```python
 import angr, claripy
@@ -224,30 +224,30 @@ b'CISCN{6654d84617f627c88846c172e0f4d46c}\n'
 
 ## baby_bc
 
-### 获取ELF文件
+### 获取 ELF 文件
 
 - llvm-dis ./baby.bc
 - clang ./baby.ll
 
-### IDA分析
+### IDA 分析
 
-明显的数独特征，有一些限制，手解的，需要了解z3解法与深搜爆破
+明显的数独特征, 有一些限制, 手解的, 需要了解 z3 解法与深搜爆破.
 
 ## gift
 
-> 2021/8/7复现完毕，来更一下
+> 2021-08-07 复现完毕, 来更一下.
 
 ### First Look
 
-使用IDA7.6Free版本可以看到符号信息，首先我们关注到`main_CISCN6666666()`，`main_CISCN66666666()`，`main_CISCN6666666666()`，由于它们位于`main_main`的最开始，猜测是输出一些欢迎信息和输出提示之类的东西，所以考虑直接把断点打在第三个函数，运行一下，发现我们的猜测果然是对的，那就先不用分析这三个函数，直接往下看。
+使用 IDA7.6 Free 版本可以看到符号信息, 首先我们关注到 `main_CISCN6666666()`, `main_CISCN66666666()`, `main_CISCN6666666666()`, 由于它们位于 `main_main` 的最开始, 猜测是输出一些欢迎信息和输出提示之类的东西, 所以考虑直接把断点打在第三个函数, 运行一下, 发现我们的猜测果然是对的, 那就先不用分析这三个函数, 直接往下看.
 
-有一个比较大的`while`循环，稍微看看可以发现就是一个`for (int i = 0; i < 32; i++)`的过程，或者更详细一点，这个循环就是在遍历下面这个东西：
+有一个比较大的 `while` 循环, 稍微看看可以发现就是一个 `for (int i = 0; i < 32; i++)` 的过程, 或者更详细一点, 这个循环就是在遍历下面这个东西:
 
 ![1.png](https://i.loli.net/2021/08/07/NoPirn6GpjBxTQl.png)
 
 ### Reversing
 
-再下面的`makeslice`是第一个重点，考虑到`golang`内部的`slice`实现：
+再下面的 `makeslice` 是第一个重点, 考虑到 `golang` 内部的 `slice` 实现:
 
 ```go
 type slice struct {
@@ -257,11 +257,11 @@ type slice struct {
 }
 ```
 
-并且紧跟着就有一个未初始化的变量直接用来赋值，猜测应该是`makeslice`的结果，所以我们自己创建一个结构体，方便静态分析：
+并且紧跟着就有一个未初始化的变量直接用来赋值, 猜测应该是 `makeslice` 的结果, 所以我们自己创建一个结构体, 方便静态分析:
 
 ![2.png](https://i.loli.net/2021/08/07/L3GNwAOhucZ4xFf.png)
 
-大概这样，**一定注意每个成员的大小（满足对齐）和顺序**。创建成功之后把相关变量的类型声明改成这个结构体，发现代码可读性明显变好了。接着看，下面又有一个类似的`while`循环，实际上就是等价于：
+大概这样, **一定注意每个成员的大小 (满足对齐) 和顺序**. 创建成功之后把相关变量的类型声明改成这个结构体, 发现代码可读性明显变好了. 接着看, 下面又有一个类似的 `while` 循环, 实际上就是等价于:
 
 ```c
 for (int i = 1; i <= 4; i++) {
@@ -269,7 +269,8 @@ for (int i = 1; i <= 4; i++) {
 }
 ```
 
-然后下面突然使用`qword_1C20E8`来取得一些值，但是前面没有对它赋值，猜想应该是`main_wtf`里面实现的。流程大概就是先根据这个值取一个数组里面的一个元素，并且把该元素与0x66异或之后\*8，取得另一个数组里面的元素。关于这个*8实际上看下对应数组，不难发现，这个矩阵是形如：
+然后下面突然使用 `qword_1C20E8` 来取得一些值, 但是前面没有对它赋值, 猜想应该是 `main_wtf` 里面实现的. 流程大概就是先根据这个值取一个数组里面的一个元素, 并且把该元素与 0x66 异或之后 \*8, 取得另一个数组里面的元素. 关于这个 \*8 实际上看下对应数组, 不难发现, 这个矩阵是形如:
+
 $$
 0\quad 0\quad 0\quad 0\quad 0\quad 0\quad 0\quad 0\\
 1\quad 0\quad 0\quad 0\quad 0\quad 0\quad 0\quad 0\\
@@ -277,11 +278,14 @@ $$
 3\quad 0\quad 0\quad 0\quad 0\quad 0\quad 0\quad 0\\
 ...
 $$
-所以列数就是第一列的数，也就是并不改变结果。
+
+
+
+所以列数就是第一列的数, 也就是并不改变结果.
 
 ### What the fxck
 
-然后我们跟进`main_wtf`里看看，发现递归调用，并且随着递归深入，第一个参数依次+1，大概美化一下：
+然后我们跟进 `main_wtf` 里看看, 发现递归调用, 并且随着递归深入, 第一个参数依次 +1, 大概美化一下:
 
 ```c
 // a1 = 0
@@ -330,7 +334,7 @@ void __golang main_wtf(__int64 depth, __int64 a2, struct slice a3)
 }
 ```
 
-逻辑也比较清晰了，看看`main_goooo`，美化代码方法类似：
+逻辑也比较清晰了，看看 `main_goooo`, 美化代码方法类似:
 
 ```c
 __int8 __golang main_goooo(struct slice a1)
@@ -390,7 +394,7 @@ if __name__ == '__main__':
     main_main()
 ```
 
-这个脚本和题目的核心功能一致，下面找一下优化点，就是`main_goooo`这个东西，它是不一定执行的，反复循环判断会随着数据规模增大而大幅消耗时间，所以我们看看能否确定enc的计算次数的通项，这样就不用花时间在判断上了：
+这个脚本和题目的核心功能一致, 下面找一下优化点, 就是 `main_goooo` 这个东西, 它是不一定执行的, 反复循环判断会随着数据规模增大而大幅消耗时间, 所以我们看看能否确定 enc 的计算次数的通项, 这样就不用花时间在判断上了:
 
 ```python
 enc = 0
@@ -439,7 +443,7 @@ if __name__ == '__main__':
     # 2**n + 4**n
 ```
 
-结果已经写在注释里面了，然后我们生成几个enc的测试数据：
+结果已经写在注释里面了, 然后我们生成几个 enc 的测试数据:
 
 ```python
 def enc_test():
@@ -451,7 +455,7 @@ def enc_test():
         # 2, 6, 3, 4, 0, 2, -5, 5, 2, 6, 3, 4, 0, 2, ...
 ```
 
-发现周期性，然后就没有然后了：
+发现周期性, 然后就没有然后了:
 
 ```python
 enc = 0
