@@ -70,7 +70,7 @@ theme = 'DoIt'
   # ("sha256", "sha384", "sha512", "md5")
   fingerprint = ""
   #  日期格式
-  dateFormat = "2023-03-14"
+  dateFormat = "2006-01-02"
   # 网站图片, 用于 Open Graph 和 Twitter Cards
   images = [""]
   #  开启 PWA 支持
