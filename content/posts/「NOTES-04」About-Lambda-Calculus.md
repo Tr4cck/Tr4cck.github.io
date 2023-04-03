@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## About Lambda Calculus
 
 ### Syntax

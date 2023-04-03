@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## wine-6.23-1
 
 > 参考：https://wiki.winehq.org/Wine_Developer%27s_Guide/Debugging_Wine
@@ -55,3 +58,7 @@ Backtrace:
 ```
 
 可以看到触发了 0x40000015 异常，但是我对于 windows 异常代码以及问题并没有太多了解。我尝试搜索了一下，并没有很好的解决方案。但是通过调用栈，可以确定异常的发生在于AccessCheckByTypeAndAuditAlarmW 函数内部，这是 windowsapi，貌似用于访问权限检查。但我无法确定在 wine-6.23-1 中进入该函数中的行为和上下文是什么。于是寄辣！
+
+## solution
+
+嘻嘻, 不如开摆等更新.

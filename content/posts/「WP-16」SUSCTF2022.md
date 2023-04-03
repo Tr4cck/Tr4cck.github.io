@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## DigitalCircuits
 
 走流程得到源代码:

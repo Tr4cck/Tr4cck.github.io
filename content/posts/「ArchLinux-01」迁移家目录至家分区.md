@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## 工作环境
 
 ```

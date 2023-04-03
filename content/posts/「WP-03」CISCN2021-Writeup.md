@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 Team: Mini-7
 
 Members: cyxq \ avalon \ wanan \ track

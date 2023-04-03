@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## 什么是线性反馈移位寄存器
 
 我先递归学习了几个数学概念

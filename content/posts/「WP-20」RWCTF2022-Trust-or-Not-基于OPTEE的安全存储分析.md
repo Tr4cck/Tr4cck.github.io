@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## TL;DR
 
 这道题是关于 optee 即可信执行环境的开源内核, 我们需要仔细了解 ARM 的 TrustZone 相关技术、optee 的架构, 尤其是文件安全存储的实现细节. 做题过程中需要不停查询文档、翻阅源码、启动 qemu 调试等等, 最好是自己拉源码去 build 一遍, 至少可以先有一个直观的认知.

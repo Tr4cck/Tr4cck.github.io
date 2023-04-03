@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## Method One
 
 程序的大概意思就是一个猜数游戏，如果连续猜中若干次，就算会拿到 flag，背后的生成相应数的核心代码如下

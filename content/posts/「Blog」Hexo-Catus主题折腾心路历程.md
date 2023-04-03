@@ -7,10 +7,14 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## TL;DR
 
 一开始它长成这样：
 ![](https://s2.loli.net/2022/04/12/v3WCrbG7O2REe4P.png)
+
 这是我在现成配置文件中能做到的最好效果了, 但还是有种让人说不上来的奇怪:
 
 - 首先是首页的文章做不到分类显示, 只有一个 Writing 躺在中间

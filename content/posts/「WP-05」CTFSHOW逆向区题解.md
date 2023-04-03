@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## 卷王杯
 
 只记录一下 BabyOC, 第二次遇到这种类型的, 运气好拿了个一血

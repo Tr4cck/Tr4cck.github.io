@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 **URL**: https://nctf.h4ck.fun/
 **Teammate**: deebato / corle / wanan / track
 **Start Time**: 11.27 9:00

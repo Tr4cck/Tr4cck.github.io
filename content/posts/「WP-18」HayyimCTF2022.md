@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## ezrev
 
 ![](https://s2.loli.net/2022/03/06/7cDjRM6xHskCyL8.png)

@@ -7,15 +7,18 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## MiniLCTF2022 WhatAssembly & Lemon Official Writeup
 
 ### Lemon | 8 Solves
 
-#### Topic Idea
+#### Idea
 
 考虑到整体难度偏高, 就想出一道签到题平衡一下难度, 同时又要让选手在短时间内学到一些东西. 结合之前在HITCON2021遇到过 lemon lang 的题, 前段时间也稍微研究了一下它的解释器源码, 于是就出了这一道运行就送 flag 的题给师傅们随便玩玩.
 
-#### Source Code
+#### Source
 
 ```
 var seed = 0xd33b470;
@@ -56,7 +59,7 @@ print(my_run.flag);
 print("[+] Done!");
 ```
 
-#### Bytecode form semantics
+#### Bytecode
 
 import source:
 
@@ -157,13 +160,13 @@ bit xor:
 
 ### WhatAssembly | 2 Solves
 
-#### Topic Idea
+#### Idea
 
 同样来自于前一段时间的学习, 结合最近国内比赛比较少涉及到 wasm 相关的逆向, 就想到加入一个简化过的 chacha20 让大家对 wasm 有一个初步的认识.
 
-#### Source Code
+#### Source
 
-##### HTML Part
+##### HTML
 
 核心标签:
 
@@ -176,7 +179,7 @@ bit xor:
        onsuccess="alert('Correct flag!');">
 ```
 
-##### C Part
+##### C
 
 > [Emscripten documentation](https://emscripten.org/index.html)
 > 
@@ -291,7 +294,7 @@ all:
     emcc --bind check.c -s WASM=1 -o flag.html $(EXPORTS) -g2
 ```
 
-#### How to Reverse
+#### How2RE
 
 > [wabt](https://github.com/WebAssembly/wabt)
 > 
@@ -303,7 +306,7 @@ all:
 
 不同优化会导致代码结构的变化, 自己尝试一下便知. 下面其实就没有什么好说的了, wasm 是典型的栈虚拟机, 慢慢分析就好了, 也不复杂, 我也没做什么代码混淆.
 
-##### Check Function
+##### Check
 
 ```c
 // search js
@@ -433,7 +436,7 @@ __int64 __fastcall w2c_check(unsigned int flag_arr, unsigned int key_arr, unsign
 }
 ```
 
-##### Quarou Function
+##### Quarou
 
 逻辑重叠比较大, xor + 8-bit ROL
 

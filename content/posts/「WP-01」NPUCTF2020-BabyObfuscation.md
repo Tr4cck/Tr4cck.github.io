@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## First Look
 
 1. 发现是 64 位程序, 无壳

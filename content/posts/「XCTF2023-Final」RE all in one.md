@@ -9,6 +9,8 @@ categories:
 ---
 
 
+<!-- more -->
+
 ## TL;DR
 
 - lambda calculus

@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## Basic Syntax
 
 关于为什么声明变量时要和C有所区别, 参见这篇文章 [Go's Declaration Syntax](https://blog.go-zh.org/gos-declaration-syntax)

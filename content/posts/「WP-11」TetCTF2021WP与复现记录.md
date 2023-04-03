@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 质量很高，感谢越南黑客
 
 ## magicbox

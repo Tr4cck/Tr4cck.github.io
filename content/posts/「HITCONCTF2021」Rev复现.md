@@ -7,7 +7,10 @@ categories:
 - TECHNOLOGY
 ---
 
-# cclemon
+
+<!-- more -->
+
+## cclemon
 
 先给出附件:
 
@@ -382,9 +385,9 @@ print("hitcon{" + v14.__string() + "}"); // like `str` in python
 
 跑一遍就有 flag 咯, 但是当然是要翻译成 C 来跑啦, 这里就不给了, 毕竟长的可能和上面还原的东西差不多 (x
 
-# mercy
+## mercy
 
-## Background
+### Background
 
 原题改自 DEFCON-25-Final 的 cLEMENCy, 具体的开发者心路历程可以看看这篇[博客](https://blog.legitbs.net/2017/10/clemency-showing-mercy.html), 看了之后特别震撼, 两三年时间开发一个新体系结构, 并且赛前给出文档和工具链. 然后当年的选手视角来看这道题的话, 比较有代表性的是[这篇](https://blog.trailofbits.com/2017/07/30/an-extra-bit-of-analysis-for-clemency/), 看看这段话:
 
@@ -392,8 +395,6 @@ print("hitcon{" + v14.__string() + "}"); // like `str` in python
 
 或许这就是神仙吧, 赛中写工具的外国猛男 (x
 
-## Analysis
+### Analysis
 
-不说了, 那么现在来看看这个架构吧. 它最有特点的就是**中端序**和 1 byte = 9 bits. 那么怎么理解这两个特点, 或者说具体影响了哪些地方呢?
-
-TODO
+那么现在来看看这个架构吧. 它最有特点的就是**中端序**和 1 byte = 9 bits. 那么怎么理解这两个特点, 或者说具体影响了哪些地方呢?

@@ -7,6 +7,9 @@ categories:
 - TECHNOLOGY
 ---
 
+
+<!-- more -->
+
 ## Background
 
 在 archlinux 中 [pwndbg](https://github.com/pwndbg/pwndbg) 无法正常使用 [pwngdb](https://github.com/scwuaptx/Pwngdb) 的 heap 系列命令, 因为缺少 glibc 的调试符号. 但问题是在 arch 的构建系统中默认会 strip 掉二进制文件的调试符号, 以减小程序体积题高性能等. 为了获得更好的调试体验, 就来研究一下如何优雅地解决这个问题. 
@@ -36,7 +39,7 @@ grep -v "#" /etc/locale.gen >> locale.gen.txt
 sed -i 's#!strip#debug#' PKGBUILD
 
 # Build glibc and glibc-debug packages
-makepkg -j4 --skipchecksums --config /usr/share/devtools/makepkg-x86_64.conf
+makepkg --skipchecksums --config /usr/share/devtools/makepkg-x86_64.conf
 
 # Install glibc-debug
 sudo pacman -U *.pkg.tar.zst
