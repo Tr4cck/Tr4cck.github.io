@@ -1,7 +1,7 @@
 ---
 title: 「ArchLinux」Comfortable with ssh on linux
 date: 2022-10-04 22:34:05
-darft: true
+draft: true
 tags:
 - Linux
 categories:
