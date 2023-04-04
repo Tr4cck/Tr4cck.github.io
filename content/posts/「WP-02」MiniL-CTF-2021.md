@@ -111,16 +111,16 @@ q12_1: ┤1                     ├──■──┤ X ├┤M├
 
 - SEH 实际包含两个主要功能: 结束处理 (termination handling) 和异常处理 (exception handling)
 - 每当你建立一个 try 块, 它必须跟随一个 `__finally` 块或一个 `__except` 块
-- 一个 `try` 块之后不能既有 finally 块又有 except 块. 但可以在try-except块中嵌套try-finally块, 反过来也可以
+- 一个 `try` 块之后不能既有 finally 块又有 except 块. 但可以在 try-except 块中嵌套 try-finally 块, 反过来也可以
 - `__try`, `__finally` 关键字用来标出结束处理程序两段代码的轮廓
   
   不管 try 块是如何退出的. 不论你在保护体中使用 return, 还是 goto, 或者是 longjump, 结束处理程序 (finally 块) 都将被调用
 - 在 try 使用 `__leave` 关键字会引起跳转到 try 块的结尾
 - 给 `ms_exc.registration.TryLevel` 赋值是用于处理嵌套的 try
 
-> 学习自HAPPY师傅的博客
+> 学习自 HAPPY 师傅的博客
 
-然后看看题, main函数直接看发现异常, 于是看汇编, 定位到伪代码异常处. IDA的分析结果如下:
+然后看看题, main 函数直接看发现异常, 于是看汇编, 定位到伪代码异常处. IDA 的分析结果如下:
 
 ```assembly
 .text:00412330 loc_412330:                             ; CODE XREF: _main_0+15C↑j
@@ -134,7 +134,7 @@ q12_1: ┤1                     ├──■──┤ X ├┤M├
 .text:0041234B                 div     edx
 ```
 
-发现非常明显的**除零异常**还有 **eax 清零后却试图访问它的内存**, 以及SEH结构. 不需要对它进行任何 patch, 因为必须让程序捕获到这个异常, 才会去执行 `__except_filter`, 也就是:
+发现非常明显的**除零异常**还有 **eax 清零后却试图访问它的内存**, 以及 SEH 结构. 不需要对它进行任何 patch, 因为必须让程序捕获到这个异常, 才会去执行 `__except_filter`, 也就是:
 
 ```assembly
 text:00412356 loc_412356:                             ; DATA XREF: .rdata:stru_41A238↓o

@@ -245,12 +245,11 @@ unsigned __int64 __fastcall proc_then()
 写一下解密脚本, 需要一点线性代数知识:
 
 $$
-AB=X\\
-\rarr A=XB^{-1}\\
-其中A代表输入，因为取的是行\\
-B代表fake\quad flag生成的矩阵，因为取的是列\\
+AB=X \\\
+\rarr A=XB^{-1} \\\
+其中A代表输入，因为取的是行 \\\
+B代表fake\quad flag生成的矩阵，因为取的是列 \\\
 而X就是加密后的结果了
-
 $$
 
 使用 sage 求解 (用 `numpy`、`matlab` 都可以):

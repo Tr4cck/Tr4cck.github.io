@@ -54,11 +54,12 @@ $$
 - 线性表示反馈函数 $f(a1, a2, …, an)$ 为线性函数, 运算有与或非, 与反馈移位寄存器的状态有关, 状态有 $2^n$ 种
 - 初始状态由用户决定
 
-![n-fsr.png (934×244) (ctf-wiki.org)](https://ctf-wiki.org/crypto/streamcipher/fsr/figure/n-fsr.png)
 
-<div align="center">图1</div>
+![](https://ctf-wiki.org/crypto/streamcipher/fsr/figure/n-fsr.png)
 
-![20200717222000117.png (1151×555) (csdnimg.cn)](https://img-blog.csdnimg.cn/20200717222000117.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjczMzQ0Mg==,size_16,color_FFFFFF,t_70)
+<div align="center"> 图1 </div>
+
+![](https://img-blog.csdnimg.cn/20200717222000117.png)
 
 <div align="center">图2</div>
 
@@ -68,9 +69,9 @@ $$
 a_{n+t}=c_1a_{n+t-1}\bigoplus c_2a_{n+t-2}\bigoplus\cdots \bigoplus c_na_{t}, t=1,2,\cdot \cdot \cdot
 $$
 
-**让我们看一个 3 级的例子**
+**让我们看一个 3 级的例子**:
 
-![20200717223543874.png (1226×421) (csdnimg.cn)](https://img-blog.csdnimg.cn/20200717223543874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NjczMzQ0Mg==,size_16,color_FFFFFF,t_70)
+![](https://img-blog.csdnimg.cn/20200717223543874.png)
 
 定义初始状态为
 
@@ -121,41 +122,31 @@ $$
 通过线性变换:
 
 $$
-\left[
-\begin{matrix}
-a_{i+1},a_{i+2},a_{i+3},\cdots,a_{i+n}
-\end{matrix}
-\right] \\
-=
-\left[
-\begin{matrix}
-a_{i+1},a_{i+2},a_{i+3},\cdots,a_{i+n}
-\end{matrix}
-\right]
-\left[
-\begin{matrix}
-0 & 0 & \cdots & 0 & c_n\\
-1 & 0 & \cdots & 0 & c_{n-1}\\
-0 & 1 & \cdots & 0 & c_{n-2}\\
-\vdots& \vdots &\ddots&\vdots\\
+\begin{bmatrix}
+a_{i+1},\ a_{i+2},\ a_{i+3},\cdots,\ a_{i+n}
+\end{bmatrix} \\\
+\=
+\begin{bmatrix}
+a_{i+1},\ a_{i+2},\ a_{i+3},\cdots,\ a_{i+n}
+\end{bmatrix}
+\begin{bmatrix}
+0 & 0 & \cdots & 0 & c_n \\\
+1 & 0 & \cdots & 0 & c_{n-1} \\\
+0 & 1 & \cdots & 0 & c_{n-2} \\\
+\vdots& \vdots &\ddots&\vdots \\\
 0 & 0 & \cdots & 1 & c_1
-\end{matrix}
-\right]\\
-=
-\left[
-\begin{matrix}
-a_{0},a_{1},a_{2},\cdots,a_{n-1}
-\end{matrix}
-\right]
-\left[
-\begin{matrix}
-0 & 0 & \cdots & 0 & c_n\\
-1 & 0 & \cdots & 0 & c_{n-1}\\
-0 & 1 & \cdots & 0 & c_{n-2}\\
-\vdots& \vdots &\ddots&\vdots\\
+\end{bmatrix} \\\
+\=
+\begin{bmatrix}
+a_{0},\ a_{1},\ a_{2},\cdots,\ a_{n-1}
+\end{bmatrix}
+\begin{bmatrix}
+0 & 0 & \cdots & 0 & c_n \\\
+1 & 0 & \cdots & 0 & c_{n-1} \\\
+0 & 1 & \cdots & 0 & c_{n-2} \\\
+\vdots& \vdots &\ddots&\vdots \\\
 0 & 0 & \cdots & 1 & c_1
-\end{matrix}
-\right]
+\end{bmatrix}
 ^{i+1}
 $$
 
@@ -211,16 +202,13 @@ BM 算法的要求我们需要知道长度为 2n 的序列. 其复杂度
 但是其实如果我们知道了长度为 2n 的序列, 我们也可以一种比较笨的方法来获取原先的序列. 不妨假设已知的序列为 $a_1,...,a_{2n}$, 我们可以令:
 
 $$
-S_1=(a_1,...,a_n) \\
-
-S_2=(a_2,...,a_{n+1}) \\
-
-.... \\
-
+S_1=(a_1,...,a_n) \\\
+S_2=(a_2,...,a_{n+1}) \\\
+\cdots \\\
 S_{n+1}=(a_{n+1},...,a_{2n})
 $$
 
-那么我们可以构造矩阵$ X=(S_1,...,S_n)$, 那么
+那么我们可以构造矩阵 $X=(S_1,...,S_n)$, 那么
 
 $S_{n+1}=(c_n,...,c_1)X$
 

@@ -7,9 +7,6 @@ categories:
 - TECHNOLOGY
 ---
 
-
-<!-- more -->
-
 ## pyast64++.rev
 
 题目实现了一个简单的 py 汇编器. 将可执行文件拖进 IDA 可以看到非常多成对的 push-pop 操作, 并且简单调试一下发现函数调用栈是一种奇怪的结构:
@@ -138,18 +135,17 @@ print(bytes(enc))
 alphabet = {|, *, a, b, c}
 
 $$
-f = 
+f
+\=
 \begin{cases}
-|b \rarr ba| \\
-ab \rarr ba \\
-b \rarr \\
-*| \rarr b* \\
-
-- \rarr c \\
-  |c \rarr c \\
-  ac \rarr c| \\
-  c \rarr .
-
+|b \rarr ba| \\\
+ab \rarr ba \\\
+b \rarr \\\
+\ast \rarr b \ast \\\
+\- \rarr c \\\
+|c \rarr c \\\
+ac \rarr c| \\\
+c \rarr \.
 \end{cases}
 $$
 
