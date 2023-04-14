@@ -13,6 +13,12 @@ categories:
 
 ## Overview
 
+如题.
+
+![ix4AXa.jpeg](https://i.328888.xyz/2023/04/14/ix4AXa.jpeg)
+
+![ix44Cw.jpeg](https://i.328888.xyz/2023/04/14/ix44Cw.jpeg)
+
 如何在没有环境强依赖性的编程上机试验中, 仅仅靠学校机房里的老爷机顺利地生存下来? 你可能在找 `linux to go`: 在 U 盘中安装的 linux 操作系统.
 
 ## Format
